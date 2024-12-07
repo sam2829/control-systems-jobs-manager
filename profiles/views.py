@@ -9,3 +9,12 @@ class ProfileList(generics.ListAPIView):
     """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+
+
+class ProfileDetail(generics.RetrieveUpdateAPIView):
+    """
+    This class is to render a single profile by id and be
+    able to update.
+    """
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer

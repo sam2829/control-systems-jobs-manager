@@ -12,6 +12,7 @@ class JobList(generics.ListCreateAPIView):
     """
     queryset = Job.objects.all()
     serializer_class = JobSerializer
+    permission_classes = [IsAuthenticated]
     # For filtering Job list in frontend
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     search_fields = ['csa_number', 'syspal_number']

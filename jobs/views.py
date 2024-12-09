@@ -1,8 +1,9 @@
-from rest_framework import generics
+from rest_framework import generics, filters
 from .models import Job
 from .serializers import JobSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class JobList(generics.ListCreateAPIView):
@@ -11,6 +12,9 @@ class JobList(generics.ListCreateAPIView):
     """
     queryset = Job.objects.all()
     serializer_class = JobSerializer
+    # For filtering Job list in frontend
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    search_fields = ['csa_number', 'syspal_number']
 
 
 class JobDetail(generics.RetrieveUpdateDestroyAPIView):

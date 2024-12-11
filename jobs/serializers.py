@@ -6,6 +6,9 @@ class JobSerializer(serializers.ModelSerializer):
     """
     This class is to serilaize the job data
     """
+    # Created field to count the number of notes made
+    notes_count = serializers.ReadOnlyField()
+
     # Super user can edit all fields
     def update(self, instance, validated_data):
         request = self.context['request']
@@ -41,5 +44,5 @@ class JobSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'csa_number', 'syspal_number', 'order_number', 'quantity',
             'description', 'quote', 'date_created', 'workshop_status',
-            'syspal_status', 'delivered', 'delivered_date'
+            'syspal_status', 'delivered', 'delivered_date', 'notes_count'
         ]

@@ -4,13 +4,16 @@ from .serializers import JobSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import Count
 
 
 class JobList(generics.ListCreateAPIView):
     """
     This class is to render list of all jobs
     """
-    queryset = Job.objects.all()
+    queryset = Job.objects.annotate(
+        notes_count=Count('note', distinct=True)
+    )
     serializer_class = JobSerializer
     permission_classes = [IsAuthenticated]
     # For filtering Job list in frontend
@@ -23,7 +26,9 @@ class JobDetail(generics.RetrieveUpdateDestroyAPIView):
     This class is to render a single job by id, and able 
     to update or delete
     """
-    queryset = Job.objects.all()
+    queryset = Job.objects.annotate(
+        notes_count=Count('note', distinct=True)
+    )
     serializer_class = JobSerializer
     permission_classes = [IsAuthenticated]
 

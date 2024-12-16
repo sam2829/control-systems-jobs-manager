@@ -11,7 +11,7 @@ class Profile(models.Model):
     # List of location options
     WORKSHOP = 'Workshop'
     SYSPAL = 'Syspal'
-    
+
     LOCATION_CHOICES = [
         (WORKSHOP, 'Workshop'),
         (SYSPAL, 'Syspal'),
@@ -30,10 +30,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.owner}'s profile"
-    
+
+
 # Code to create new profile everytime new user is created
 def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(owner=instance)
+
 
 post_save.connect(create_profile, sender=User)

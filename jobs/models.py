@@ -34,13 +34,12 @@ class Job(models.Model):
     )
     delivered = models.BooleanField(default=False)
     delivered_date = models.DateField(blank=True, null=True)
-    
+
     class Meta:
         ordering = ['-date_created']
 
     def __str__(self):
         return f"{self.csa_number} / {self.syspal_number} {self.quantity} off."
-    
 
     def save(self, *args, **kwargs):
         # automatically save delivery date when delivered

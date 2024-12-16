@@ -12,7 +12,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
-    
+
     # function for only letting superuser edit work location
     def update(self, instance, validated_data):
         request = self.context['request']
@@ -25,7 +25,7 @@ class ProfileSerializer(serializers.ModelSerializer):
                     raise serializers.ValidationError(
                         {"work_location": "Only superusers can update work location."}
                     )
-                
+
         return super().update(instance, validated_data)
 
     class Meta:

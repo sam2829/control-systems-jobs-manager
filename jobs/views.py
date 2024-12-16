@@ -13,14 +13,13 @@ class JobList(generics.ListCreateAPIView):
     """
     queryset = Job.objects.annotate(
         notes_count=Count('note', distinct=True)
-    )
+    ).order_by('-date_created')
     serializer_class = JobSerializer
     permission_classes = [IsAuthenticated]
     # For filtering Job list in frontend
     filter_backends = [
         DjangoFilterBackend,
         filters.SearchFilter,
-        DjangoFilterBackend,
     ]
     filterset_fields = [
         'workshop_status',
@@ -28,10 +27,16 @@ class JobList(generics.ListCreateAPIView):
     ]
     search_fields = ['csa_number', 'syspal_number']
 
+    # Restrict job creation to superusers only
+    def perform_create(self, serializer):
+        if not self.request.user.is_superuser:
+            raise PermissionDenied("Only superusers can create new jobs.")
+        serializer.save()
+
 
 class JobDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    This class is to render a single job by id, and able 
+    This class is to render a single job by id, and able
     to update or delete
     """
     queryset = Job.objects.annotate(

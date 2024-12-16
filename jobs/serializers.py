@@ -15,7 +15,7 @@ class JobSerializer(serializers.ModelSerializer):
 
         if request.user.is_superuser:
             return super().update(instance, validated_data)
-        
+
         # regular users can only edit allowed fields
         user_location = request.user.profile.work_location
         allowed_fields = []
@@ -29,15 +29,15 @@ class JobSerializer(serializers.ModelSerializer):
             field for field in validated_data.keys() if field not in allowed_fields
         ]
         if restricted_fields:
-            # Compare only the restricted fields to instance values to avoid unnecessary update attempts
+            # Compare only the restricted fields to instance
+            # values to avoid unnecessary update attempts
             for field in restricted_fields:
                 if validated_data.get(field) != getattr(instance, field):
                     raise serializers.ValidationError(
                         {"error": f"You are not authorized to edit these fields: {', '.join(restricted_fields)}"}
                     )
-        
-        return super().update(instance, validated_data)
 
+        return super().update(instance, validated_data)
 
     class Meta:
         model = Job

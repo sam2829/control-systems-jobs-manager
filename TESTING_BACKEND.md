@@ -71,6 +71,18 @@ Made sure I was logged out and went to the jobs URL. | The job form was not on d
 
 In this project I also done automated python testing. In this I done some basic testing on the apps, but in future look to carry out more thorough automated testing. These tests were created to test the functionality of the apps. These can be found in the test.py files in the respective apps.
 
+***Profiles***
+
+![Automated Testing Profiles Screenshot](/docs/testing_screenshots/automated-testing-profiles.png)
+
+***Jobs***
+
+![Automated Testing Jobs Screenshot](/docs/testing_screenshots/automated-testing-jobs.png)
+
+***Notes***
+
+![Automated Testing Notes Screenshot](/docs/testing_screenshots/automated-testing-notes.png)
+
 ## Validators
 
 ***CI Python Linter***

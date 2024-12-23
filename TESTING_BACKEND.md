@@ -72,15 +72,15 @@ In this project I also done automated python testing. In this I done some basic 
 
 ***Profiles***
 
-![Automated Testing Profiles Screenshot](/docs/testing_screenshots/automated-testing-profiles.png)
+![Automated Testing Profiles Screenshot](/docs/backend_testing_screenshots/automated-testing-profiles.png)
 
 ***Jobs***
 
-![Automated Testing Jobs Screenshot](/docs/testing_screenshots/automated-testing-jobs.png)
+![Automated Testing Jobs Screenshot](/docs/backend_testing_screenshots/automated-testing-jobs.png)
 
 ***Notes***
 
-![Automated Testing Notes Screenshot](/docs/testing_screenshots/automated-testing-notes.png)
+![Automated Testing Notes Screenshot](/docs/backend_testing_screenshots/automated-testing-notes.png)
 
 ## Validators
 

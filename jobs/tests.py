@@ -17,7 +17,7 @@ class JobListViewTests(APITestCase):
         )
         # Create regular user
         sam = User.objects.create_user(username='sam', password='pass123')
-        
+
         # Create job
         Job.objects.create(
             csa_number='CSA10000',
@@ -55,7 +55,7 @@ class JobListViewTests(APITestCase):
             }
         )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-    
+
     # test superuser can create a job
     def test_superuser_can_create_job(self):
         self.client.login(username='admin', password='adminpass')
@@ -72,7 +72,7 @@ class JobListViewTests(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    
+
 class JobDetailViewTests(APITestCase):
     """
     this class is for testing Job Detail views
@@ -146,3 +146,15 @@ class JobDetailViewTests(APITestCase):
             }
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    # test regular user cannot delete a job
+    def test_user_cannot_delete_job(self):
+        self.client.login(username='sam', password='pass123')
+        response = self.client.delete(f'/api/jobs/1')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    # test superuser can delete job
+    def test_superuser_can_delete_job(self):
+        self.client.login(username='admin', password='adminpass')
+        response = self.client.delete(f'/api/jobs/1')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

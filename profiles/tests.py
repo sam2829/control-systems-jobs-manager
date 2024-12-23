@@ -18,9 +18,8 @@ class ProfileListViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # Ensure there's exactly one user
         self.assertEqual(User.objects.count(), 1)
-         # Ensure there's exactly one profile
+        # Ensure there's exactly one profile
         self.assertEqual(Profile.objects.count(), 1)
-        
 
 
 class ProfileDetailViewTests(APITestCase):
@@ -30,7 +29,10 @@ class ProfileDetailViewTests(APITestCase):
     # setup logged in users
     def setUp(self):
         self.sam = User.objects.create_user(username='sam', password='pass123')
-        self.emma = User.objects.create_user(username='emma', password='pass456')
+        self.emma = User.objects.create_user(
+            username='emma',
+            password='pass456'
+        )
 
     # test that user can retrieve single profile by id
     def test_can_retrieve_profile_detail(self):

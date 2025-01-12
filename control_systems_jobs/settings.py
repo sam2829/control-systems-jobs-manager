@@ -58,7 +58,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
-    'localhost', 'control-systems-jobs-8e7c07b4a83a.herokuapp.com', '127.0.0.1'
+    os.environ.get('ALLOWED_HOST'), 'localhost', '127.0.0.1'
 ]
 
 
@@ -100,14 +100,9 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-if 'CLIENT_ORIGIN' in os.environ:
-    CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
-    ]
-else:
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https:\/\/.*\.codeinstitute-ide\.net$",
-    ]
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get('CLIENT_ORIGIN')
+]
 
 CORS_ALLOW_CREDENTIALS = True
 

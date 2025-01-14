@@ -1,0 +1,44 @@
+.NavBar {
+  background-color: #1a1a40;
+  display: flex;
+  align-items: center;
+  min-height: 136px;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.Logo {
+  background-color: #f1f1f1;
+  border: 2px solid #e63946;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-right: 10px !important;
+  padding-left: 10px !important;
+}
+
+.LogoText {
+  color: #457b9d;
+  margin: 5px 0 5px 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.MenuIcon {
+  margin-right: 10px;
+  font-size: 20px;
+  padding: 5px;
+  color: #f1f1f1 !important;
+  border-color: #f1f1f1 !important;
+  border: 2px solid #f1f1f1 !important;
+  background-color: #f1f1f1;
+}
+
+.NavLinks {
+  flex-grow: 1;
+  display: flex;
+  padding-top: 30px;
+  /* align-items: flex-end; */
+  padding-right: 15px;
+}

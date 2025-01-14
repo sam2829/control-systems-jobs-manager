@@ -1,0 +1,21 @@
+.Button {
+  background-color: #e63946;
+  color: #f1f1f1;
+  border-color: #1a1a40 !important;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 120px;
+
+}
+
+.Button:hover {
+  background-color: #1a1a40 !important;
+  border-color: #e63946 !important;
+}
+
+.Button:active,
+.Button:focus {
+  background-color: #1a1a40 !important;
+  border-color: #e63946 !important;
+}

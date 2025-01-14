@@ -16,6 +16,7 @@
   margin-bottom: 20px;
   padding-right: 10px !important;
   padding-left: 10px !important;
+  margin-right: 8px !important;
 }
 
 .LogoText {
@@ -26,7 +27,7 @@
 }
 
 .MenuIcon {
-  margin-right: 10px;
+  margin-right: 5px;
   font-size: 20px;
   padding: 5px;
   color: #f1f1f1 !important;

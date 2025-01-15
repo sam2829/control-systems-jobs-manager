@@ -1,0 +1,25 @@
+.FormLabel {
+  color: #457b9d;
+  font-size: 18px;
+  margin-right: 100%;
+  padding-left: 5%;
+}
+
+.FormInput {
+  color: #1a1a40;
+  width: 90%;
+  margin-left: 5%;
+  font-size: 18px;
+}
+
+/* Styles for screen sizes larger than 992px wide */
+@media (min-width: 992px) {
+
+  .FormLabel {
+    font-size: 23px;
+  }
+
+  .FormInput {
+    font-size: 23px;
+  }
+}

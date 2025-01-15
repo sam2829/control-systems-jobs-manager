@@ -1,6 +1,6 @@
 .Main {
-  margin-top: 230px;
-  padding: 20px;
+  padding: 230px 20px 20px 20px;
+  height: 100vh;
 }
 
 .Heading {
@@ -12,4 +12,15 @@
 .Text {
   color: #457b9d;
   font-size: 18px;
+}
+
+/* Styles for screen sizes larger than 992px wide */
+@media (min-width: 992px) {
+  .Heading {
+    font-size: 28px;
+  }
+
+  .Text {
+    font-size: 23px;
+  }
 }

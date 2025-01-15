@@ -23,10 +23,13 @@ const NavBar = () => {
       >
         <Container>
           <Navbar.Brand className={`px-4 ${styles.Logo}`}>
-            <div>
-              <p className={styles.LogoText}>Control Systems</p>
-              <p className={styles.LogoText}>Automation Manager</p>
-            </div>
+            {/* Navbar Logo */}
+            <Link to="/" className={styles.LogoLink}>
+              <div>
+                <p className={styles.LogoText}>Control Systems</p>
+                <p className={styles.LogoText}>Automation Manager</p>
+              </div>
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle
             ref={ref}

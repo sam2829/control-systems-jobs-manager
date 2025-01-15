@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "../../styles/Homepage.module.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -22,9 +23,11 @@ const Hompage = () => {
           </p>
         </Row>
         <Row>
-          <div>
-            <CustomButton text="Sign In" />
-          </div>
+          <Link to="/signin">
+            <div>
+              <CustomButton text="Sign In" />
+            </div>
+          </Link>
         </Row>
       </main>
     </Container>

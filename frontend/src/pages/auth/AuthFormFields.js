@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../styles/AuthFormFields.module.css";
 import Form from "react-bootstrap/Form";
+import AuthFormErrorMessage from "./AuthFormErrorMessage";
 
 // this compenent is to render the auth form fields
 const AuthFormFields = ({
@@ -10,6 +11,7 @@ const AuthFormFields = ({
   placeholder,
   value,
   onChange,
+  errors,
 }) => {
   return (
     <>
@@ -24,6 +26,8 @@ const AuthFormFields = ({
         required
         onChange={onChange}
       />
+      {/* Error message component */}
+      <AuthFormErrorMessage errors={errors} fieldName={name} />
     </>
   );
 };

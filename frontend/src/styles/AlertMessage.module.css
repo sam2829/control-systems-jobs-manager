@@ -1,0 +1,18 @@
+.Alert {
+  position: fixed;
+  top: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #f1f1f1;
+  background-color: #e63946;
+  text-align: center;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-color: #1a1a40;
+}
+
+.SuccessAlert {
+  color: #f1f1f1;
+  background-color: #1a1a40;
+  border-color: #e63946;
+}

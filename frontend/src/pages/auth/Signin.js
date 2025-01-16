@@ -7,15 +7,19 @@ import Form from "react-bootstrap/Form";
 import CustomButton from "../../components/CustomButton";
 import AuthFormFields from "./AuthFormFields";
 import axios from "axios";
+import AuthFormErrorMessage from "./AuthFormErrorMessage";
 
 // This component is to render the signin page
-const Signin = () => {
+const Signin = ({ showAlert }) => {
   // use state hook for sign in data
   const [signInData, setSignInData] = useState({
     username: "",
     password: "",
   });
   const { username, password } = signInData;
+
+  // state for sign in form
+  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
 
@@ -31,11 +35,17 @@ const Signin = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log("try to submit");
-      await axios.post("http://127.0.0.1:8000/api/dj-rest-auth/login/", signInData);
+      await axios.post(
+        "http://127.0.0.1:8000/api/dj-rest-auth/login/",
+        signInData
+      );
+      const { username } = signInData;
+      showAlert("success", `You have successfully signed in as ${username}!`);
       navigate("/");
     } catch (err) {
-      console.log(err);
+      console.log("error trying to sign in", err);
+      setErrors(err.response?.data || {});
+      showAlert("warning", "Error trying to login!");
     }
   };
 
@@ -54,6 +64,7 @@ const Signin = () => {
           placeholder="Your username..."
           value={username}
           onChange={handleChange}
+          errors={errors}
         />
         {/* form input field */}
         <AuthFormFields
@@ -63,11 +74,14 @@ const Signin = () => {
           placeholder="Your password..."
           value={password}
           onChange={handleChange}
+          errors={errors}
         />
         <div className="py-4">
           {/* import custom button */}
           <CustomButton text="Sign In" type="submit" />
         </div>
+        {/* Displaying non-field errors, if any */}
+        <AuthFormErrorMessage errors={errors} />
       </Form>
     </Container>
   );

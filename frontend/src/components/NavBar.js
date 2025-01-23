@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -6,11 +6,25 @@ import Container from "react-bootstrap/Container";
 import styles from "../styles/NavBar.module.css";
 import NavBarNavLink from "./NavBarNavLink";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+import { CurrentUserContext } from "../App";
+import axios from "../api/axiosDefaults";
 
 // component for rendering Navbar
-const NavBar = () => {
+const NavBar = ({ showAlert }) => {
+  // call to find who is current user
+  const currentUser = useContext(CurrentUserContext);
   // This is so we can toggle the hamburger menu
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
+
+  const handleSignOut = async () => {
+    try {
+      await axios.post("http://127.0.0.1:8000/api/dj-rest-auth/logout/",);
+      showAlert("success", "You have successfully signed out!");
+      console.log("you have signed out");
+    } catch (err) {
+      console.log("sign out failed", err);
+    }
+  };
 
   return (
     <>
@@ -40,9 +54,24 @@ const NavBar = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className={`ms-auto ${styles.NavLinks}`}>
               {/** Nav Links in Navbar */}
-              <NavBarNavLink title="Jobs" />
-              <NavBarNavLink title="Profile" />
-              <NavBarNavLink title="Sign Out" />
+              {currentUser ? (
+                <>
+                  <NavBarNavLink title="Jobs" />
+                  <NavBarNavLink title="Profile" />
+                  <NavBarNavLink
+                    title="Sign Out"
+                    handleSignOut={handleSignOut}
+                  />
+                </>
+              ) : (
+                <>
+                  <NavBarNavLink title="Sign In" />
+                  <NavBarNavLink
+                    title="Sign Out"
+                    handleSignOut={handleSignOut}
+                  />
+                </>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

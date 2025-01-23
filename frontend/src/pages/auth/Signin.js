@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/Signin.module.css";
 import Container from "react-bootstrap/Container";
@@ -6,11 +6,14 @@ import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import CustomButton from "../../components/CustomButton";
 import AuthFormFields from "./AuthFormFields";
-import axios from "axios";
+import axios from "../../api/axiosDefaults";
 import AuthFormErrorMessage from "./AuthFormErrorMessage";
+import { SetCurrentUserContext } from "../../App";
 
 // This component is to render the signin page
 const Signin = ({ showAlert }) => {
+  // call current user context hook
+  const setCurrentUser = useContext(SetCurrentUserContext);
   // use state hook for sign in data
   const [signInData, setSignInData] = useState({
     username: "",
@@ -35,15 +38,39 @@ const Signin = ({ showAlert }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(
+      const { data } = await axios.post(
         "http://127.0.0.1:8000/api/dj-rest-auth/login/",
         signInData
       );
+      console.log("Login Response:", data); // Log the response to check if you're getting a token
+
+      // Assuming the token is returned in the 'access' field
+      const token = data.key;
+      console.log("Token:", token); // Log the token
+
+      // Store the token in localStorage or state if needed
+      localStorage.setItem("authToken", token);
+      setCurrentUser(data.user);
+      console.log("current user?", data.user);
+      console.log("Login Response:", data);
       const { username } = signInData;
+
+      const token2 = localStorage.getItem("authToken");
+      console.log("Token from localStorage:", token2);
+
+      const { responseData } = await axios.get(
+        "http://127.0.0.1:8000/api/dj-rest-auth/user/", // Endpoint to get user data
+        {
+          headers: {
+            Authorization: `Token ${token}`, // Use "Token" for the token authentication
+          },
+        }
+      );
+
       showAlert("success", `You have successfully signed in as ${username}!`);
       navigate("/");
     } catch (err) {
-      console.log("error trying to sign in", err);
+      console.log("error trying to sign in", err.response.data);
       setErrors(err.response?.data || {});
       showAlert("warning", "Error trying to login!");
     }

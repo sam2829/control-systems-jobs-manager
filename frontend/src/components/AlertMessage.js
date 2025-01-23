@@ -18,7 +18,7 @@ const AlertMessage = ({ variant, message, showAlert }) => {
       setShow(true);
       const timer = setTimeout(() => {
         setShow(false);
-      }, 15000);
+      }, 5000);
 
       return () => {
         clearTimeout(timer);

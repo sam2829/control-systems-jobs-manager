@@ -5,31 +5,61 @@ import styles from "./App.module.css";
 import Signin from "./pages/auth/Signin.js";
 import Homepage from "./pages/homepage/Homepage.js";
 import AlertMessage, { useAlert } from "./components/AlertMessage";
+import { createContext, useEffect, useState } from "react";
+import axios from "./api/axiosDefaults";
+
+export const CurrentUserContext = createContext();
+export const SetCurrentUserContext = createContext();
 
 function App() {
+  // usestate hook to find current user
+  const [currentUser, setCurrentUser] = useState(null);
   // to show alert message
   const { alert, showAlert, hideAlert } = useAlert();
 
+  // handle mount function to get user data
+  const handleMount = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://127.0.0.1:8000/api/dj-rest-auth/user/"
+      );
+      setCurrentUser(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  // use effect function to run when app loads
+  useEffect(() => {
+    handleMount();
+  }, []);
+
   return (
-    <Router>
-      <div className={styles.App}>
-        {/* Display Navbar */}
-        <NavBar />
-        {/** Display the show alert message */}
-        {alert && (
-          <AlertMessage
-            variant={alert.variant}
-            message={alert.message}
-            showAlert={showAlert}
-            onClose={hideAlert}
-          />
-        )}
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/signin" element={<Signin showAlert={showAlert} />} />
-        </Routes>
-      </div>
-    </Router>
+    <CurrentUserContext value={currentUser}>
+      <SetCurrentUserContext value={setCurrentUser}>
+        <Router>
+          <div className={styles.App}>
+            {/* Display Navbar */}
+            <NavBar showAlert={showAlert} />
+            {/** Display the show alert message */}
+            {alert && (
+              <AlertMessage
+                variant={alert.variant}
+                message={alert.message}
+                showAlert={showAlert}
+                onClose={hideAlert}
+              />
+            )}
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route
+                path="/signin"
+                element={<Signin showAlert={showAlert} />}
+              />
+            </Routes>
+          </div>
+        </Router>
+      </SetCurrentUserContext>
+    </CurrentUserContext>
   );
 }
 

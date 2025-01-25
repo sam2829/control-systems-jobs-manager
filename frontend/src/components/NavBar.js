@@ -7,22 +7,28 @@ import styles from "../styles/NavBar.module.css";
 import NavBarNavLink from "./NavBarNavLink";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { CurrentUserContext } from "../App";
+import { SetCurrentUserContext } from "../App";
 import axios from "../api/axiosDefaults";
 
 // component for rendering Navbar
 const NavBar = ({ showAlert }) => {
   // call to find who is current user
   const currentUser = useContext(CurrentUserContext);
+  // call current user context hook
+  const setCurrentUser = useContext(SetCurrentUserContext);
   // This is so we can toggle the hamburger menu
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
+  //  Handle sign out function
   const handleSignOut = async () => {
     try {
-      await axios.post("http://127.0.0.1:8000/api/dj-rest-auth/logout/",);
+      await axios.post("http://127.0.0.1:8000/api/dj-rest-auth/logout/", {});
+      // Clear token from localStorage
+      localStorage.removeItem("authToken");
       showAlert("success", "You have successfully signed out!");
-      console.log("you have signed out");
+      setCurrentUser(null);
     } catch (err) {
-      console.log("sign out failed", err);
+      console.log("Error signing out:", err);
     }
   };
 
@@ -65,11 +71,7 @@ const NavBar = ({ showAlert }) => {
                 </>
               ) : (
                 <>
-                  <NavBarNavLink title="Sign In" />
-                  <NavBarNavLink
-                    title="Sign Out"
-                    handleSignOut={handleSignOut}
-                  />
+                  <NavBarNavLink title="Sign In" to="/signin" />
                 </>
               )}
             </Nav>

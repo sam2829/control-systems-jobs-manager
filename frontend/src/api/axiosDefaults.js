@@ -13,4 +13,31 @@ axios.defaults.withCredentials = true;
 // export const axiosReq = axios.create();
 // export const axiosRes = axios.create();
 
+// Function to set the Authorization token
+export const setAuthToken = () => {
+  const token = localStorage.getItem("authToken"); // Get token from localStorage
+  if (token) {
+    // If token exists, add it to the default Authorization header
+    axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+  } else {
+    // If no token, remove the Authorization header
+    delete axios.defaults.headers.common["Authorization"];
+  }
+};
+
+// Run setAuthToken initially to ensure token is always added when Axios is used
+setAuthToken();
+
+// Optionally, set up an Axios request interceptor to dynamically attach the token to each request
+axios.interceptors.request.use(
+  (config) => {
+    // Attach the token before the request is sent
+    setAuthToken();
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 export default axios;

@@ -20,12 +20,12 @@ function App() {
   // handle mount function to get user data
   const handleMount = async () => {
     try {
-      const { data } = await axios.get(
+      const userResponse = await axios.get(
         "http://127.0.0.1:8000/api/dj-rest-auth/user/"
       );
-      setCurrentUser(data);
+      setCurrentUser(userResponse.data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
   // use effect function to run when app loads

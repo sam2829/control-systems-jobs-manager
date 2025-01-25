@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import CustomButton from "../../components/CustomButton";
 import AuthFormFields from "./AuthFormFields";
-import axios from "../../api/axiosDefaults";
+import axios, { setAuthToken } from "../../api/axiosDefaults";
 import AuthFormErrorMessage from "./AuthFormErrorMessage";
 import { SetCurrentUserContext } from "../../App";
 
@@ -21,9 +21,10 @@ const Signin = ({ showAlert }) => {
   });
   const { username, password } = signInData;
 
-  // state for sign in form
+  //Error state for sign in form
   const [errors, setErrors] = useState({});
 
+  // Hook to navigate user
   const navigate = useNavigate();
 
   // handle change function for form fields
@@ -34,7 +35,7 @@ const Signin = ({ showAlert }) => {
     });
   };
 
-  // handle sign in form submission
+  // handle sign in form submission tokens
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -42,31 +43,22 @@ const Signin = ({ showAlert }) => {
         "http://127.0.0.1:8000/api/dj-rest-auth/login/",
         signInData
       );
-      console.log("Login Response:", data); // Log the response to check if you're getting a token
 
-      // Assuming the token is returned in the 'access' field
+      // Access and store token
       const token = data.key;
-      console.log("Token:", token); // Log the token
-
-      // Store the token in localStorage or state if needed
       localStorage.setItem("authToken", token);
-      setCurrentUser(data.user);
-      console.log("current user?", data.user);
-      console.log("Login Response:", data);
-      const { username } = signInData;
 
-      const token2 = localStorage.getItem("authToken");
-      console.log("Token from localStorage:", token2);
+      // Ensure the headers are set before making the user request
+      setAuthToken();
 
-      const { responseData } = await axios.get(
-        "http://127.0.0.1:8000/api/dj-rest-auth/user/", // Endpoint to get user data
-        {
-          headers: {
-            Authorization: `Token ${token}`, // Use "Token" for the token authentication
-          },
-        }
+      // Slight delay to make sure token is set
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // get user data
+      const userResponse = await axios.get(
+        "http://127.0.0.1:8000/api/dj-rest-auth/user/"
       );
-
+      setCurrentUser(userResponse.data);
       showAlert("success", `You have successfully signed in as ${username}!`);
       navigate("/");
     } catch (err) {

@@ -47,7 +47,7 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZERS': 'control_systems_jobs.serializers.CurrentUserSerializer'
+    'USER_DETAILS_SERIALIZER': 'control_systems_jobs.serializers.CurrentUserSerializer'
 }
 
 

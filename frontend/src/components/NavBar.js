@@ -60,11 +60,17 @@ const NavBar = ({ showAlert }) => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className={`ms-auto ${styles.NavLinks}`}>
               {/** Nav Links in Navbar */}
+              {/* nav links for logged in user */}
               {currentUser ? (
                 <>
-                  {/* nav links for logged in user */}
-                  <NavBarNavLink title="Add User" to="/signup" />
-                  <NavBarNavLink title="Add Job" to="/addjob" />
+                  {/* navlinks for superuser */}
+                  {currentUser && currentUser.is_superuser && (
+                    <>
+                      <NavBarNavLink title="Add User" to="/signup" />
+                      <NavBarNavLink title="Add Job" to="/addjob" />
+                    </>
+                  )}
+                  {/* navlinks for all logged in */}
                   <NavBarNavLink title="Jobs" to="/" />
                   <NavBarNavLink title="Profile" to="/profile" />
                   <NavBarNavLink

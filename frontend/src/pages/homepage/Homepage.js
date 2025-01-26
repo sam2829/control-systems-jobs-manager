@@ -19,6 +19,7 @@ const Hompage = () => {
         {currentUser ? (
           <Row>
             <p>Welcome {currentUser.username}</p>
+            {console.log("current user", currentUser)}
           </Row>
         ) : (
           // display when a user is not logged in

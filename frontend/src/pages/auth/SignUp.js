@@ -36,12 +36,12 @@ const SignUp = ({ showAlert }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post(
+      await axios.post(
         "http://127.0.0.1:8000/api/dj-rest-auth/registration/",
         signUpData
       );
       showAlert("success", "Successfully created an account!");
-      navigate("/signin");
+      navigate("/");
     } catch (err) {
       console.log("Error trying to sign up", err.response.data);
       setErrors(err.response?.data || {});
@@ -68,7 +68,7 @@ const SignUp = ({ showAlert }) => {
         />
         {/* form input field */}
         <AuthFormFields
-          title="Password1"
+          title="Password"
           type="password"
           name="password1"
           placeholder="Your password..."
@@ -78,10 +78,10 @@ const SignUp = ({ showAlert }) => {
         />
         {/* form input field */}
         <AuthFormFields
-          title="Password2"
+          title="Confirm&nbsp;Password"
           type="password"
           name="password2"
-          placeholder="Your password..."
+          placeholder="Confirm password..."
           value={password2}
           onChange={handleChange}
           errors={errors}

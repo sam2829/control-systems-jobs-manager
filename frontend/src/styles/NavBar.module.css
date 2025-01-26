@@ -44,6 +44,14 @@
   flex-grow: 1;
   display: flex;
   padding-top: 30px;
-  /* align-items: flex-end; */
   padding-right: 15px;
+}
+
+/* Styles for screen sizes larger than 992px wide */
+@media (min-width: 992px) {
+  .NavLinks {
+    justify-content: flex-end;
+    gap: 3rem;
+    padding-top: 0;
+  }
 }

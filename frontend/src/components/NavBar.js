@@ -62,15 +62,20 @@ const NavBar = ({ showAlert }) => {
               {/** Nav Links in Navbar */}
               {currentUser ? (
                 <>
-                  <NavBarNavLink title="Jobs" />
-                  <NavBarNavLink title="Profile" />
+                  {/* nav links for logged in user */}
+                  <NavBarNavLink title="Add User" to="/signup" />
+                  <NavBarNavLink title="Add Job" to="/addjob" />
+                  <NavBarNavLink title="Jobs" to="/" />
+                  <NavBarNavLink title="Profile" to="/profile" />
                   <NavBarNavLink
                     title="Sign Out"
                     handleSignOut={handleSignOut}
+                    to="/"
                   />
                 </>
               ) : (
                 <>
+                  {/* navlinks for logged out user */}
                   <NavBarNavLink title="Sign In" to="/signin" />
                 </>
               )}

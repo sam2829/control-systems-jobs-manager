@@ -4,4 +4,25 @@
   padding: 10px 5px;
   font-size: 16px;
   position: relative;
+  margin: 5px 0;
+}
+
+.NavLink:hover {
+  color: #457b9d;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+}
+
+.Active {
+  color: #457b9d;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Styles for screen sizes larger than 992px wide */
+@media (min-width: 992px) {
+  .NavLink {
+    width: 12%;
+    font-size: 18px;
+  }
 }

@@ -1,0 +1,44 @@
+.Main {
+    padding: 230px 20px 20px 20px;
+    height: 100vh;
+  }
+  
+  .Heading {
+    color: #457b9d;
+    font-weight: 700;
+    font-size: 23px;
+  }
+  
+  .Form {
+    background-color: #d9d9d9;
+    border: 2px solid #e63946;
+    border-radius: 8px;
+  }
+  
+  /* Styles for screen sizes larger than 768px wide */
+  @media (min-width: 768px) {
+    .Form {
+      width: 80%;
+      margin-left: 10%;
+    }
+  }
+  
+  /* Styles for screen sizes larger than 992px wide */
+  @media (min-width: 992px) {
+    .Heading {
+      font-size: 28px;
+    }
+  
+    .Form {
+      width: 60%;
+      margin-left: 20%;
+    }
+  
+    .FormLabel {
+      font-size: 23px;
+    }
+  
+    .FormInput {
+      font-size: 23px;
+    }
+  }

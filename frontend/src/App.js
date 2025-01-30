@@ -8,6 +8,7 @@ import AlertMessage, { useAlert } from "./components/AlertMessage";
 import { createContext, useEffect, useState } from "react";
 import axios from "./api/axiosDefaults";
 import SignUp from "./pages/auth/SignUp.js";
+import AddJobPage from "./pages/addJobPage/AddJobPage.js";
 
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
@@ -60,6 +61,10 @@ function App() {
               <Route
                 path="/signup"
                 element={<SignUp showAlert={showAlert} />}
+              />
+              <Route
+                path="/add-job"
+                element={<AddJobPage showAlert={showAlert} />}
               />
             </Routes>
           </div>

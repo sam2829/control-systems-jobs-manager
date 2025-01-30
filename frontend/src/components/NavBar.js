@@ -67,7 +67,7 @@ const NavBar = ({ showAlert }) => {
                   {currentUser && currentUser.is_superuser && (
                     <>
                       <NavBarNavLink title="Add User" to="/signup" />
-                      <NavBarNavLink title="Add Job" to="/addjob" />
+                      <NavBarNavLink title="Add Job" to="/add-job" />
                     </>
                   )}
                   {/* navlinks for all logged in */}

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import styles from "../../styles/Homepage.module.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import CustomButton from "../../components/CustomButton";
 import { CurrentUserContext } from "../../App";
 import axios from "../../api/axiosDefaults";
+import HomepageJobList from "./HomepageJobList";
 
 //  This component is used to render the homepage
 const Hompage = () => {
@@ -46,24 +46,19 @@ const Hompage = () => {
         {/* display when a user is logged in */}
         {currentUser ? (
           <Row>
-            <p>Welcome {currentUser.username}</p>
-            {/* display list of jobs */}
-            {jobs.results.length > 0 &&
+            <h1 className={styles.Heading}>Job List</h1>
+            <p className={styles.Text}>Welcome {currentUser.username}</p>
+            {/* display and map over list of jobs */}
+            {jobs.results.length > 0 ? (
               jobs.results.map((job) => (
-                <Container key={job.id} className="my-5">
-                  <p>{job.csa_number}</p>
-                  <p>{job.syspal_number}</p>
-                  <p>{job.order_number}</p>
-                  <p>{job.quantity}</p>
-                  <p>{job.description}</p>
-                  <p>{job.date_created}</p>
-                  <p>{job.workshop_status}</p>
-                  <p>{job.syspal_status}</p>
-                  <p>{job.delivered}</p>
-                  <p>{job.delivered_date}</p>
-                  <p>{job.quote}</p>
-                </Container>
-              ))}
+                <HomepageJobList key={job.id} {...job} />
+              ))
+            ) : (
+              // display message if no jobs
+              <p className={styles.Text}>
+                There are currently no jobs to view.
+              </p>
+            )}
           </Row>
         ) : (
           // display when a user is not logged in

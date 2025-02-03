@@ -6,8 +6,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import CustomButton from "../../components/CustomButton";
-import AuthFormErrorMessage from "../auth/AuthFormErrorMessage";
 import axios from "../../api/axiosDefaults";
+import AddJobFormFields from "./AddJobFormFields";
 
 // this is a component to render the add job page
 const AddJobPage = ({ showAlert }) => {
@@ -49,10 +49,7 @@ const AddJobPage = ({ showAlert }) => {
       quote: addJobData.quote,
     };
     try {
-      const { data } = await axios.post(
-        "http://127.0.0.1:8000/api/jobs/",
-        formData
-      );
+      await axios.post("http://127.0.0.1:8000/api/jobs/", formData);
       showAlert("success", `You have successfully added new job!`);
       navigate("/");
     } catch (err) {
@@ -71,83 +68,73 @@ const AddJobPage = ({ showAlert }) => {
       <Form onSubmit={handleAddJob} className={`${styles.Form} py-4 my-5`}>
         <Row>
           <Col sm={12} lg={4}>
-            <Form.Label className={styles.FormLabel}>CSA&nbsp;No:</Form.Label>
-            <Form.Control
+            <AddJobFormFields
+              title="CSA&nbsp;No:"
               type="text"
               name="csaNumber"
               placeholder="CSA number..."
               value={csaNumber}
               onChange={handleChange}
-              className={`${styles.FormInput} py-2 my-2`}
-              required
+              errors={errors}
             />
-            {/* Error message component */}
-            <AuthFormErrorMessage errors={errors} fieldName="csaNumber" />
           </Col>
           <Col sm={12} lg={4}>
-            <Form.Label className={styles.FormLabel}>
-              Syspal&nbsp;No:
-            </Form.Label>
-            <Form.Control
+            <AddJobFormFields
+              title="Syspal&nbsp;No:"
               type="text"
               name="syspalNumber"
               placeholder="Syspal number..."
               value={syspalNumber}
               onChange={handleChange}
-              className={`${styles.FormInput} py-2 my-2`}
-              required
+              errors={errors}
             />
           </Col>
           <Col sm={12} lg={4}>
-            <Form.Label className={styles.FormLabel}>Order&nbsp;No:</Form.Label>
-            <Form.Control
+            <AddJobFormFields
+              title="Order&nbsp;No:"
               type="text"
               name="orderNumber"
               placeholder="Order number..."
               value={orderNumber}
               onChange={handleChange}
-              className={`${styles.FormInput} py-2 my-2`}
-              required
+              errors={errors}
             />
           </Col>
         </Row>
         <Row>
           <Col sm={12} lg={4}>
-            <Form.Label className={styles.FormLabel}>Quantity:</Form.Label>
-            <Form.Control
+            <AddJobFormFields
+              title="Quantity:"
               type="number"
               min="1"
               name="quantity"
               placeholder="Quantity..."
               value={quantity}
               onChange={handleChange}
-              className={`${styles.FormInput} py-2 my-2`}
-              required
+              errors={errors}
             />
           </Col>
           <Col sm={12} lg={8}>
-            <Form.Label className={styles.FormLabel}>Description:</Form.Label>
-            <Form.Control
+            <AddJobFormFields
+              title="Description:"
               type="text"
               name="description"
               placeholder="Description..."
               value={description}
               onChange={handleChange}
-              className={`${styles.FormInput} py-2 my-2`}
-              required
+              errors={errors}
             />
           </Col>
         </Row>
-        <Form.Label className={styles.FormLabel}>Quote:</Form.Label>
-        <Form.Control
+        <AddJobFormFields
+          title="Quote:"
           as="textarea"
           name="quote"
           placeholder="Quote..."
           value={quote}
           onChange={handleChange}
-          className={`${styles.FormInput} py-2 my-2`}
           rows={5}
-          required
+          errors={errors}
         />
         <div className="py-4">
           {/* import custom button */}

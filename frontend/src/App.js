@@ -26,7 +26,6 @@ function App() {
         "http://127.0.0.1:8000/api/dj-rest-auth/user/"
       );
       setCurrentUser(userResponse.data);
-      console.log("homepage log", userResponse.data);
     } catch (err) {
       // console.log(err);
     }

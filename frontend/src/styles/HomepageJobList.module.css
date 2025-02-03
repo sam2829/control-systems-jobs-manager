@@ -22,3 +22,13 @@
 .Button {
   text-align: center;
 }
+
+.Complete {
+  color: #32CD32;
+  font-size: 30px;
+}
+
+.InComplete {
+  color: #e63946;
+  font-size: 30px;
+}

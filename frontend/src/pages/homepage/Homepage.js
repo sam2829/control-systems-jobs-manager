@@ -7,38 +7,42 @@ import CustomButton from "../../components/CustomButton";
 import { CurrentUserContext } from "../../App";
 import axios from "../../api/axiosDefaults";
 import HomepageJobList from "./HomepageJobList";
+import useJobs from "../../hooks/useJobs";
 
 //  This component is used to render the homepage
 const Hompage = () => {
   // call to find who is current user
   const currentUser = useContext(CurrentUserContext);
 
+  // custom hook to fetch jobs
+  const {jobs, loading, error} = useJobs()
+
   // set current jobs
-  const [jobs, setJobs] = useState({ results: [] });
+  // const [jobs, setJobs] = useState({ results: [] });
 
-  useEffect(() => {
-    // fetch jobs only if there is a current user
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    if (currentUser) {
-      const fetchJobs = async () => {
-        try {
-          const jobResponse = await axios.get(
-            "http://127.0.0.1:8000/api/jobs/"
-          );
-          setJobs(jobResponse.data);
-          console.log("Fetched jobs:", jobResponse.data);
-          console.log("jobs logged:", jobs);
-        } catch (err) {
-          console.log(
-            "Error trying to fetch jobs",
-            err.response?.data || err.message
-          );
-        }
-      };
+  // useEffect(() => {
+  //   // fetch jobs only if there is a current user
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   if (currentUser) {
+  //     const fetchJobs = async () => {
+  //       try {
+  //         const jobResponse = await axios.get(
+  //           "http://127.0.0.1:8000/api/jobs/"
+  //         );
+  //         setJobs(jobResponse.data);
+  //         console.log("Fetched jobs:", jobResponse.data);
+  //         console.log("jobs logged:", jobs);
+  //       } catch (err) {
+  //         console.log(
+  //           "Error trying to fetch jobs",
+  //           err.response?.data || err.message
+  //         );
+  //       }
+  //     };
 
-      fetchJobs();
-    }
-  }, [currentUser]);
+  //     fetchJobs();
+  //   }
+  // }, [currentUser]);
 
   return (
     <Container className={styles.Main}>
@@ -48,9 +52,10 @@ const Hompage = () => {
           <Row>
             <h1 className={styles.Heading}>Job List</h1>
             <p className={styles.Text}>Welcome {currentUser.username}</p>
+            {loading && <p>Loading....</p>}
             {/* display and map over list of jobs */}
-            {jobs.results.length > 0 ? (
-              jobs.results.map((job) => (
+            {jobs.length > 0 ? (
+              jobs.map((job) => (
                 <HomepageJobList key={job.id} {...job} />
               ))
             ) : (

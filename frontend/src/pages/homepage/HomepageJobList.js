@@ -40,8 +40,13 @@ const HomepageJobList = ({
             <p className={styles.Data}>{order_number}</p>
           </Col>
           <Col xs={12} lg={2}>
-            <p className={styles.Text}>
-              Completed: {workshop_status && syspal_status ? "Yes" : "No"}
+            <p className={styles.Text}>Completed:</p>
+            <p>
+              {workshop_status === true && syspal_status === true ? (
+                <i className={`${styles.Complete} fa-solid fa-check`}></i>
+              ) : (
+                <i className={`${styles.InComplete} fa-solid fa-xmark`}></i>
+              )}
             </p>
           </Col>
         </Row>

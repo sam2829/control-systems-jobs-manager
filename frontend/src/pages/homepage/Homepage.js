@@ -1,13 +1,14 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../styles/Homepage.module.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import CustomButton from "../../components/CustomButton";
 import { CurrentUserContext } from "../../App";
-import axios from "../../api/axiosDefaults";
 import HomepageJobList from "./HomepageJobList";
 import useJobs from "../../hooks/useJobs";
+import ErrorMessage from "../../components/ErrorMessage";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 //  This component is used to render the homepage
 const Hompage = () => {
@@ -15,34 +16,14 @@ const Hompage = () => {
   const currentUser = useContext(CurrentUserContext);
 
   // custom hook to fetch jobs
-  const {jobs, loading, error} = useJobs()
+  const { jobs, loading, error, fetchJobs } = useJobs();
 
-  // set current jobs
-  // const [jobs, setJobs] = useState({ results: [] });
-
-  // useEffect(() => {
-  //   // fetch jobs only if there is a current user
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   if (currentUser) {
-  //     const fetchJobs = async () => {
-  //       try {
-  //         const jobResponse = await axios.get(
-  //           "http://127.0.0.1:8000/api/jobs/"
-  //         );
-  //         setJobs(jobResponse.data);
-  //         console.log("Fetched jobs:", jobResponse.data);
-  //         console.log("jobs logged:", jobs);
-  //       } catch (err) {
-  //         console.log(
-  //           "Error trying to fetch jobs",
-  //           err.response?.data || err.message
-  //         );
-  //       }
-  //     };
-
-  //     fetchJobs();
-  //   }
-  // }, [currentUser]);
+  // use effect hook to fetch jobs
+  useEffect(() => {
+    if (currentUser) {
+      fetchJobs();
+    }
+  }, [currentUser]);
 
   return (
     <Container className={styles.Main}>
@@ -52,18 +33,21 @@ const Hompage = () => {
           <Row>
             <h1 className={styles.Heading}>Job List</h1>
             <p className={styles.Text}>Welcome {currentUser.username}</p>
-            {loading && <p>Loading....</p>}
-            {/* display and map over list of jobs */}
-            {jobs.length > 0 ? (
-              jobs.map((job) => (
-                <HomepageJobList key={job.id} {...job} />
-              ))
-            ) : (
-              // display message if no jobs
+            {/* loading jobs */}
+            {loading && <LoadingSpinner />}
+            {/* display error message */}
+            {!loading && error && <ErrorMessage error={error} />}
+            {/* no jobs message */}
+            {!loading && !error && jobs.length === 0 && (
               <p className={styles.Text}>
                 There are currently no jobs to view.
               </p>
             )}
+            {/* Map over and display jobs */}
+            {!loading &&
+              !error &&
+              jobs.length > 0 &&
+              jobs.map((job) => <HomepageJobList key={job.id} {...job} />)}
           </Row>
         ) : (
           // display when a user is not logged in

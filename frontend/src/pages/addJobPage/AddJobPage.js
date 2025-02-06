@@ -6,8 +6,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import CustomButton from "../../components/CustomButton";
-import axios from "../../api/axiosDefaults";
 import AddJobFormFields from "./AddJobFormFields";
+import useJobs from "../../hooks/useJobs";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 // this is a component to render the add job page
 const AddJobPage = ({ showAlert }) => {
@@ -23,11 +24,11 @@ const AddJobPage = ({ showAlert }) => {
   const { csaNumber, syspalNumber, orderNumber, quantity, description, quote } =
     addJobData;
 
-  //Error state for sign in form
-  const [errors, setErrors] = useState({});
-
   // Hook to navigate user
   const navigate = useNavigate();
+
+  // Add job custom hook
+  const { addJob, loading, error } = useJobs();
 
   //   handle change function for form inputs
   const handleChange = (event) => {
@@ -48,15 +49,7 @@ const AddJobPage = ({ showAlert }) => {
       description: addJobData.description,
       quote: addJobData.quote,
     };
-    try {
-      await axios.post("http://127.0.0.1:8000/api/jobs/", formData);
-      showAlert("success", `You have successfully added new job!`);
-      navigate("/");
-    } catch (err) {
-      console.log("error trying to add job:", err.response.data);
-      setErrors(err.response?.data || {});
-      showAlert("warning", "Error trying to add new job!");
-    }
+    await addJob(formData, showAlert, navigate);
   };
 
   return (
@@ -75,7 +68,7 @@ const AddJobPage = ({ showAlert }) => {
               placeholder="CSA number..."
               value={csaNumber}
               onChange={handleChange}
-              errors={errors}
+              errors={error}
             />
           </Col>
           <Col sm={12} lg={4}>
@@ -86,7 +79,7 @@ const AddJobPage = ({ showAlert }) => {
               placeholder="Syspal number..."
               value={syspalNumber}
               onChange={handleChange}
-              errors={errors}
+              errors={error}
             />
           </Col>
           <Col sm={12} lg={4}>
@@ -97,7 +90,7 @@ const AddJobPage = ({ showAlert }) => {
               placeholder="Order number..."
               value={orderNumber}
               onChange={handleChange}
-              errors={errors}
+              errors={error}
             />
           </Col>
         </Row>
@@ -111,7 +104,7 @@ const AddJobPage = ({ showAlert }) => {
               placeholder="Quantity..."
               value={quantity}
               onChange={handleChange}
-              errors={errors}
+              errors={error}
             />
           </Col>
           <Col sm={12} lg={8}>
@@ -122,7 +115,7 @@ const AddJobPage = ({ showAlert }) => {
               placeholder="Description..."
               value={description}
               onChange={handleChange}
-              errors={errors}
+              errors={error}
             />
           </Col>
         </Row>
@@ -134,11 +127,15 @@ const AddJobPage = ({ showAlert }) => {
           value={quote}
           onChange={handleChange}
           rows={5}
-          errors={errors}
+          errors={error}
         />
         <div className="py-4">
           {/* import custom button */}
-          <CustomButton text="Add Job" type="submit" />
+          <CustomButton
+            text={loading ? <LoadingSpinner buttonSpinner /> : "Add Job"}
+            type="submit"
+            disabled={loading}
+          />
         </div>
       </Form>
     </Container>

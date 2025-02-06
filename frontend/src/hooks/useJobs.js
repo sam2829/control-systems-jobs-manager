@@ -29,13 +29,33 @@ const useJobs = (jobId = null) => {
     }
   };
 
-  useEffect(() => {
-    if (currentUser) {
-      fetchJobs(jobId);
+  // Add a new job
+  const addJob = async (formData, showAlert, navigate) => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/jobs/",
+        formData
+      );
+      setJobs((prevJobs) => [...prevJobs, response.data]);
+      showAlert("success", `You have successfully added new job!`);
+      navigate("/");
+    } catch (err) {
+      console.log("error trying to add job:", err.response.data);
+      setError(err.response?.data || {});
+      showAlert("warning", "Error trying to add new job!");
+    } finally {
+      setLoading(false);
     }
-  }, [currentUser, jobId]);
+  };
 
-  return { jobs, loading, error, fetchJobs };
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     fetchJobs(jobId);
+  //   }
+  // }, [currentUser, jobId]);
+
+  return { jobs, loading, error, fetchJobs, addJob };
 };
 
 export default useJobs;

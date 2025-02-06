@@ -51,7 +51,7 @@ const HomepageJobList = ({
           </Col>
         </Row>
         {/* import custom button */}
-        <div className={`${styles.Button} py-4`}>
+        <div className={`${styles.Button} py-1`}>
           <CustomButton text="View Job" />
         </div>
       </Container>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,6 +8,7 @@ import styles from "../../styles/HomepageJobList.module.css";
 
 // component to render list of jobs
 const HomepageJobList = ({
+  id,
   csa_number,
   syspal_number,
   description,
@@ -51,9 +53,11 @@ const HomepageJobList = ({
           </Col>
         </Row>
         {/* import custom button */}
-        <div className={`${styles.Button} py-1`}>
-          <CustomButton text="View Job" />
-        </div>
+        <Link to={`/job/${id}`}>
+          <div className={`${styles.Button} py-1`}>
+            <CustomButton text="View Job" />
+          </div>
+        </Link>
       </Container>
     </>
   );

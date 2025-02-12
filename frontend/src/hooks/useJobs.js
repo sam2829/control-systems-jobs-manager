@@ -18,7 +18,7 @@ const useJobs = (jobId = null) => {
     setLoading(true);
     try {
       const endpoint = id
-        ? "http://127.0.0.1:8000/api/jobs/${id}/"
+        ? `http://127.0.0.1:8000/api/jobs/${id}/`
         : "http://127.0.0.1:8000/api/jobs/";
       const response = await axios.get(endpoint);
       setJobs(id ? response.data : response.data.results);

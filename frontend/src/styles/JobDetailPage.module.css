@@ -1,0 +1,17 @@
+.Main {
+  padding: 230px 20px 20px 20px;
+  min-height: 100vh;
+}
+
+.Heading {
+  color: #457b9d;
+  font-weight: 700;
+  font-size: 23px;
+}
+
+/* Styles for screen sizes larger than 992px wide */
+@media (min-width: 992px) {
+  .Heading {
+    font-size: 28px;
+  }
+}

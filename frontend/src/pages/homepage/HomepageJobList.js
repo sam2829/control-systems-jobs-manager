@@ -44,7 +44,7 @@ const HomepageJobList = ({
           <Col xs={12} lg={2}>
             <p className={styles.Text}>Completed:</p>
             <p>
-              {workshop_status === true && syspal_status === true ? (
+              {workshop_status === "Complete" && syspal_status === "Complete" ? (
                 <i className={`${styles.Complete} fa-solid fa-check`}></i>
               ) : (
                 <i className={`${styles.InComplete} fa-solid fa-xmark`}></i>

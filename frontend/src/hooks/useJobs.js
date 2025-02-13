@@ -49,11 +49,7 @@ const useJobs = (jobId = null) => {
     }
   };
 
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     fetchJobs(jobId);
-  //   }
-  // }, [currentUser, jobId]);
+  
 
   return { jobs, loading, error, fetchJobs, addJob };
 };

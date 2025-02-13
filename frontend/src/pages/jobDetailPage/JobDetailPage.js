@@ -9,7 +9,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage";
 import JobDetailPageJob from "./JobDetailPageJob";
 
-const JobDetailPage = () => {
+const JobDetailPage = ({ showAlert }) => {
   // extract id from url for job id
   const { id } = useParams();
 
@@ -39,7 +39,11 @@ const JobDetailPage = () => {
           {!loading && error && <ErrorMessage error={error} />}
           {/* display job details */}
           {!loading && !error && jobs && (
-            <JobDetailPageJob {...jobs} currentUser={currentUser} />
+            <JobDetailPageJob
+              {...jobs}
+              currentUser={currentUser}
+              showAlert={showAlert}
+            />
           )}
         </Row>
       </main>

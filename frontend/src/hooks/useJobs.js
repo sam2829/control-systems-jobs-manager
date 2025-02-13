@@ -49,9 +49,28 @@ const useJobs = (jobId = null) => {
     }
   };
 
-  
+  // edit existing job
+  const editJob = async (id, formData, showAlert) => {
+    setLoading(true);
+    try {
+      const response = await axios.put(
+        `http://127.0.0.1:8000/api/jobs/${id}/`,
+        formData
+      );
+      setJobs((prevJobs) =>
+        prevJobs.map((job) => (job.id === id ? response.data : job))
+      );
+      showAlert("success", `You have successfully modified the job!`);
+    } catch (err) {
+      console.log("Error trying to edit job:", err.response?.data || err);
+      setError(err.response?.data || {});
+      showAlert("warning", "Error trying to edit the job!");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  return { jobs, loading, error, fetchJobs, addJob };
+  return { jobs, loading, error, fetchJobs, addJob, editJob };
 };
 
 export default useJobs;

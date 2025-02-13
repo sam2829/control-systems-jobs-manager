@@ -4,7 +4,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import CustomButton from "../../components/CustomButton";
-import axios from "../../api/axiosDefaults";
+import useJobs from "../../hooks/useJobs";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import AuthFormErrorMessage from "../auth/AuthFormErrorMessage";
 
 const JobDetailPageJob = ({
   id,
@@ -32,7 +34,7 @@ const JobDetailPageJob = ({
     jobQuote: quote,
     workshopStatus: workshop_status,
     syspalStatus: syspal_status,
-    deliveredStatus: delivered,
+    deliveredStatus: delivered ?? false,
     deliveredDate: delivered_date,
     notesCount: notes_count,
   });
@@ -50,12 +52,16 @@ const JobDetailPageJob = ({
     notesCount,
   } = jobData;
 
-  // handle change function for form inputs
+  // custom hook to edit job
+  const { editJob, loading, error } = useJobs();
+
   const handleChange = (event) => {
-    setJobData({
-      ...jobData,
-      [event.target.name]: event.target.value,
-    });
+    const { name, value } = event.target;
+
+    setJobData((prevData) => ({
+      ...prevData,
+      [name]: name === "deliveredStatus" ? value === "true" : value,
+    }));
   };
 
   // handle submit edited job
@@ -79,20 +85,23 @@ const JobDetailPageJob = ({
       delivered: jobData.deliveredStatus,
       delivered_date: formattedDeliveredDate,
     };
-    try {
-      await axios.put(`http://127.0.0.1:8000/api/jobs/${id}/`, formData);
-      // setJobData((prevJobs) => )
-      showAlert("success", `You have successfully modified job!`);
-    } catch (err) {
-      console.log("error trying to edit job:", err.response.data);
-      showAlert("warning", "Error trying to add new job!");
-    }
+    await editJob(id, formData, showAlert);
   };
+
+  // drop down status options
+  const statusOptions = ["Not Started", "Ongoing", "Complete"];
+
+  // drop down options for delivered
+  const deliveredOptions = [
+    { value: "true", label: "✔ Delivered" },
+    { value: "false", label: "✖ Not Delivered" },
+  ];
 
   return (
     <>
       <Form onSubmit={handleEditJob}>
         <section className={`${styles.DataContainer} my-5 py-4`}>
+        <AuthFormErrorMessage errors={error} fieldName="csaNumber" />
           <Row>
             <Col xs={6} lg={3}>
               <Form.Label className={styles.FormLabel}>CSA Number:</Form.Label>
@@ -106,6 +115,8 @@ const JobDetailPageJob = ({
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
               />
+              {/* error message component */}
+              <AuthFormErrorMessage errors={error} fieldName="csa_number" />
             </Col>
             <Col xs={6} lg={3}>
               <Form.Label className={styles.FormLabel}>
@@ -156,46 +167,58 @@ const JobDetailPageJob = ({
               <Form.Label className={styles.FormLabel}>
                 Workshop Status:
               </Form.Label>
-              <Form.Control
-                type="text"
+              <Form.Select
                 name="workshopStatus"
-                placeholder={workshopStatus}
                 value={workshopStatus}
                 className={styles.FormData}
                 required
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
-              />
+              >
+                {statusOptions.map((status, index) => (
+                  <option key={index} value={status}>
+                    {status}
+                  </option>
+                ))}
+              </Form.Select>
             </Col>
             <Col xs={6} lg={3}>
               <Form.Label className={styles.FormLabel}>
                 Syspal Status:
               </Form.Label>
-              <Form.Control
-                type="text"
+              <Form.Select
                 name="syspalStatus"
-                placeholder={syspalStatus}
                 value={syspalStatus}
                 className={styles.FormData}
                 required
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
-              />
+              >
+                {statusOptions.map((status, index) => (
+                  <option key={index} value={status}>
+                    {status}
+                  </option>
+                ))}
+              </Form.Select>
             </Col>
             <Col xs={6} lg={3}>
               <Form.Label className={styles.FormLabel}>
                 Delivered Status:
               </Form.Label>
-              <Form.Control
-                type="text"
+              <Form.Select
                 name="deliveredStatus"
-                placeholder={deliveredStatus ? "Yes" : "No"}
-                value={deliveredStatus}
+                value={deliveredStatus ? deliveredStatus.toString() : "false"}
                 className={styles.FormData}
                 required
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
-              />
+              >
+                {deliveredOptions.map((option, index) => (
+                  <option key={index} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Form.Select>
             </Col>
             <Col xs={6} lg={3}>
               <Form.Label className={styles.FormLabel}>
@@ -227,17 +250,27 @@ const JobDetailPageJob = ({
                 onChange={handleChange}
               />
             </Col>
-            {/* import of custom buttons */}
-            <Col xs={12} sm={6} lg={3}>
-              <div className={`${styles.Button} py-1`}>
-                <CustomButton type="submit" text="Save Changes" />
-              </div>
-            </Col>
-            <Col xs={12} sm={6} lg={3}>
-              <div className={`${styles.Button} py-1`}>
-                <CustomButton text="Cancel" />
-              </div>
-            </Col>
+            {/* import of custom buttons and spinner if loading*/}
+            {!loading && (
+              <>
+                <Col xs={12} sm={6} lg={3}>
+                  <div className={`${styles.Button} py-1`}>
+                    <CustomButton type="submit" text="Save Changes" />
+                  </div>
+                </Col>
+                <Col xs={12} sm={6} lg={3}>
+                  <div className={`${styles.Button} py-1`}>
+                    <CustomButton text="Cancel" />
+                  </div>
+                </Col>
+              </>
+            )}
+            {/* import spinner instead of buttons when loading */}
+            {loading && (
+              <Col xs={12} lg={6} className="mt-5">
+                <LoadingSpinner />
+              </Col>
+            )}
           </Row>
         </section>
         {/* quote section */}
@@ -245,7 +278,7 @@ const JobDetailPageJob = ({
           <Form.Label className={styles.SubHeading}>Quote</Form.Label>
           <Form.Control
             type="text"
-            name="quote"
+            name="jobQuote"
             placeholder={jobQuote}
             value={jobQuote}
             className={`${styles.FormData} ${styles.QuoteContainer} my-4`}

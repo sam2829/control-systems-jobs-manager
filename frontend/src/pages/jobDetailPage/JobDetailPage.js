@@ -38,7 +38,9 @@ const JobDetailPage = () => {
           {/* display error message */}
           {!loading && error && <ErrorMessage error={error} />}
           {/* display job details */}
-          {!loading && !error && jobs && <JobDetailPageJob {...jobs} />}
+          {!loading && !error && jobs && (
+            <JobDetailPageJob {...jobs} currentUser={currentUser} />
+          )}
         </Row>
       </main>
     </Container>

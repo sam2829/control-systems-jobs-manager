@@ -2,24 +2,23 @@
   background-color: #d9d9d9;
   border: 2px solid #e63946;
   border-radius: 8px;
-  padding-right: 20px;
-  padding-left: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
   text-align: start;
 }
 
-.Text {
+.FormLabel {
   padding-top: 17px;
   padding-bottom: 17px;
   color: #457b9d;
   font-size: 16px;
   width: 100%;
-  height: 50px;
-  /* margin-top: 10px; */
+  height: 65px;
 }
 
-.Data {
+.FormData {
   color: #1a1a40;
-  font-size: 16px;
+  font-size: 12px;
   width: 100%;
 }
 
@@ -44,11 +43,21 @@
 /* Styles for screen sizes larger than 992px wide */
 @media (min-width: 992px) {
   .Button {
-    text-align: left;
-    margin-top: 10px;
+    text-align: center;
+    margin-top: 70px;
   }
 
   .QuoteContainer {
     text-align: start;
+  }
+
+  .FormLabel {
+    color: #457b9d;
+    font-size: 16px;
+    height: auto;
+  }
+
+  .FormData {
+    font-size: 16px;
   }
 }

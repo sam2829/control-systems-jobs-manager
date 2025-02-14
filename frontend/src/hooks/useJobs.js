@@ -53,7 +53,7 @@ const useJobs = (jobId = null) => {
   const editJob = async (id, formData, showAlert) => {
     setLoading(true);
     try {
-      const response = await axios.put(
+      const response = await axios.patch(
         `http://127.0.0.1:8000/api/jobs/${id}/`,
         formData
       );

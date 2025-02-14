@@ -20,9 +20,9 @@ class JobSerializer(serializers.ModelSerializer):
         user_location = request.user.profile.work_location
         allowed_fields = []
 
-        if user_location == 'Workshop':
+        if user_location == 'WORKSHOP':
             allowed_fields = ['workshop_status']
-        elif user_location == 'Syspal':
+        elif user_location == 'SYSPAL':
             allowed_fields = ['syspal_status']
 
         restricted_fields = [

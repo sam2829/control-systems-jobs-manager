@@ -24,7 +24,7 @@ const JobDetailPageJob = ({
   currentUser,
   showAlert,
 }) => {
-  // use state for job detail data
+  // // use state for job detail data
   const [jobData, setJobData] = useState({
     csaNumber: csa_number,
     syspalNumber: syspal_number,
@@ -52,6 +52,8 @@ const JobDetailPageJob = ({
     notesCount,
   } = jobData;
 
+  const [initialJobData] = useState(jobData); // Store initial state
+
   // custom hook to edit job
   const { editJob, loading, error } = useJobs();
 
@@ -64,7 +66,7 @@ const JobDetailPageJob = ({
     }));
   };
 
-  // handle submit edited job
+  //  handle editing job submission
   const handleEditJob = async (event) => {
     event.preventDefault();
 
@@ -73,19 +75,38 @@ const JobDetailPageJob = ({
       ? new Date(jobData.deliveredDate).toISOString().split("T")[0]
       : null;
 
-    const formData = {
-      csa_number: jobData.csaNumber,
-      syspal_number: jobData.syspalNumber,
-      order_number: jobData.orderNumber,
-      quantity: jobData.jobQuantity,
-      description: jobData.jobDescription,
-      quote: jobData.jobQuote,
-      workshop_status: jobData.workshopStatus,
-      syspal_status: jobData.syspalStatus,
-      delivered: jobData.deliveredStatus,
-      delivered_date: formattedDeliveredDate,
-    };
-    await editJob(id, formData, showAlert);
+    // Construct formData with only changed fields
+    const formData = {};
+
+    Object.keys(jobData).forEach((key) => {
+      if (jobData[key] !== initialJobData[key]) {
+        // Convert key names to backend format
+        const backendKey = key
+          .replace("csaNumber", "csa_number")
+          .replace("syspalNumber", "syspal_number")
+          .replace("orderNumber", "order_number")
+          .replace("jobQuantity", "quantity")
+          .replace("jobDescription", "description")
+          .replace("jobQuote", "quote")
+          .replace("workshopStatus", "workshop_status")
+          .replace("syspalStatus", "syspal_status")
+          .replace("deliveredStatus", "delivered")
+          .replace("deliveredDate", "delivered_date");
+
+        formData[backendKey] = jobData[key];
+      }
+    });
+
+    // Ensure delivered_date is properly formatted
+    if ("delivered_date" in formData) {
+      formData["delivered_date"] = formattedDeliveredDate;
+    }
+
+    if (Object.keys(formData).length > 0) {
+      await editJob(id, formData, showAlert);
+    } else {
+      showAlert("success", `No edits have been made to job!`);
+    }
   };
 
   // drop down status options
@@ -101,7 +122,7 @@ const JobDetailPageJob = ({
     <>
       <Form onSubmit={handleEditJob}>
         <section className={`${styles.DataContainer} my-5 py-4`}>
-        <AuthFormErrorMessage errors={error} fieldName="csaNumber" />
+          <AuthFormErrorMessage errors={error} fieldName="csaNumber" />
           <Row>
             <Col xs={6} lg={3}>
               <Form.Label className={styles.FormLabel}>CSA Number:</Form.Label>
@@ -132,6 +153,8 @@ const JobDetailPageJob = ({
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
               />
+              {/* error message component */}
+              <AuthFormErrorMessage errors={error} fieldName="syspal_number" />
             </Col>
             <Col xs={6} lg={3}>
               <Form.Label className={styles.FormLabel}>
@@ -147,7 +170,10 @@ const JobDetailPageJob = ({
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
               />
+              {/* error message component */}
+              <AuthFormErrorMessage errors={error} fieldName="order_number" />
             </Col>
+
             <Col xs={6} lg={3}>
               <Form.Label className={styles.FormLabel}>Quantity:</Form.Label>
               <Form.Control
@@ -155,11 +181,14 @@ const JobDetailPageJob = ({
                 name="jobQuantity"
                 placeholder={jobQuantity}
                 value={jobQuantity}
+                min="1"
                 className={styles.FormData}
                 required
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
               />
+              {/* error message component */}
+              <AuthFormErrorMessage errors={error} fieldName="quantity" />
             </Col>
           </Row>
           <Row>
@@ -172,7 +201,10 @@ const JobDetailPageJob = ({
                 value={workshopStatus}
                 className={styles.FormData}
                 required
-                disabled={!currentUser.is_superuser}
+                disabled={
+                  currentUser.work_location !== "WORKSHOP" &&
+                  !currentUser.is_superuser
+                }
                 onChange={handleChange}
               >
                 {statusOptions.map((status, index) => (
@@ -181,7 +213,13 @@ const JobDetailPageJob = ({
                   </option>
                 ))}
               </Form.Select>
+              {/* error message component */}
+              <AuthFormErrorMessage
+                errors={error}
+                fieldName="workshop_status"
+              />
             </Col>
+
             <Col xs={6} lg={3}>
               <Form.Label className={styles.FormLabel}>
                 Syspal Status:
@@ -191,7 +229,10 @@ const JobDetailPageJob = ({
                 value={syspalStatus}
                 className={styles.FormData}
                 required
-                disabled={!currentUser.is_superuser}
+                disabled={
+                  currentUser.work_location !== "SYSPAL" &&
+                  !currentUser.is_superuser
+                }
                 onChange={handleChange}
               >
                 {statusOptions.map((status, index) => (
@@ -200,6 +241,8 @@ const JobDetailPageJob = ({
                   </option>
                 ))}
               </Form.Select>
+              {/* error message component */}
+              <AuthFormErrorMessage errors={error} fieldName="syspal_status" />
             </Col>
             <Col xs={6} lg={3}>
               <Form.Label className={styles.FormLabel}>
@@ -219,6 +262,11 @@ const JobDetailPageJob = ({
                   </option>
                 ))}
               </Form.Select>
+              {/* error message component */}
+              <AuthFormErrorMessage
+                errors={error}
+                fieldName="delivered_status"
+              />
             </Col>
             <Col xs={6} lg={3}>
               <Form.Label className={styles.FormLabel}>
@@ -233,6 +281,8 @@ const JobDetailPageJob = ({
                 required
                 disabled
               />
+              {/* error message component */}
+              <AuthFormErrorMessage errors={error} fieldName="delivered_date" />
             </Col>
           </Row>
           <Row>
@@ -249,6 +299,8 @@ const JobDetailPageJob = ({
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
               />
+              {/* error message component */}
+              <AuthFormErrorMessage errors={error} fieldName="description" />
             </Col>
             {/* import of custom buttons and spinner if loading*/}
             {!loading && (
@@ -286,6 +338,8 @@ const JobDetailPageJob = ({
             disabled={!currentUser.is_superuser}
             onChange={handleChange}
           />
+          {/* error message component */}
+          <AuthFormErrorMessage errors={error} fieldName="quote" />
         </section>
       </Form>
 

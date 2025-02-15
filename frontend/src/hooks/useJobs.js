@@ -12,14 +12,14 @@ const useJobs = (jobId = null) => {
   const [error, setError] = useState(null);
 
   // Fetch jobs or job by id
-  const fetchJobs = async (id = null) => {
+  const fetchJobs = async (id = null, searchQuery = "") => {
     if (!currentUser) return;
 
     setLoading(true);
     try {
       const endpoint = id
         ? `http://127.0.0.1:8000/api/jobs/${id}/`
-        : "http://127.0.0.1:8000/api/jobs/";
+        : `http://127.0.0.1:8000/api/jobs/?search=${searchQuery}`;
       const response = await axios.get(endpoint);
       setJobs(id ? response.data : response.data.results);
     } catch (err) {

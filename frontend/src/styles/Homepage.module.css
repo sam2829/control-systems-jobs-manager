@@ -14,6 +14,42 @@
   font-size: 18px;
 }
 
+.SearchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+}
+
+.SearchBar {
+  width: 100%;
+}
+
+.SearchBar input {
+  width: 100%;
+  margin-top: 40px;
+  border-radius: 10px;
+  padding-left: 40px;
+  margin-bottom: 16px;
+  border: 2px solid #457b9d;
+  color: #457b9d !important;
+}
+
+.SearchIcon {
+  position: absolute;
+  font-size: 16px;
+  padding: 9px;
+  padding-left: 15px;
+  margin-top: 23px;
+  color: #457b9d;
+}
+
+.SearchIcon:hover {
+  cursor: default;
+  color: #ffac00;
+}
+
 /* Styles for screen sizes larger than 992px wide */
 @media (min-width: 992px) {
   .Heading {
@@ -22,5 +58,19 @@
 
   .Text {
     font-size: 23px;
+  }
+
+  .SearchBar {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+
+  .SearchIcon {
+    padding-left: 22%;
+  }
+
+  .SearchBar input {
+    padding-left: 8%;
   }
 }

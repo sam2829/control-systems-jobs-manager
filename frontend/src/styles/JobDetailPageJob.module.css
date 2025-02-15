@@ -6,16 +6,3 @@
   padding-left: 10px;
   text-align: start;
 }
-
-.Button {
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* Styles for screen sizes larger than 992px wide */
-@media (min-width: 992px) {
-  .Button {
-    text-align: center;
-    margin-top: 70px;
-  }
-}

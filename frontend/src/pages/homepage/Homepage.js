@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../styles/Homepage.module.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
 import CustomButton from "../../components/CustomButton";
 import { CurrentUserContext } from "../../App";
 import HomepageJobList from "./HomepageJobList";
@@ -15,16 +17,29 @@ const Hompage = () => {
   // call to find who is current user
   const currentUser = useContext(CurrentUserContext);
 
+  // set search icon query
+  const [query, setQuery] = useState("");
+
+  // set search has taken place
+  const [searchComplete, setSearchComplete] = useState(false);
+
   // custom hook to fetch jobs
   const { jobs, loading, error, fetchJobs } = useJobs();
 
   // use effect hook to fetch jobs
   useEffect(() => {
     if (currentUser) {
-      fetchJobs();
+      const timer = setTimeout(() => {
+        fetchJobs(null, query);
+        setSearchComplete(true);
+      }, 1000);
+      return () => {
+        clearTimeout(timer);
+        setSearchComplete(false);
+      };
     }
     // eslint-disable-next-line
-  }, [currentUser]);
+  }, [currentUser, query]);
 
   return (
     <Container className={styles.Main}>
@@ -34,13 +49,28 @@ const Hompage = () => {
           <Row>
             <h1 className={styles.Heading}>Job List</h1>
             <p className={styles.Text}>Welcome {currentUser.username}</p>
+            {/* search bar */}
+            <Col className={styles.SearchWrapper}>
+              <i className={`fas fa-search ${styles.SearchIcon}`} />
+              <Form
+                className={styles.SearchBar}
+                onSubmit={(event) => event.preventDefault()}
+              >
+                <Form.Control
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  type="text"
+                  placeholder="Search jobs..."
+                />
+              </Form>
+            </Col>
             {/* loading jobs */}
             {loading && <LoadingSpinner />}
             {/* display error message */}
             {!loading && error && <ErrorMessage error={error} />}
             {/* no jobs message */}
-            {!loading && !error && jobs.length === 0 && (
-              <p className={styles.Text}>
+            {!loading && !error && jobs.length === 0 && searchComplete && (
+              <p className={`${styles.Text} mt-5`}>
                 There are currently no jobs to view.
               </p>
             )}

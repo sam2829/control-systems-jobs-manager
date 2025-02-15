@@ -23,6 +23,7 @@ const Hompage = () => {
     if (currentUser) {
       fetchJobs();
     }
+    // eslint-disable-next-line
   }, [currentUser]);
 
   return (

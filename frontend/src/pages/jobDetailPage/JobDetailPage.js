@@ -24,6 +24,7 @@ const JobDetailPage = ({ showAlert }) => {
     if (currentUser) {
       fetchJobs(id);
     }
+    // eslint-disable-next-line
   }, [currentUser, id]);
 
   return (

@@ -3,10 +3,11 @@ import styles from "../../styles/JobDetailPageJob.module.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import CustomButton from "../../components/CustomButton";
 import useJobs from "../../hooks/useJobs";
-import LoadingSpinner from "../../components/LoadingSpinner";
 import AuthFormErrorMessage from "../auth/AuthFormErrorMessage";
+import JobDetailFormFields from "./JobDetailFormFields";
+import JobDetailDropDownField from "./JobDetailDropDownField";
+import JobDetailFormButtons from "./JobDetailFormButtons";
 
 const JobDetailPageJob = ({
   id,
@@ -109,15 +110,6 @@ const JobDetailPageJob = ({
     }
   };
 
-  // drop down status options
-  const statusOptions = ["Not Started", "Ongoing", "Complete"];
-
-  // drop down options for delivered
-  const deliveredOptions = [
-    { value: "true", label: "✔ Delivered" },
-    { value: "false", label: "✖ Not Delivered" },
-  ];
-
   return (
     <>
       <Form onSubmit={handleEditJob}>
@@ -125,221 +117,148 @@ const JobDetailPageJob = ({
           <AuthFormErrorMessage errors={error} fieldName="csaNumber" />
           <Row>
             <Col xs={6} lg={3}>
-              <Form.Label className={styles.FormLabel}>CSA Number:</Form.Label>
-              <Form.Control
+              <JobDetailFormFields
+                title="CSA Number:"
                 type="text"
                 name="csaNumber"
                 placeholder={csaNumber}
                 value={csaNumber}
-                className={styles.FormData}
-                required
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
+                fieldName="csa_number"
+                errors={error}
               />
-              {/* error message component */}
-              <AuthFormErrorMessage errors={error} fieldName="csa_number" />
             </Col>
             <Col xs={6} lg={3}>
-              <Form.Label className={styles.FormLabel}>
-                Syspal Number:
-              </Form.Label>
-              <Form.Control
+              <JobDetailFormFields
+                title="Syspal Number:"
                 type="text"
                 name="syspalNumber"
                 placeholder={syspalNumber}
                 value={syspalNumber}
-                className={styles.FormData}
-                required
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
+                fieldName="syspal_number"
+                errors={error}
               />
-              {/* error message component */}
-              <AuthFormErrorMessage errors={error} fieldName="syspal_number" />
             </Col>
             <Col xs={6} lg={3}>
-              <Form.Label className={styles.FormLabel}>
-                Order Number:
-              </Form.Label>
-              <Form.Control
+              <JobDetailFormFields
+                title="Order Number:"
                 type="text"
                 name="orderNumber"
                 placeholder={orderNumber}
                 value={orderNumber}
-                className={styles.FormData}
-                required
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
+                fieldName="order_number"
+                errors={error}
               />
-              {/* error message component */}
-              <AuthFormErrorMessage errors={error} fieldName="order_number" />
             </Col>
-
             <Col xs={6} lg={3}>
-              <Form.Label className={styles.FormLabel}>Quantity:</Form.Label>
-              <Form.Control
+              <JobDetailFormFields
+                title="Quantity:"
                 type="number"
                 name="jobQuantity"
                 placeholder={jobQuantity}
                 value={jobQuantity}
-                min="1"
-                className={styles.FormData}
-                required
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
+                fieldName="quantity"
+                min="1"
+                errors={error}
               />
-              {/* error message component */}
-              <AuthFormErrorMessage errors={error} fieldName="quantity" />
             </Col>
           </Row>
           <Row>
             <Col xs={6} lg={3}>
-              <Form.Label className={styles.FormLabel}>
-                Workshop Status:
-              </Form.Label>
-              <Form.Select
+              <JobDetailDropDownField
+                title="Workshop Status"
                 name="workshopStatus"
                 value={workshopStatus}
-                className={styles.FormData}
-                required
                 disabled={
                   currentUser.work_location !== "WORKSHOP" &&
                   !currentUser.is_superuser
                 }
                 onChange={handleChange}
-              >
-                {statusOptions.map((status, index) => (
-                  <option key={index} value={status}>
-                    {status}
-                  </option>
-                ))}
-              </Form.Select>
-              {/* error message component */}
-              <AuthFormErrorMessage
-                errors={error}
+                optionType="workplace"
                 fieldName="workshop_status"
+                errors={error}
               />
             </Col>
-
             <Col xs={6} lg={3}>
-              <Form.Label className={styles.FormLabel}>
-                Syspal Status:
-              </Form.Label>
-              <Form.Select
+              <JobDetailDropDownField
+                title="Syspal Status"
                 name="syspalStatus"
                 value={syspalStatus}
-                className={styles.FormData}
-                required
                 disabled={
                   currentUser.work_location !== "SYSPAL" &&
                   !currentUser.is_superuser
                 }
                 onChange={handleChange}
-              >
-                {statusOptions.map((status, index) => (
-                  <option key={index} value={status}>
-                    {status}
-                  </option>
-                ))}
-              </Form.Select>
-              {/* error message component */}
-              <AuthFormErrorMessage errors={error} fieldName="syspal_status" />
-            </Col>
-            <Col xs={6} lg={3}>
-              <Form.Label className={styles.FormLabel}>
-                Delivered Status:
-              </Form.Label>
-              <Form.Select
-                name="deliveredStatus"
-                value={deliveredStatus ? deliveredStatus.toString() : "false"}
-                className={styles.FormData}
-                required
-                disabled={!currentUser.is_superuser}
-                onChange={handleChange}
-              >
-                {deliveredOptions.map((option, index) => (
-                  <option key={index} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </Form.Select>
-              {/* error message component */}
-              <AuthFormErrorMessage
+                optionType="workplace"
+                fieldName="syspal_status"
                 errors={error}
-                fieldName="delivered_status"
               />
             </Col>
             <Col xs={6} lg={3}>
-              <Form.Label className={styles.FormLabel}>
-                Date Delivered:
-              </Form.Label>
-              <Form.Control
+              <JobDetailDropDownField
+                title="Delivered Status"
+                name="deliveredStatus"
+                value={deliveredStatus ? deliveredStatus.toString() : "false"}
+                disabled={!currentUser.is_superuser}
+                onChange={handleChange}
+                optionType="delivered"
+                fieldName="delivered_status"
+                errors={error}
+              />
+            </Col>
+            <Col xs={6} lg={3}>
+              <JobDetailFormFields
+                title="Date Delivered:"
                 type="text"
                 name="deliveredDate"
                 placeholder={deliveredDate}
                 value={deliveredDate}
-                className={styles.FormData}
-                required
                 disabled
+                fieldName="delivered_date"
+                errors={error}
               />
-              {/* error message component */}
-              <AuthFormErrorMessage errors={error} fieldName="delivered_date" />
             </Col>
           </Row>
           <Row>
             <Col xs={12} lg={6}>
-              <Form.Label className={styles.FormLabel}>Description:</Form.Label>
-              <Form.Control
+              <JobDetailFormFields
+                title="Description:"
                 as="textarea"
                 name="jobDescription"
                 placeholder={jobDescription}
                 value={jobDescription}
-                className={styles.FormData}
-                required
-                rows={3}
                 disabled={!currentUser.is_superuser}
                 onChange={handleChange}
+                fieldName="description"
+                rows={3}
+                errors={error}
               />
-              {/* error message component */}
-              <AuthFormErrorMessage errors={error} fieldName="description" />
             </Col>
             {/* import of custom buttons and spinner if loading*/}
-            {!loading && (
-              <>
-                <Col xs={12} sm={6} lg={3}>
-                  <div className={`${styles.Button} py-1`}>
-                    <CustomButton type="submit" text="Save Changes" />
-                  </div>
-                </Col>
-                <Col xs={12} sm={6} lg={3}>
-                  <div className={`${styles.Button} py-1`}>
-                    <CustomButton text="Cancel" />
-                  </div>
-                </Col>
-              </>
-            )}
-            {/* import spinner instead of buttons when loading */}
-            {loading && (
-              <Col xs={12} lg={6} className="mt-5">
-                <LoadingSpinner />
-              </Col>
-            )}
+            <JobDetailFormButtons loading={loading} />
           </Row>
         </section>
         {/* quote section */}
         <section className="px-0">
-          <Form.Label className={styles.SubHeading}>Quote</Form.Label>
-          <Form.Control
+          <JobDetailFormFields
+            title="Quote:"
             type="text"
             name="jobQuote"
             placeholder={jobQuote}
             value={jobQuote}
-            className={`${styles.FormData} ${styles.QuoteContainer} my-4`}
-            required
             disabled={!currentUser.is_superuser}
             onChange={handleChange}
+            fieldName="quote"
+            quote
+            errors={error}
           />
-          {/* error message component */}
-          <AuthFormErrorMessage errors={error} fieldName="quote" />
         </section>
       </Form>
 

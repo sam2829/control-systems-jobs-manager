@@ -15,7 +15,7 @@ const AddJobFormFields = ({
   as,
   rows,
   min,
-  ...rest
+  fieldName,
 }) => {
   return (
     <>
@@ -33,7 +33,7 @@ const AddJobFormFields = ({
         required
       />
       {/* Error message component */}
-      <AuthFormErrorMessage errors={errors} fieldName={name} />
+      <AuthFormErrorMessage errors={errors} fieldName={fieldName} />
     </>
   );
 };

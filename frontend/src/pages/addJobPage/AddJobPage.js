@@ -69,6 +69,7 @@ const AddJobPage = ({ showAlert }) => {
               value={csaNumber}
               onChange={handleChange}
               errors={error}
+              fieldName="csa_number"
             />
           </Col>
           <Col sm={12} lg={4}>
@@ -80,6 +81,7 @@ const AddJobPage = ({ showAlert }) => {
               value={syspalNumber}
               onChange={handleChange}
               errors={error}
+              fieldName="syspal_number"
             />
           </Col>
           <Col sm={12} lg={4}>
@@ -91,6 +93,7 @@ const AddJobPage = ({ showAlert }) => {
               value={orderNumber}
               onChange={handleChange}
               errors={error}
+              fieldName="order_number"
             />
           </Col>
         </Row>
@@ -105,6 +108,7 @@ const AddJobPage = ({ showAlert }) => {
               value={quantity}
               onChange={handleChange}
               errors={error}
+              fieldName="quantity"
             />
           </Col>
           <Col sm={12} lg={8}>
@@ -116,6 +120,7 @@ const AddJobPage = ({ showAlert }) => {
               value={description}
               onChange={handleChange}
               errors={error}
+              fieldName="description"
             />
           </Col>
         </Row>
@@ -128,6 +133,7 @@ const AddJobPage = ({ showAlert }) => {
           onChange={handleChange}
           rows={5}
           errors={error}
+          fieldName="quote"
         />
         <div className="py-4">
           {/* import custom button */}

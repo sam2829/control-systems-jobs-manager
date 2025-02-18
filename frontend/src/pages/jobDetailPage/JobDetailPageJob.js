@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "../../styles/JobDetailPageJob.module.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,6 +9,7 @@ import AuthFormErrorMessage from "../auth/AuthFormErrorMessage";
 import JobDetailFormFields from "./JobDetailFormFields";
 import JobDetailDropDownField from "./JobDetailDropDownField";
 import JobDetailFormButtons from "./JobDetailFormButtons";
+import { MoreDropdown } from "../../components/MoreDropdown";
 
 const JobDetailPageJob = ({
   id,
@@ -50,13 +52,16 @@ const JobDetailPageJob = ({
     syspalStatus,
     deliveredStatus,
     deliveredDate,
-    notesCount,
   } = jobData;
 
-  const [initialJobData] = useState(jobData); // Store initial state
+  // store initial state
+  const [initialJobData] = useState(jobData);
 
-  // custom hook to edit job
-  const { editJob, loading, error } = useJobs();
+  // Hook to navigate user
+  const navigate = useNavigate();
+
+  // custom hook to edit and delete job
+  const { editJob, loading, error, deleteJob } = useJobs();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -110,10 +115,21 @@ const JobDetailPageJob = ({
     }
   };
 
+  // handle deleting job
+  const handleDelete = async () => {
+    await deleteJob(id, showAlert, navigate);
+  };
+
   return (
     <>
       <Form onSubmit={handleEditJob}>
         <section className={`${styles.DataContainer} my-5 py-4`}>
+          {/* dropdown icon for super user */}
+          {currentUser.is_superuser && (
+            <div className={styles.DropdownContainer}>
+              <MoreDropdown handleDelete={handleDelete} />
+            </div>
+          )}
           <AuthFormErrorMessage errors={error} fieldName="csaNumber" />
           <Row>
             <Col xs={6} lg={3}>
@@ -261,8 +277,6 @@ const JobDetailPageJob = ({
           />
         </section>
       </Form>
-
-      <p>{notesCount}</p>
     </>
   );
 };

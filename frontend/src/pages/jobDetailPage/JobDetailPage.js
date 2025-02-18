@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage";
 import JobDetailPageJob from "./JobDetailPageJob";
+import JobDetailComments from "./JobDetailComments";
 
 const JobDetailPage = ({ showAlert }) => {
   // extract id from url for job id
@@ -40,11 +41,20 @@ const JobDetailPage = ({ showAlert }) => {
           {!loading && error && <ErrorMessage error={error} />}
           {/* display job details */}
           {!loading && !error && jobs && (
-            <JobDetailPageJob
-              {...jobs}
-              currentUser={currentUser}
-              showAlert={showAlert}
-            />
+            <>
+              {/* job details */}
+              <JobDetailPageJob
+                {...jobs}
+                currentUser={currentUser}
+                showAlert={showAlert}
+              />
+              {/* notes section */}
+              <JobDetailComments
+                jobId={jobs.id}
+                notesCount={jobs.notes_count}
+                profileId={currentUser.profile_id}
+              />
+            </>
           )}
         </Row>
       </main>

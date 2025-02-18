@@ -1,0 +1,21 @@
+.DropdownMenu {
+  background-color: #f1f1f1;
+  text-align: center !important;
+}
+
+.DropdownItem i {
+  color: #457b9d;
+  display: inline-block !important;
+  max-width: 50%;
+  padding: 2px;
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+.DropdownItem i:hover {
+  color: #e63946;
+}
+
+.DropdownMenu:hover {
+  background-color: #f1f1f1;
+}

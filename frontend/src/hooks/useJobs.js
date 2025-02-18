@@ -70,7 +70,25 @@ const useJobs = (jobId = null) => {
     }
   };
 
-  return { jobs, loading, error, fetchJobs, addJob, editJob };
+  // delete job
+  const deleteJob = async (id, showAlert, navigate) => {
+    setLoading(true);
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/jobs/${id}/`);
+      // Update state to remove the deleted job
+      setJobs((prevJobs) => prevJobs.filter((job) => job.id !== id));
+      showAlert("success", `You have successfully deleted job!`);
+      navigate("/");
+    } catch (err) {
+      console.log("Error trying to delete job:", err.response?.data || err);
+      setError(err.response?.data || {});
+      showAlert("warning", "Error trying to delete job!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { jobs, loading, error, fetchJobs, addJob, editJob, deleteJob };
 };
 
 export default useJobs;

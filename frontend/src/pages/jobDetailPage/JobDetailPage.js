@@ -33,7 +33,7 @@ const JobDetailPage = ({ showAlert }) => {
       <main>
         <Row>
           <h1 className={styles.Heading}>
-            Job Detail Page {currentUser.username}
+            Job Detail Page
           </h1>
           {/* loading job */}
           {loading && <LoadingSpinner />}
@@ -47,6 +47,7 @@ const JobDetailPage = ({ showAlert }) => {
                 {...jobs}
                 currentUser={currentUser}
                 showAlert={showAlert}
+                fetchJobs={fetchJobs}
               />
               {/* notes section */}
               <JobDetailComments

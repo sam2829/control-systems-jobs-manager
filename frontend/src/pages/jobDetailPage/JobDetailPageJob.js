@@ -26,6 +26,7 @@ const JobDetailPageJob = ({
   notes_count,
   currentUser,
   showAlert,
+  fetchJobs,
 }) => {
   // // use state for job detail data
   const [jobData, setJobData] = useState({
@@ -110,6 +111,7 @@ const JobDetailPageJob = ({
 
     if (Object.keys(formData).length > 0) {
       await editJob(id, formData, showAlert);
+      fetchJobs(id);
     } else {
       showAlert("success", `No edits have been made to job!`);
     }

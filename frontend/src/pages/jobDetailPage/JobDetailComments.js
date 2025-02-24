@@ -45,7 +45,7 @@ const JobDetailComments = ({ jobId, notesCount, profileId }) => {
               notes.map((note) => (
                 <div key={note.id} className={`${styles.Note} my-4`}>
                   <p>
-                    {note.owner}{" "}
+                    <span className={styles.Owner}>{note.owner}</span>
                     <span className={styles.Date}>{note.updated_at}</span>
                   </p>
                   <p className={styles.Text}>{note.content}</p>
@@ -66,7 +66,7 @@ const JobDetailComments = ({ jobId, notesCount, profileId }) => {
               notes.map((note) => (
                 <div key={note.id} className={`${styles.Note} my-4`}>
                   <p>
-                    {note.owner}{" "}
+                    <span className={styles.Owner}>{note.owner}</span>
                     <span className={styles.Date}>{note.updated_at}</span>
                   </p>
                   <p className={styles.Text}>{note.content}</p>

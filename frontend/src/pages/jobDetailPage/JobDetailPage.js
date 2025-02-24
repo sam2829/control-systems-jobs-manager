@@ -54,6 +54,7 @@ const JobDetailPage = ({ showAlert }) => {
                 jobId={jobs.id}
                 notesCount={jobs.notes_count}
                 profileId={currentUser.profile_id}
+                showAlert={showAlert}
               />
             </>
           )}

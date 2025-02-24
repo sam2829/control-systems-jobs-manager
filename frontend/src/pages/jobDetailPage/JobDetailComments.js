@@ -8,10 +8,8 @@ import JobDetailComment from "./JobDetailComment";
 
 // component to render comment content for jobs
 const JobDetailComments = ({ jobId, notesCount, profileId, showAlert }) => {
-  // state for notes
-  // const [notes, setNotes] = useState([]);
-
-  const { notes, loading, error, fetchNotes } = useNotes();
+  // custom hook to fetch
+  const { notes, loading, error, fetchNotes, addNote } = useNotes();
 
   useEffect(() => {
     fetchNotes(jobId);

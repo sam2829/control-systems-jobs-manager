@@ -31,7 +31,9 @@ const JobDetailCommentForm = ({ jobId, showAlert }) => {
       job: jobId,
       content: addNoteData.note,
     };
-    addNote(formData, showAlert);
+    await addNote(formData, showAlert);
+    // Reset the input field after successful submission
+    setAddNoteData({ note: "" });
   };
 
   return (

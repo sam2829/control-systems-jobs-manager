@@ -44,6 +44,7 @@ const useNotes = () => {
         formData
       );
       setNotes((prevNotes) => [...prevNotes, response.data]);
+      setError(null);
       showAlert("success", `You have successfully added new note!`);
     } catch (err) {
       console.log("error trying to add note:", err.response.data);
@@ -54,7 +55,7 @@ const useNotes = () => {
     }
   };
 
-  return { notes, loading, error, fetchNotes, addNote };
+  return { notes, setNotes, loading, error, fetchNotes, addNote };
 };
 
 export default useNotes;

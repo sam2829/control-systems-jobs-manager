@@ -10,6 +10,7 @@ const useNotes = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [addNoteError, setAddNoteError] = useState(null);
 
   // fetch notes by job id
   const fetchNotes = async (jobId) => {
@@ -26,6 +27,7 @@ const useNotes = () => {
         ? response.data.results
         : response.data;
       setNotes(notesData);
+      setError(null);
     } catch (err) {
       console.log("error trying to fetch notes", err.response.data);
       setError(err.response?.data || err.message);
@@ -44,18 +46,18 @@ const useNotes = () => {
         formData
       );
       setNotes((prevNotes) => [...prevNotes, response.data]);
-      setError(null);
+      setAddNoteError(null);
       showAlert("success", `You have successfully added new note!`);
     } catch (err) {
       console.log("error trying to add note:", err.response.data);
-      setError(err.response?.data || {});
+      setAddNoteError(err.response?.data || {});
       showAlert("warning", "Error trying to add note!");
     } finally {
       setLoading(false);
     }
   };
 
-  return { notes, setNotes, loading, error, fetchNotes, addNote };
+  return { notes, setNotes, loading, error, addNoteError, fetchNotes, addNote };
 };
 
 export default useNotes;

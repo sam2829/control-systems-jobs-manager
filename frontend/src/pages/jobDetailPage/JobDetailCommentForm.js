@@ -3,18 +3,23 @@ import styles from "../../styles/JobDetailCommentForm.module.css";
 import Form from "react-bootstrap/Form";
 import CustomButton from "../../components/CustomButton";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import useNotes from "../../hooks/useNotes";
 import AuthFormErrorMessage from "../auth/AuthFormErrorMessage";
 
 // component to render notes form
-const JobDetailCommentForm = ({ jobId, showAlert }) => {
+const JobDetailCommentForm = ({
+  jobId,
+  showAlert,
+  error,
+  loading,
+  addNote,
+}) => {
   // use state for note data
   const [addNoteData, setAddNoteData] = useState({
     note: "",
   });
   const { note } = addNoteData;
 
-  const { loading, error, addNote } = useNotes();
+  // const { loading, error, addNote } = useNotes();
 
   // handle change function for add note form fields
   const handleChange = (event) => {
@@ -32,8 +37,10 @@ const JobDetailCommentForm = ({ jobId, showAlert }) => {
       content: addNoteData.note,
     };
     await addNote(formData, showAlert);
-    // Reset the input field after successful submission
+
     setAddNoteData({ note: "" });
+
+    console.log(error);
   };
 
   return (

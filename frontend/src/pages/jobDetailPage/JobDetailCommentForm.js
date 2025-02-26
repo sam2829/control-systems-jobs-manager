@@ -6,20 +6,12 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import AuthFormErrorMessage from "../auth/AuthFormErrorMessage";
 
 // component to render notes form
-const JobDetailCommentForm = ({
-  jobId,
-  showAlert,
-  error,
-  loading,
-  addNote,
-}) => {
+const JobDetailCommentForm = ({ jobId, error, loading, handleAddNote }) => {
   // use state for note data
   const [addNoteData, setAddNoteData] = useState({
     note: "",
   });
   const { note } = addNoteData;
-
-  // const { loading, error, addNote } = useNotes();
 
   // handle change function for add note form fields
   const handleChange = (event) => {
@@ -29,22 +21,19 @@ const JobDetailCommentForm = ({
     });
   };
 
-  // handle submit new note
-  const handleAddNote = async (event) => {
+  // handle submit of new note
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = {
       job: jobId,
       content: addNoteData.note,
     };
-    await addNote(formData, showAlert);
-
+    handleAddNote(formData);
     setAddNoteData({ note: "" });
-
-    console.log(error);
   };
 
   return (
-    <Form onSubmit={handleAddNote} className={`${styles.NotesForm} mt-5`}>
+    <Form onSubmit={handleSubmit} className={`${styles.NotesForm} mt-5`}>
       <h3 className={`${styles.Heading} mt-3`}>Add Note</h3>
       <Form.Label className={styles.FormLabel}></Form.Label>
       <Form.Control

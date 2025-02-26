@@ -11,13 +11,15 @@ const useNotes = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [addNoteError, setAddNoteError] = useState(null);
+  const [localNotesCount, setLocalNotesCount] = useState(0);
 
   // fetch notes by job id
-  const fetchNotes = async (jobId) => {
+  const fetchNotes = async (jobId, notesCount) => {
     if (!currentUser) return;
     if (!jobId) return;
-
+    setLocalNotesCount(notesCount);
     setLoading(true);
+
     try {
       const response = await axios.get(
         `http://127.0.0.1:8000/api/notes/?job=${jobId}`
@@ -29,7 +31,7 @@ const useNotes = () => {
       setNotes(notesData);
       setError(null);
     } catch (err) {
-      console.log("error trying to fetch notes", err.response.data);
+      // console.log("error trying to fetch notes", err.response.data);
       setError(err.response?.data || err.message);
     } finally {
       setLoading(false);
@@ -46,10 +48,11 @@ const useNotes = () => {
         formData
       );
       setNotes((prevNotes) => [...prevNotes, response.data]);
+      setLocalNotesCount((prevCount) => prevCount + 1);
       setAddNoteError(null);
       showAlert("success", `You have successfully added new note!`);
     } catch (err) {
-      console.log("error trying to add note:", err.response.data);
+      // console.log("error trying to add note:", err.response.data);
       setAddNoteError(err.response?.data || {});
       showAlert("warning", "Error trying to add note!");
     } finally {
@@ -57,7 +60,16 @@ const useNotes = () => {
     }
   };
 
-  return { notes, setNotes, loading, error, addNoteError, fetchNotes, addNote };
+  return {
+    notes,
+    setNotes,
+    loading,
+    error,
+    addNoteError,
+    localNotesCount,
+    fetchNotes,
+    addNote,
+  };
 };
 
 export default useNotes;

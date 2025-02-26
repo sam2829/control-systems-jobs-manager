@@ -7,7 +7,7 @@
   text-align: start;
   color: #457b9d;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 11px;
 }
 
 .Note {
@@ -19,20 +19,33 @@
   border: 2px solid #e63946;
   color: #457b9d;
   border-radius: 10px;
-  padding: 10px;
+  padding: 8px;
 }
 
 .Date {
-  padding-left: 20px;
-  font-size: 12px;
+  padding-left: 15px;
+  font-size: 10px;
 }
 
 .Text {
   color: #1a1a40;
   font-weight: 400;
   font-size: 12px;
-  margin-top: 40px;
+  margin-top: 30px;
   margin-bottom: 40px;
+}
+
+.NoteHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Dropdown {
+  display: inline-flex;
+  text-align: end;
+  margin-bottom: 15px;
+  
 }
 
 /* Styles for screen sizes larger than 992px wide */

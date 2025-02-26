@@ -16,7 +16,12 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
 ));
 
 // drop down menu with three dots icon
-export const MoreDropdown = ({ handleDelete }) => {
+export const MoreDropdown = ({ handleDelete, noteId, handleNoteDelete }) => {
+  // function to handle deleting notes
+  const handleDeleteNote = (noteId) => {
+    handleNoteDelete(noteId);
+  };
+
   return (
     <Dropdown className={styles.DropdownItem} drop="start">
       <Dropdown.Toggle as={ThreeDots} />
@@ -26,7 +31,14 @@ export const MoreDropdown = ({ handleDelete }) => {
       >
         <Dropdown.Item
           className={styles.DropdownItem}
-          onClick={handleDelete}
+          onClick={() => {
+            // check if noteId is present to call note delete function
+            if (noteId) {
+              handleDeleteNote(noteId);
+            } else {
+              handleDelete();
+            }
+          }}
           aria-label="delete"
         >
           <i className="fa-solid fa-trash-can" />

@@ -6,7 +6,7 @@ import ErrorMessage from "../../components/ErrorMessage";
 import { MoreDropdown } from "../../components/MoreDropdown";
 
 // component to render notes / comments for job
-const JobDetailComment = ({ loading, error, notes }) => {
+const JobDetailComment = ({ loading, error, notes, handleDelete }) => {
   return (
     <Container className={`${styles.NotesContainer} my-5`}>
       {/* import loading spinner */}
@@ -30,7 +30,10 @@ const JobDetailComment = ({ loading, error, notes }) => {
               </p>
               {note.is_owner && (
                 <span className={styles.Dropdown}>
-                  <MoreDropdown />
+                  <MoreDropdown
+                    noteId={note.id}
+                    handleNoteDelete={handleDelete}
+                  />
                 </span>
               )}
             </div>
@@ -40,7 +43,9 @@ const JobDetailComment = ({ loading, error, notes }) => {
       {/* no notes message */}
       {!loading && !error && notes.length === 0 && (
         <div className="mt-5">
-          <p className={styles.Text}>No notes created for this job</p>
+          <p className={`${styles.Text} ${styles.NoJobs}`}>
+            No notes created for this job
+          </p>
         </div>
       )}
     </Container>

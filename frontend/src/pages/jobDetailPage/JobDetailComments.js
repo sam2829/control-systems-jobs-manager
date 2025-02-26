@@ -17,6 +17,7 @@ const JobDetailComments = ({ jobId, notesCount, profileId, showAlert }) => {
     localNotesCount,
     fetchNotes,
     addNote,
+    deleteNote,
   } = useNotes();
 
   useEffect(() => {
@@ -30,6 +31,11 @@ const JobDetailComments = ({ jobId, notesCount, profileId, showAlert }) => {
     await addNote(formData, showAlert);
   };
 
+  // delete note function
+  const handleDeleteNote = async (noteId) => {
+    await deleteNote(noteId, showAlert, jobId);
+  };
+
   return (
     <section>
       <h3 className={`${styles.SubHeading} mt-5`}>
@@ -40,7 +46,12 @@ const JobDetailComments = ({ jobId, notesCount, profileId, showAlert }) => {
         {/* display only in large screens */}
         <Col xs={12} lg={6} className="d-none d-lg-block">
           {/* import job notes / comments */}
-          <JobDetailComment notes={notes} error={error} loading={loading} />
+          <JobDetailComment
+            notes={notes}
+            error={error}
+            loading={loading}
+            handleDelete={handleDeleteNote}
+          />
         </Col>
         <Col xs={12} lg={6}>
           <JobDetailCommentForm
@@ -54,7 +65,12 @@ const JobDetailComments = ({ jobId, notesCount, profileId, showAlert }) => {
         {/* display only in small screens */}
         <Col xs={12} lg={6} className="d-lg-none d-block">
           {/* import job notes / comments */}
-          <JobDetailComment notes={notes} error={error} loading={loading} />
+          <JobDetailComment
+            notes={notes}
+            error={error}
+            loading={loading}
+            handleDelete={handleDeleteNote}
+          />
         </Col>
       </Row>
     </section>

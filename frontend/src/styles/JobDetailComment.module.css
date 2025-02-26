@@ -35,6 +35,10 @@
   margin-bottom: 40px;
 }
 
+.NoJobs {
+  text-align: center;
+}
+
 .NoteHeader {
   display: flex;
   justify-content: space-between;

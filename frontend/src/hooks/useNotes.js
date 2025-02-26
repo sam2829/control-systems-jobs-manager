@@ -60,6 +60,24 @@ const useNotes = () => {
     }
   };
 
+  // delete note
+  const deleteNote = async (noteId, showAlert, jobId) => {
+    setLoading(true);
+
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/notes/${noteId}/`);
+      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
+      setLocalNotesCount((prevCount) => prevCount - 1);
+      showAlert("success", `You have successfully deleted your note!`);
+    } catch (err) {
+      console.log("error trying to delete note:", err.response.data);
+      setAddNoteError(err.response?.data || {});
+      showAlert("warning", "Error trying to delete note!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     notes,
     setNotes,
@@ -69,6 +87,7 @@ const useNotes = () => {
     localNotesCount,
     fetchNotes,
     addNote,
+    deleteNote,
   };
 };
 

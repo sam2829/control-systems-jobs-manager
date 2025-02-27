@@ -1,24 +1,37 @@
 import React, { useState } from "react";
 import styles from "../../styles/EditCommentForm.module.css";
+import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
-import CustomButton from "../../components/CustomButton";
-import LoadingSpinner from "../../components/LoadingSpinner";
 import AuthFormErrorMessage from "../auth/AuthFormErrorMessage";
+import JobDetailFormButtons from "./JobDetailFormButtons";
 
 // component to render edit notes form
-const EditCommentForm = ({ jobId, error, loading }) => {
+const EditCommentForm = ({
+  jobId,
+  error,
+  loading,
+  noteData,
+  id,
+  toggleEditForm,
+}) => {
   // use state for note data
-  const [addNoteData, setAddNoteData] = useState({
-    note: "",
+  const [editNoteData, setEditNoteData] = useState({
+    note: noteData.content,
   });
-  const { note } = addNoteData;
+  const { note } = editNoteData;
 
   // handle change function for add note form fields
   const handleChange = (event) => {
-    setAddNoteData({
-      ...addNoteData,
+    setEditNoteData({
+      ...editNoteData,
       [event.target.name]: event.target.value,
     });
+  };
+
+  // Handle cancel button to close form
+  const handleCancel = (event) => {
+    event.preventDefault(); // Prevent form submission or page refresh
+    toggleEditForm(id); // Toggle the edit form visibility
   };
 
   // handle submit of new note
@@ -40,7 +53,7 @@ const EditCommentForm = ({ jobId, error, loading }) => {
         as="textarea"
         name="note"
         value={note}
-        placeholder="Create new note..."
+        placeholder={note}
         rows={5}
         className={styles.FormInput}
         onChange={handleChange}
@@ -48,13 +61,10 @@ const EditCommentForm = ({ jobId, error, loading }) => {
       />
       <AuthFormErrorMessage errors={error} fieldName="content" />
       {/* import custom button */}
-      <div className="my-4">
-        <CustomButton
-          text={loading ? <LoadingSpinner buttonSpinner /> : "Edit Note"}
-          type="submit"
-          disabled={loading}
-        />
-      </div>
+      <Row className="my-4">
+        {/* import form buttons */}
+        <JobDetailFormButtons noteButtons onClick={handleCancel} />
+      </Row>
     </Form>
   );
 };

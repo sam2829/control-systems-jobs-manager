@@ -1,12 +1,16 @@
 .Button {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  /* margin-top: 20px; */
+}
+
+.JobButton {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Styles for screen sizes larger than 992px wide */
+@media (min-width: 992px) {
+  .JobButton {
+    margin-top: 70px;
   }
-  
-  /* Styles for screen sizes larger than 992px wide */
-  @media (min-width: 992px) {
-    .Button {
-      text-align: center;
-      margin-top: 70px;
-    }
-  }
+}

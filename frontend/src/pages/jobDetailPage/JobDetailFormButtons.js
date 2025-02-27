@@ -4,20 +4,28 @@ import Col from "react-bootstrap/Col";
 import CustomButton from "../../components/CustomButton";
 import LoadingSpinner from "../../components/LoadingSpinner";
 
-const JobDetailFormButtons = ({ loading }) => {
+const JobDetailFormButtons = ({ loading, noteButtons, onClick }) => {
   return (
     <>
       {/* import of custom buttons and spinner if loading*/}
       {!loading && (
         <>
-          <Col xs={12} sm={6} lg={3}>
-            <div className={`${styles.Button} py-1`}>
+          <Col xs={12} sm={6} lg={noteButtons ? 6 : 3}>
+            <div
+              className={`${styles.Button} py-1 ${
+                !noteButtons ? styles.JobButton : "py-2"
+              }`}
+            >
               <CustomButton type="submit" text="Save Changes" />
             </div>
           </Col>
-          <Col xs={12} sm={6} lg={3}>
-            <div className={`${styles.Button} py-1`}>
-              <CustomButton text="Cancel" />
+          <Col xs={12} sm={6} lg={noteButtons ? 6 : 3}>
+            <div
+              className={`${styles.Button} py-1 ${
+                !noteButtons ? styles.JobButton : "py-2"
+              }`}
+            >
+              <CustomButton text="Cancel" onClick={onClick} />
             </div>
           </Col>
         </>

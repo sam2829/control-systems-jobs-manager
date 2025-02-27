@@ -14,9 +14,9 @@ const JobDetailComment = ({ loading, error, notes, handleDelete }) => {
   // function to handle toggling edit form
   const toggleEditForm = (noteId) => {
     if (editNoteId === noteId) {
-      setEditNoteId(null); // Close form if the same note is clicked
+      setEditNoteId(null);
     } else {
-      setEditNoteId(noteId); // Open form for the clicked note
+      setEditNoteId(noteId);
     }
   };
 
@@ -53,7 +53,13 @@ const JobDetailComment = ({ loading, error, notes, handleDelete }) => {
             </div>
             <p className={styles.Text}>{note.content}</p>
             {/* show edit form only if it's the selected note */}
-            {editNoteId === note.id && <EditCommentForm note={note} />}
+            {editNoteId === note.id && (
+              <EditCommentForm
+                noteData={note}
+                id={note.id}
+                toggleEditForm={toggleEditForm}
+              />
+            )}
           </div>
         ))}
 

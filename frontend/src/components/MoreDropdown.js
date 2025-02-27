@@ -16,10 +16,20 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
 ));
 
 // drop down menu with three dots icon
-export const MoreDropdown = ({ handleDelete, noteId, handleNoteDelete }) => {
+export const MoreDropdown = ({
+  handleDelete,
+  noteId,
+  handleNoteDelete,
+  toggleEditForm,
+}) => {
   // function to handle deleting notes
   const handleDeleteNote = (noteId) => {
     handleNoteDelete(noteId);
+  };
+
+  // function to handle edit note form
+  const handleEditNote = (noteId) => {
+    toggleEditForm(noteId);
   };
 
   return (
@@ -29,6 +39,16 @@ export const MoreDropdown = ({ handleDelete, noteId, handleNoteDelete }) => {
         className={styles.DropdownMenu}
         popperConfig={{ strategy: "fixed" }}
       >
+        {noteId && (
+          <Dropdown.Item
+            className={styles.DropdownItem}
+            onClick={() => handleEditNote(noteId)}
+            aria-label="edit"
+          >
+            <i className="fa-solid fa-pen-to-square" />
+          </Dropdown.Item>
+        )}
+
         <Dropdown.Item
           className={styles.DropdownItem}
           onClick={() => {

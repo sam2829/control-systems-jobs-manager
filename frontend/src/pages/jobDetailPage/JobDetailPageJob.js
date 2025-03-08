@@ -267,7 +267,7 @@ const JobDetailPageJob = ({
         <section className="px-0">
           <JobDetailFormFields
             title="Quote:"
-            type="text"
+            as="textarea"
             name="jobQuote"
             placeholder={jobQuote}
             value={jobQuote}

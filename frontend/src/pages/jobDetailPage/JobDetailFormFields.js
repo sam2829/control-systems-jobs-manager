@@ -1,4 +1,5 @@
 import React from "react";
+import { useRef, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import styles from "../../styles/JobDetailFormFields.module.css";
 import AuthFormErrorMessage from "../auth/AuthFormErrorMessage";
@@ -19,6 +20,15 @@ const JobDetailFormFields = ({
   fieldName,
   quote = false,
 }) => {
+  const textAreaRef = useRef(null);
+
+  useEffect(() => {
+    if (quote && textAreaRef.current) {
+      textAreaRef.current.style.height = "auto";
+      textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`; // Set new height
+    }
+  }, [value, quote]);
+
   return (
     <>
       <Form.Label className={quote ? styles.SubHeading : styles.FormLabel}>
@@ -26,6 +36,7 @@ const JobDetailFormFields = ({
       </Form.Label>
       <Form.Control
         type={type}
+        ref={quote ? textAreaRef : null} // Only assign ref if quote is true
         name={name}
         placeholder={placeholder}
         value={value}

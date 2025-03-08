@@ -93,7 +93,10 @@ const NavBar = ({ showAlert }) => {
                   )}
                   {/* navlinks for all logged in */}
                   <NavBarNavLink title="Jobs" to="/" />
-                  <NavBarNavLink title="Profile" to="/profile" />
+                  <NavBarNavLink
+                    title="Profile"
+                    to={currentUser.is_superuser ? "/profiles" : "/profile"}
+                  />
                   <NavBarNavLink
                     title="Sign Out"
                     handleShowModal={openModal}

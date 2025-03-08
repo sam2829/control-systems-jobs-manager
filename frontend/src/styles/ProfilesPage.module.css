@@ -1,0 +1,42 @@
+.Main {
+    padding: 230px 20px 20px 20px;
+    min-height: 100vh;
+}
+
+.Heading {
+    color: #457b9d;
+    font-weight: 700;
+    font-size: 23px;
+}
+
+.ProfileContainer {
+    background-color: #d9d9d9;
+    border: 2px solid #e63946;
+    border-radius: 8px;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-align: center;
+}
+
+.Text {
+  color: #457b9d;
+  font-size: 18px;
+  width: 100%;
+}
+
+.Data {
+  color: #1a1a40;
+  font-size: 18px;
+  width: 100%;
+}
+  
+  /* Styles for screen sizes larger than 992px wide */
+  @media (min-width: 992px) {
+    .Heading {
+      font-size: 28px;
+    }
+
+    .ProfileContainer {
+        width: 50%;
+    }
+  }

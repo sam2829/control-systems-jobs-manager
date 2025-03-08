@@ -10,6 +10,8 @@ import axios from "./api/axiosDefaults";
 import SignUp from "./pages/auth/SignUp.js";
 import AddJobPage from "./pages/addJobPage/AddJobPage.js";
 import JobDetailPage from "./pages/jobDetailPage/JobDetailPage.js";
+import ProfilesPage from "./pages/profilePage/ProfilesPage.js";
+import ProfilePage from "./pages/profilePage/ProfilePage.js";
 
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
@@ -69,6 +71,14 @@ function App() {
               <Route
                 path="/job/:id"
                 element={<JobDetailPage showAlert={showAlert} />}
+              />
+              <Route
+                path="/profiles"
+                element={<ProfilesPage showAlert={showAlert} />}
+              />
+              <Route
+                path="/profile"
+                element={<ProfilePage showAlert={showAlert} />}
               />
             </Routes>
           </div>

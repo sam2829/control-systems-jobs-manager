@@ -10,6 +10,8 @@ import JobDetailFormFields from "./JobDetailFormFields";
 import JobDetailDropDownField from "./JobDetailDropDownField";
 import JobDetailFormButtons from "./JobDetailFormButtons";
 import { MoreDropdown } from "../../components/MoreDropdown";
+import useModal from "../../hooks/useModal";
+import CustomModal from "../../components/CustomModal";
 
 const JobDetailPageJob = ({
   id,
@@ -63,6 +65,9 @@ const JobDetailPageJob = ({
 
   // custom hook to edit and delete job
   const { editJob, loading, error, deleteJob } = useJobs();
+
+  // use modal custom hook
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -120,16 +125,25 @@ const JobDetailPageJob = ({
   // handle deleting job
   const handleDelete = async () => {
     await deleteJob(id, showAlert, navigate);
+    closeModal();
   };
 
   return (
     <>
+      {/* show are you sure about delete modal */}
+      {isModalOpen && (
+        <CustomModal
+          onConfirm={handleDelete}
+          onCancel={closeModal}
+          message="Are you sure you want to delete this job?"
+        />
+      )}
       <Form onSubmit={handleEditJob}>
         <section className={`${styles.DataContainer} my-5 py-4`}>
           {/* dropdown icon for super user */}
           {currentUser.is_superuser && (
             <div className={styles.DropdownContainer}>
-              <MoreDropdown handleDelete={handleDelete} />
+              <MoreDropdown handleShowModal={openModal} />
             </div>
           )}
           <AuthFormErrorMessage errors={error} fieldName="csaNumber" />

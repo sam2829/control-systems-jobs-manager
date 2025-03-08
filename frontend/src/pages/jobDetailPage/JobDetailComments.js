@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import JobDetailCommentForm from "./JobDetailCommentForm";
 import useNotes from "../../hooks/useNotes";
 import JobDetailComment from "./JobDetailComment";
+import useModal from "../../hooks/useModal";
 
 // component to render comment content for jobs
 const JobDetailComments = ({ jobId, notesCount, profileId, showAlert }) => {
@@ -21,6 +22,9 @@ const JobDetailComments = ({ jobId, notesCount, profileId, showAlert }) => {
     editNote,
     deleteNote,
   } = useNotes();
+
+  // use modal custom hook to display modal
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   useEffect(() => {
     fetchNotes(jobId, notesCount);
@@ -42,6 +46,7 @@ const JobDetailComments = ({ jobId, notesCount, profileId, showAlert }) => {
   // delete note function
   const handleDeleteNote = async (noteId) => {
     await deleteNote(noteId, showAlert, jobId);
+    closeModal();
   };
 
   return (
@@ -61,6 +66,9 @@ const JobDetailComments = ({ jobId, notesCount, profileId, showAlert }) => {
             loading={loading}
             handleDelete={handleDeleteNote}
             handleEditNote={handleEditNote}
+            handleShowModal={openModal}
+            isModalOpen={isModalOpen}
+            closeModal={closeModal}
           />
         </Col>
         <Col xs={12} lg={6}>

@@ -10,7 +10,7 @@ import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { CurrentUserContext } from "../App";
 import { SetCurrentUserContext } from "../App";
 import axios from "../api/axiosDefaults";
-import CustomModal from "../pages/auth/CustomModal";
+import CustomModal from "./CustomModal";
 import useModal from "../hooks/useModal";
 
 // component for rendering Navbar

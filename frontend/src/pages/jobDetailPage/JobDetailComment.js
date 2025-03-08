@@ -5,6 +5,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage";
 import { MoreDropdown } from "../../components/MoreDropdown";
 import EditCommentForm from "./EditCommentForm";
+import CustomModal from "../../components/CustomModal";
 
 // component to render notes / comments for job
 const JobDetailComment = ({
@@ -14,6 +15,9 @@ const JobDetailComment = ({
   notes,
   handleDelete,
   handleEditNote,
+  handleShowModal,
+  closeModal,
+  isModalOpen,
 }) => {
   // state to store which note is being edited
   const [editNoteId, setEditNoteId] = useState(null);
@@ -43,6 +47,15 @@ const JobDetailComment = ({
         notes.length > 0 &&
         notes.map((note) => (
           <div key={note.id} className={`${styles.Note} my-4`}>
+            {/* open are you sure you want to delete note modal */}
+            {isModalOpen && (
+              <CustomModal
+                onConfirm={() => handleDelete(note.id)}
+                onCancel={closeModal}
+                message="Are you sure you want to delete this note?"
+                noteModal
+              />
+            )}
             <div className={styles.NoteHeader}>
               <p>
                 <span className={styles.Owner}>{note.owner}</span>
@@ -52,8 +65,8 @@ const JobDetailComment = ({
                 <span className={styles.Dropdown}>
                   <MoreDropdown
                     noteId={note.id}
-                    handleNoteDelete={handleDelete}
                     toggleEditForm={toggleEditForm}
+                    handleShowModal={handleShowModal}
                   />
                 </span>
               )}

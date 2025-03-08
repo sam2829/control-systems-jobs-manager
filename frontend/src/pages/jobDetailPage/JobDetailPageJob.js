@@ -274,7 +274,7 @@ const JobDetailPageJob = ({
               />
             </Col>
             {/* import of custom buttons and spinner if loading*/}
-            <JobDetailFormButtons loading={loading} />
+            <JobDetailFormButtons loading={loading} goBackButton />
           </Row>
         </section>
         {/* quote section */}

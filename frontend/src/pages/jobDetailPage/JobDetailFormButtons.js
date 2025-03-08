@@ -4,7 +4,12 @@ import Col from "react-bootstrap/Col";
 import CustomButton from "../../components/CustomButton";
 import LoadingSpinner from "../../components/LoadingSpinner";
 
-const JobDetailFormButtons = ({ loading, noteButtons, onClick }) => {
+const JobDetailFormButtons = ({
+  loading,
+  noteButtons,
+  onClick,
+  goBackButton,
+}) => {
   return (
     <>
       {/* import of custom buttons and spinner if loading*/}
@@ -25,7 +30,13 @@ const JobDetailFormButtons = ({ loading, noteButtons, onClick }) => {
                 !noteButtons ? styles.JobButton : "py-2"
               }`}
             >
-              <CustomButton text="Cancel" onClick={onClick} />
+              {/* if goBackButton prop is present it lets the button
+              act as go back instead of cancel */}
+              <CustomButton
+                text={goBackButton ? "Go Back" : "Cancel"}
+                onClick={onClick}
+                goBackButton
+              />
             </div>
           </Col>
         </>

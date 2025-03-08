@@ -11,6 +11,7 @@ const useNotes = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [addNoteError, setAddNoteError] = useState(null);
+  const [editNoteError, setEditNoteError] = useState(null);
   const [localNotesCount, setLocalNotesCount] = useState(0);
 
   // fetch notes by job id
@@ -60,6 +61,32 @@ const useNotes = () => {
     }
   };
 
+  // Edit note
+  const editNote = async (formData, showAlert, noteId) => {
+    setLoading(true);
+
+    try {
+      const response = await axios.put(
+        `http://127.0.0.1:8000/api/notes/${noteId}/`,
+        formData
+      );
+      setNotes((prevNotes) =>
+        prevNotes.map((note) => (note.id === noteId ? response.data : note))
+      );
+      setEditNoteError(null);
+      showAlert("success", "You have succesffully edited note!");
+    } catch (err) {
+      console.log("error trying to edit note:", err.response.data);
+      setEditNoteError(err.response?.data || {});
+      showAlert(
+        "warning",
+        "Error trying to edit note, please check edit form!"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // delete note
   const deleteNote = async (noteId, showAlert, jobId) => {
     setLoading(true);
@@ -84,9 +111,11 @@ const useNotes = () => {
     loading,
     error,
     addNoteError,
+    editNoteError,
     localNotesCount,
     fetchNotes,
     addNote,
+    editNote,
     deleteNote,
   };
 };

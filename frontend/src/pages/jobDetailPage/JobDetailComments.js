@@ -14,9 +14,11 @@ const JobDetailComments = ({ jobId, notesCount, profileId, showAlert }) => {
     loading,
     error,
     addNoteError,
+    editNoteError,
     localNotesCount,
     fetchNotes,
     addNote,
+    editNote,
     deleteNote,
   } = useNotes();
 
@@ -29,6 +31,12 @@ const JobDetailComments = ({ jobId, notesCount, profileId, showAlert }) => {
   // function to handle add notes
   const handleAddNote = async (formData) => {
     await addNote(formData, showAlert);
+  };
+
+  // function to handle editing notes
+  const handleEditNote = async (noteId, formData) => {
+    console.log("Editing note", noteId, formData);
+    await editNote(formData, showAlert, noteId);
   };
 
   // delete note function
@@ -49,8 +57,10 @@ const JobDetailComments = ({ jobId, notesCount, profileId, showAlert }) => {
           <JobDetailComment
             notes={notes}
             error={error}
+            editError={editNoteError}
             loading={loading}
             handleDelete={handleDeleteNote}
+            handleEditNote={handleEditNote}
           />
         </Col>
         <Col xs={12} lg={6}>

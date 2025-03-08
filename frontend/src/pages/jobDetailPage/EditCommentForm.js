@@ -13,6 +13,7 @@ const EditCommentForm = ({
   noteData,
   id,
   toggleEditForm,
+  handleEditNote,
 }) => {
   // use state for note data
   const [editNoteData, setEditNoteData] = useState({
@@ -30,23 +31,24 @@ const EditCommentForm = ({
 
   // Handle cancel button to close form
   const handleCancel = (event) => {
-    event.preventDefault(); // Prevent form submission or page refresh
+    event.preventDefault();
     toggleEditForm(id); // Toggle the edit form visibility
   };
 
   // handle submit of new note
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const formData = {
-  //     job: jobId,
-  //     content: addNoteData.note,
-  //   };
-  //   handleAddNote(formData);
-  //   setAddNoteData({ note: "" });
-  // };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = {
+      job: jobId,
+      content: editNoteData.note,
+    };
+    await handleEditNote(id, formData);
+    setEditNoteData({ note: "" });
+    toggleEditForm(id); // Toggle the edit form visibility
+  };
 
   return (
-    <Form className={`${styles.NotesForm} mt-5`}>
+    <Form onSubmit={handleSubmit} className={`${styles.NotesForm} mt-5`}>
       <h3 className={`${styles.Heading} mt-3`}>Edit Note</h3>
       <Form.Label className={styles.FormLabel}></Form.Label>
       <Form.Control
@@ -60,7 +62,6 @@ const EditCommentForm = ({
         required
       />
       <AuthFormErrorMessage errors={error} fieldName="content" />
-      {/* import custom button */}
       <Row className="my-4">
         {/* import form buttons */}
         <JobDetailFormButtons noteButtons onClick={handleCancel} />

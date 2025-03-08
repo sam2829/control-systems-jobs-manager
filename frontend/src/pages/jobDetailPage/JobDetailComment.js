@@ -7,7 +7,14 @@ import { MoreDropdown } from "../../components/MoreDropdown";
 import EditCommentForm from "./EditCommentForm";
 
 // component to render notes / comments for job
-const JobDetailComment = ({ loading, error, notes, handleDelete }) => {
+const JobDetailComment = ({
+  loading,
+  error,
+  editError,
+  notes,
+  handleDelete,
+  handleEditNote,
+}) => {
   // state to store which note is being edited
   const [editNoteId, setEditNoteId] = useState(null);
 
@@ -58,6 +65,9 @@ const JobDetailComment = ({ loading, error, notes, handleDelete }) => {
                 noteData={note}
                 id={note.id}
                 toggleEditForm={toggleEditForm}
+                handleEditNote={handleEditNote}
+                error={editError}
+                loading={loading}
               />
             )}
           </div>

@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -9,15 +10,25 @@ import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { CurrentUserContext } from "../App";
 import { SetCurrentUserContext } from "../App";
 import axios from "../api/axiosDefaults";
+import CustomModal from "../pages/auth/CustomModal";
+import useModal from "../hooks/useModal";
 
 // component for rendering Navbar
 const NavBar = ({ showAlert }) => {
   // call to find who is current user
   const currentUser = useContext(CurrentUserContext);
+
   // call current user context hook
   const setCurrentUser = useContext(SetCurrentUserContext);
+
   // This is so we can toggle the hamburger menu
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
+
+  // use modal custom hook
+  const { isModalOpen, openModal, closeModal } = useModal();
+
+  // Hook to navigate user
+  const navigate = useNavigate();
 
   //  Handle sign out function
   const handleSignOut = async () => {
@@ -25,15 +36,25 @@ const NavBar = ({ showAlert }) => {
       await axios.post("http://127.0.0.1:8000/api/dj-rest-auth/logout/", {});
       // Clear token from localStorage
       localStorage.removeItem("authToken");
+      closeModal();
+      navigate("/");
       showAlert("success", "You have successfully signed out!");
       setCurrentUser(null);
     } catch (err) {
-      console.log("Error signing out:", err);
+      // console.log("Error signing out:", err);
     }
   };
 
   return (
     <>
+      {/* show signout modal */}
+      {isModalOpen && (
+        <CustomModal
+          onConfirm={handleSignOut}
+          onCancel={closeModal}
+          message="Are you sure you want to sign out?"
+        />
+      )}
       <Navbar
         expanded={expanded}
         collapseOnSelect
@@ -75,8 +96,9 @@ const NavBar = ({ showAlert }) => {
                   <NavBarNavLink title="Profile" to="/profile" />
                   <NavBarNavLink
                     title="Sign Out"
-                    handleSignOut={handleSignOut}
-                    to="/"
+                    handleShowModal={openModal}
+                    isModalOpen={isModalOpen}
+                    isSignOut
                   />
                 </>
               ) : (

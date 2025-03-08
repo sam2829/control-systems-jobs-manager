@@ -1,0 +1,55 @@
+.Modal {
+    position: fixed;
+    top: 30%;
+    width: 76%;
+    margin-left: 12%;
+    margin-right: 12%;
+    background-color: #f1f1f1;
+    color: #1a1a40;
+    padding: 40px;
+    border: 2px solid #1a1a40;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 99;
+}
+
+.ModalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 98;
+}
+
+.Text {
+    color: #457b9d;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+/* Styles for screen sizes larger than 992px wide */
+@media (min-width: 992px) {
+
+    .Modal {
+        width: 50%;
+        margin-left: 25%;
+        margin-right: 25%;
+      }
+
+    .Text {
+        font-size: 23px;
+    }
+  }
+
+/* Styles for screen sizes larger than 1200px wide */
+@media (min-width: 1200px) {
+
+    .Modal {
+        width: 40%;
+        margin-left: 30%;
+        margin-right: 30%;
+      }
+  }

@@ -40,7 +40,7 @@ const JobDetailPage = ({ showAlert }) => {
           {/* display error message */}
           {!loading && error && <ErrorMessage error={error} />}
           {/* display job details */}
-          {!loading && !error && jobs && (
+          {!loading && !error && jobs && currentUser && (
             <>
               {/* job details */}
               <JobDetailPageJob

@@ -95,7 +95,11 @@ const NavBar = ({ showAlert }) => {
                   <NavBarNavLink title="Jobs" to="/" />
                   <NavBarNavLink
                     title="Profile"
-                    to={currentUser.is_superuser ? "/profiles" : "/profile"}
+                    to={
+                      currentUser.is_superuser
+                        ? "/profiles"
+                        : `/profile/${currentUser.profile_id}`
+                    }
                   />
                   <NavBarNavLink
                     title="Sign Out"

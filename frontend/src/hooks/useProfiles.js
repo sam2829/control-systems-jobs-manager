@@ -19,7 +19,7 @@ const useProfiles = (profileId = null) => {
     setLoading(true);
     try {
       const endpoint = id
-        ? `http://127.0.0.1:8000/api/profiles/${id}/`
+        ? `http://127.0.0.1:8000/api/profiles/${id}`
         : `http://127.0.0.1:8000/api/profiles/`;
 
       const response = await axios.get(endpoint);

@@ -77,7 +77,7 @@ function App() {
                 element={<ProfilesPage showAlert={showAlert} />}
               />
               <Route
-                path="/profile"
+                path="/profile/:id"
                 element={<ProfilePage showAlert={showAlert} />}
               />
             </Routes>

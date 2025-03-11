@@ -18,14 +18,26 @@ const ProfilePage = () => {
   useEffect(() => {
     if (currentUser) {
       fetchProfiles(id);
-      console.log(profiles)
+      console.log(profiles);
     }
     // eslint-disable-next-line
   }, [currentUser, id]);
 
   return (
     <Container className={styles.Main}>
-      <p>{profiles.owner}</p>
+      <h2 className={styles.Heading}>Profile</h2>
+      <Container className={`${styles.ProfileContainer} mt-5 py-4`}>
+        <p className={`${styles.Text} mt-3 mb-4`}>{profiles.owner}</p>
+        <p className={styles.Text}>
+          Work Location:{" "}
+          <span className={styles.Data}>
+            {profiles.work_location
+              ? profiles.work_location.charAt(0).toUpperCase() +
+                profiles.work_location.slice(1).toLowerCase()
+              : ""}
+          </span>
+        </p>
+      </Container>
     </Container>
   );
 };

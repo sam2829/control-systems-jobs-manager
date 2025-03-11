@@ -25,6 +25,22 @@
   font-weight: 700;
 }
 
+.Owner {
+  background-color: #f1f1f1;
+  border: 2px solid #e63946;
+  color: #457b9d;
+  border-radius: 10px;
+  padding: 15px;
+}
+
 .Data {
   color: #1a1a40;
+}
+
+/* Styles for screen sizes larger than 992px wide */
+@media (min-width: 992px) {
+  .ProfileContainer {
+    width: 50%;
+    margin-left: 25%;
+  }
 }

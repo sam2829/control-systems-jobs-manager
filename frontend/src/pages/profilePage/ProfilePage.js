@@ -5,6 +5,7 @@ import { CurrentUserContext } from "../../App";
 import { useParams } from "react-router-dom";
 import useProfiles from "../../hooks/useProfiles";
 
+// component to render profile page
 const ProfilePage = () => {
   // call to find who is the current user
   const currentUser = useContext(CurrentUserContext);
@@ -27,7 +28,9 @@ const ProfilePage = () => {
     <Container className={styles.Main}>
       <h2 className={styles.Heading}>Profile</h2>
       <Container className={`${styles.ProfileContainer} mt-5 py-4`}>
-        <p className={`${styles.Text} mt-3 mb-4`}>{profiles.owner}</p>
+        <p className={`${styles.Text} mt-3 mb-5`}>
+          <span className={styles.Owner}>{profiles.owner}</span>
+        </p>
         <p className={styles.Text}>
           Work Location:{" "}
           <span className={styles.Data}>

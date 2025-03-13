@@ -209,7 +209,7 @@ const JobDetailPageJob = ({
                 name="workshopStatus"
                 value={workshopStatus}
                 disabled={
-                  currentUser.work_location !== "WORKSHOP" &&
+                  currentUser.work_location !== "Workshop" &&
                   !currentUser.is_superuser
                 }
                 onChange={handleChange}
@@ -224,7 +224,7 @@ const JobDetailPageJob = ({
                 name="syspalStatus"
                 value={syspalStatus}
                 disabled={
-                  currentUser.work_location !== "SYSPAL" &&
+                  currentUser.work_location !== "Syspal" &&
                   !currentUser.is_superuser
                 }
                 onChange={handleChange}

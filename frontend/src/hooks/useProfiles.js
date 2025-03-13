@@ -32,7 +32,33 @@ const useProfiles = (profileId = null) => {
     }
   };
 
-  return { profiles, loading, error, fetchProfiles };
+  // edit profiles
+  const editProfile = async (id, formData, showAlert) => {
+    setLoading(true);
+
+    try {
+      const response = await axios.patch(
+        `http://127.0.0.1:8000/api/profiles/${id}`,
+        formData
+      );
+      setProfiles((prevProfile) =>
+        Array.isArray(prevProfile)
+          ? prevProfile.map((profile) =>
+              profile.id === id ? response.data : profile
+            )
+          : response.data
+      );
+      showAlert("success", `You have successfully modified the profile!`);
+    } catch (err) {
+      console.log("Error trying to modify profile:", err.response?.data || err);
+      setError(err.response?.data || {});
+      showAlert("warning", "Error trying to modify the profile!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { profiles, loading, error, fetchProfiles, editProfile };
 };
 
 export default useProfiles;

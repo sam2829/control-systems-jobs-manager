@@ -22,7 +22,7 @@ class Profile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=50, blank=True)
     work_location = models.CharField(
-        max_length=15, choices=LOCATION_CHOICES, default='WORKSHOP'
+        max_length=15, choices=LOCATION_CHOICES, default='Workshop'
     )
 
     class Meta:

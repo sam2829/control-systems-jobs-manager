@@ -24,7 +24,6 @@ const ProfilePage = ({ showAlert }) => {
   useEffect(() => {
     if (currentUser) {
       fetchProfiles(id);
-      console.log(profiles);
     }
     // eslint-disable-next-line
   }, [currentUser, id]);

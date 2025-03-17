@@ -58,7 +58,35 @@ const useProfiles = (profileId = null) => {
     }
   };
 
-  return { profiles, loading, error, fetchProfiles, editProfile };
+  // delete profiles
+  const deleteProfile = async (id, showAlert, navigate) => {
+    setLoading(true);
+
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/profiles/${id}`);
+      // update state and remove deleted profile
+      setProfiles((prevProfiles) =>
+        prevProfiles.filter((profile) => profile.id !== id)
+      );
+      showAlert("success", `You have successfully deleted profile!`);
+      navigate("/profiles");
+    } catch (err) {
+      console.log("Error trying to delete profile:", err.response?.data || err);
+      setError(err.response?.data || {});
+      showAlert("warning", "Error trying to delete this profile!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return {
+    profiles,
+    loading,
+    error,
+    fetchProfiles,
+    editProfile,
+    deleteProfile,
+  };
 };
 
 export default useProfiles;

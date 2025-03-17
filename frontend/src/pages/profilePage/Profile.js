@@ -7,6 +7,7 @@ import useProfiles from "../../hooks/useProfiles";
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
 import useModal from "../../hooks/useModal";
 import CustomModal from "../../components/CustomModal";
+import { useNavigate } from "react-router-dom";
 
 // component to render profile work location
 const Profile = ({
@@ -29,7 +30,10 @@ const Profile = ({
   const { workLocation, profileName } = profileData;
 
   // custom hook to edit profile
-  const { editProfile } = useProfiles();
+  const { editProfile, deleteProfile } = useProfiles();
+
+  // Hook to navigate user
+  const navigate = useNavigate();
 
   // use modal custom hook
   const { isModalOpen, openModal, closeModal } = useModal();
@@ -55,12 +59,18 @@ const Profile = ({
     await editProfile(id, formData, showAlert);
   };
 
+  // handle delete profile
+  const handleDelete = async () => {
+    await deleteProfile(id, showAlert, navigate);
+    closeModal();
+  };
+
   return (
     <>
       {/* show are you sure about delete modal */}
       {isModalOpen && (
         <CustomModal
-          // onConfirm={handleDelete}
+          onConfirm={handleDelete}
           onCancel={closeModal}
           message="Are you sure you want to delete this profile?"
         />

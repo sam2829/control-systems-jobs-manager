@@ -31,6 +31,12 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.owner}'s profile"
 
+    def delete(self, *args, **kwargs):
+        # delete user when profile deleted
+        user = self.owner
+        super().delete(*args, **kwargs)
+        user.delete()
+
 
 # Code to create new profile everytime new user is created
 def create_profile(sender, instance, created, **kwargs):

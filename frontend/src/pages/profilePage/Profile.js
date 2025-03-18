@@ -79,6 +79,7 @@ const Profile = ({
               id={id}
               superUser={currentUser.is_superuser}
               handleShowModal={openModal}
+              isOwner={is_owner}
             />
           </div>
         )}

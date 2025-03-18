@@ -1,0 +1,45 @@
+.Main {
+  padding: 230px 20px 20px 20px;
+  min-height: 100vh;
+}
+
+.Heading {
+  color: #457b9d;
+  font-weight: 700;
+  font-size: 23px;
+}
+
+.FormContainer {
+  background-color: #d9d9d9;
+  border: 2px solid #e63946;
+  border-radius: 8px;
+  padding-right: 20px;
+  padding-left: 20px;
+  text-align: center;
+}
+
+.FormLabel {
+  display: none;
+}
+
+.FormInput {
+  color: #1a1a40;
+  width: 94%;
+  margin-left: 3%;
+  font-size: 14px;
+  height: 50px;
+}
+
+/* Styles for screen sizes larger than 992px wide */
+@media (min-width: 992px) {
+
+  .FormContainer {
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+
+  .FormInput {
+    font-size: 23px;
+  }
+}

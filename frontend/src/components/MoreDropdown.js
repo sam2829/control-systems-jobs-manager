@@ -53,7 +53,12 @@ export const MoreDropdown = ({ noteId, toggleEditForm, handleShowModal }) => {
 };
 
 // drop down component for profile editing
-export function ProfileEditDropdown({ id, superUser, handleShowModal }) {
+export function ProfileEditDropdown({
+  id,
+  superUser,
+  handleShowModal,
+  isOwner,
+}) {
   // Hook to navigate user
   const navigate = useNavigate();
 
@@ -64,22 +69,28 @@ export function ProfileEditDropdown({ id, superUser, handleShowModal }) {
         className={styles.DropdownMenu}
         popperConfig={{ strategy: "fixed" }}
       >
-        <Dropdown.Item
-          className={styles.DropdownItem}
-          onClick={() => navigate(`/profile/${id}/edit/username`)}
-          aria-label="edit-username"
-        >
-          <i className="far fa-id-card" />
-          Change Username
-        </Dropdown.Item>
-        <Dropdown.Item
-          className={styles.DropdownItem}
-          onClick={() => navigate(`/profile/${id}/edit/password`)}
-          aria-label="edit-password"
-        >
-          <i className="far fa-id-card" />
-          Change Password
-        </Dropdown.Item>
+        {/* only display if owner of profile */}
+        {isOwner && (
+          <>
+            <Dropdown.Item
+              className={styles.DropdownItem}
+              onClick={() => navigate(`/profile/${id}/edit/username`)}
+              aria-label="edit-username"
+            >
+              <i className="far fa-id-card" />
+              Change Username
+            </Dropdown.Item>
+            <Dropdown.Item
+              className={styles.DropdownItem}
+              onClick={() => navigate(`/profile/${id}/edit/password`)}
+              aria-label="edit-password"
+            >
+              <i className="far fa-id-card" />
+              Change Password
+            </Dropdown.Item>
+          </>
+        )}
+
         {/* only show delete option if super user */}
         {superUser && (
           <Dropdown.Item

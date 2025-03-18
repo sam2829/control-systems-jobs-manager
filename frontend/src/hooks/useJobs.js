@@ -24,6 +24,7 @@ const useJobs = (jobId = null) => {
       setJobs(id ? response.data : response.data.results);
     } catch (err) {
       setError(err.response?.data || err.message);
+      console.error("Error in fetchJobs:", err.response?.data || err.message);
     } finally {
       setLoading(false);
     }
@@ -41,7 +42,7 @@ const useJobs = (jobId = null) => {
       showAlert("success", `You have successfully added new job!`);
       navigate("/");
     } catch (err) {
-      console.log("error trying to add job:", err.response.data);
+      // console.log("error trying to add job:", err.response.data);
       setError(err.response?.data || {});
       showAlert("warning", "Error trying to add new job!");
     } finally {
@@ -62,7 +63,7 @@ const useJobs = (jobId = null) => {
       );
       showAlert("success", `You have successfully modified the job!`);
     } catch (err) {
-      console.log("Error trying to edit job:", err.response?.data || err);
+      // console.log("Error trying to edit job:", err.response?.data || err);
       setError(err.response?.data || {});
       showAlert("warning", "Error trying to edit the job!");
     } finally {
@@ -80,7 +81,7 @@ const useJobs = (jobId = null) => {
       showAlert("success", `You have successfully deleted job!`);
       navigate("/");
     } catch (err) {
-      console.log("Error trying to delete job:", err.response?.data || err);
+      // console.log("Error trying to delete job:", err.response?.data || err);
       setError(err.response?.data || {});
       showAlert("warning", "Error trying to delete job!");
     } finally {

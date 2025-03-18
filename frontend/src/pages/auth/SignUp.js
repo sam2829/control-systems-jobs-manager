@@ -43,7 +43,7 @@ const SignUp = ({ showAlert }) => {
       showAlert("success", "Successfully created an account!");
       navigate("/");
     } catch (err) {
-      console.log("Error trying to sign up", err.response.data);
+      // console.log("Error trying to sign up", err.response.data);
       setErrors(err.response?.data || {});
       showAlert("warning", "Error trying to sign up!");
     }

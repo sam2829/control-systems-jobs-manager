@@ -76,7 +76,7 @@ const useNotes = () => {
       setEditNoteError(null);
       showAlert("success", "You have succesffully edited note!");
     } catch (err) {
-      console.log("error trying to edit note:", err.response.data);
+      // console.log("error trying to edit note:", err.response.data);
       setEditNoteError(err.response?.data || {});
       showAlert(
         "warning",
@@ -97,7 +97,7 @@ const useNotes = () => {
       setLocalNotesCount((prevCount) => prevCount - 1);
       showAlert("success", `You have successfully deleted your note!`);
     } catch (err) {
-      console.log("error trying to delete note:", err.response.data);
+      // console.log("error trying to delete note:", err.response.data);
       setAddNoteError(err.response?.data || {});
       showAlert("warning", "Error trying to delete note!");
     } finally {

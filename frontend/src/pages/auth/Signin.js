@@ -62,7 +62,7 @@ const Signin = ({ showAlert }) => {
       showAlert("success", `You have successfully signed in as ${username}!`);
       navigate("/");
     } catch (err) {
-      console.log("error trying to sign in", err.response.data);
+      // console.log("error trying to sign in", err.response.data);
       setErrors(err.response?.data || {});
       showAlert("warning", "Error trying to login!");
     }

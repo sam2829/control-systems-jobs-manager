@@ -26,7 +26,10 @@ const useProfiles = (profileId = null) => {
       setProfiles(id ? response.data : response.data.results);
     } catch (err) {
       setError(err.response?.data || err.message);
-      console.log("error trying to fetch profiles:", err.response.data);
+      // console.log(
+      //   "error trying to fetch profiles:",
+      //   err.response?.data || err.message
+      // );
     } finally {
       setLoading(false);
     }
@@ -50,7 +53,7 @@ const useProfiles = (profileId = null) => {
       );
       showAlert("success", `You have successfully modified the profile!`);
     } catch (err) {
-      console.log("Error trying to modify profile:", err.response?.data || err);
+      // console.log("Error trying to modify profile:", err.response?.data || err);
       setError(err.response?.data || {});
       showAlert("warning", "Error trying to modify the profile!");
     } finally {
@@ -71,7 +74,7 @@ const useProfiles = (profileId = null) => {
       showAlert("success", `You have successfully deleted profile!`);
       navigate("/profiles");
     } catch (err) {
-      console.log("Error trying to delete profile:", err.response?.data || err);
+      // console.log("Error trying to delete profile:", err.response?.data || err);
       setError(err.response?.data || {});
       showAlert("warning", "Error trying to delete this profile!");
     } finally {

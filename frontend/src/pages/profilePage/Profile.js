@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import styles from "../../styles/Profile.module.css";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import CustomButton from "../../components/CustomButton";
 import useProfiles from "../../hooks/useProfiles";
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
 import useModal from "../../hooks/useModal";
 import CustomModal from "../../components/CustomModal";
 import { useNavigate } from "react-router-dom";
+import ProfileWorkLocationForm from "./ProfileWorkLocationForm";
 
 // component to render profile work location
 const Profile = ({
@@ -21,10 +20,7 @@ const Profile = ({
 }) => {
   // profile data
   const [profileData, setProfileData] = useState({
-    workLocation: work_location
-      ? work_location.charAt(0).toUpperCase() +
-        work_location.slice(1).toLowerCase()
-      : "",
+    workLocation: work_location,
     profileName: name,
   });
   const { workLocation, profileName } = profileData;
@@ -99,23 +95,14 @@ const Profile = ({
         )}
         {/* render work location edit form if super user */}
         {currentUser.is_superuser && (
-          <Form onSubmit={handleEditProfile}>
-            <Form.Label className={styles.Text}>Work Location:</Form.Label>
-            <Form.Select
-              name="workLocation"
-              value={workLocation}
-              required
-              className={styles.Data}
-              onChange={handleChange}
-            >
-              <option value="Syspal">Syspal</option>
-              <option value="Workshop">Workshop</option>
-            </Form.Select>
-            {/* import custom button */}
-            <div className="mt-4 mb-2">
-              <CustomButton text="Submit" type="submit" />
-            </div>
-          </Form>
+          // import work location form
+          <ProfileWorkLocationForm
+            title="Work Location:"
+            name="workLocation"
+            value={workLocation}
+            handleChange={handleChange}
+            handleEditProfile={handleEditProfile}
+          />
         )}
       </Container>
     </>

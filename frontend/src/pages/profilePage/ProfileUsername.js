@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "../../styles/ProfileUsername.module.css";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import CustomButton from "../../components/CustomButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { CurrentUserContext } from "../../App";
 import axios from "../../api/axiosDefaults";
-import AuthFormErrorMessage from "../auth/AuthFormErrorMessage";
+import AuthFormFields from "../auth/AuthFormFields";
+import ProfileAuthEditButtons from "./ProfileAuthEditButtons";
 
 // component to render change username form
 const ProfileUsername = ({ showAlert }) => {
@@ -56,30 +54,19 @@ const ProfileUsername = ({ showAlert }) => {
         onSubmit={handleSubmit}
         className={`${styles.FormContainer} mt-5 py-4`}
       >
-        <Form.Label className={styles.FormLabel}>Change Username</Form.Label>
-        <Form.Control
+        {/* import form fields */}
+        <AuthFormFields
+          title="Change Username:"
           type="text"
-          name="newUsername"
+          name="username"
           placeholder="Your new username here..."
-          required
-          className={styles.FormInput}
+          value={newUsername}
           onChange={(event) => setNewUsername(event.target.value)}
+          errors={errors}
+          changeUsername
         />
-        {/* Error message component */}
-        <AuthFormErrorMessage errors={errors} fieldName="username" />
-        {/* import custom buttons and spinner if loading */}
-        <Row className="mt-4 justify-content-center">
-          <Col xs={12} sm={6}>
-            <div className="py-2">
-              <CustomButton text="Save" type="submit" />
-            </div>
-          </Col>
-          <Col xs={12} sm={6}>
-            <div className="py-2">
-              <CustomButton text="Go Back" goBackButton />
-            </div>
-          </Col>
-        </Row>
+        {/* import custom buttons */}
+        <ProfileAuthEditButtons />
       </Form>
     </Container>
   );

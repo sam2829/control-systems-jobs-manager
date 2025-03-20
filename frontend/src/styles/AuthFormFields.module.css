@@ -5,11 +5,23 @@
   padding-left: 5%;
 }
 
+.ChangeUsernameLabel {
+  display: none;
+}
+
 .FormInput {
   color: #1a1a40;
   width: 90%;
   margin-left: 5%;
   font-size: 18px;
+}
+
+.ChangeUsernameInput {
+  color: #1a1a40;
+  width: 94%;
+  margin-left: 3%;
+  font-size: 14px;
+  height: 50px;
 }
 
 /* Styles for screen sizes larger than 992px wide */
@@ -20,6 +32,10 @@
   }
 
   .FormInput {
+    font-size: 23px;
+  }
+
+  .ChangeUsernameInput {
     font-size: 23px;
   }
 }

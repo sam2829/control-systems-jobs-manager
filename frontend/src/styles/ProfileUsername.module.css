@@ -18,18 +18,6 @@
   text-align: center;
 }
 
-.FormLabel {
-  display: none;
-}
-
-.FormInput {
-  color: #1a1a40;
-  width: 94%;
-  margin-left: 3%;
-  font-size: 14px;
-  height: 50px;
-}
-
 /* Styles for screen sizes larger than 992px wide */
 @media (min-width: 992px) {
 
@@ -37,9 +25,5 @@
     width: 50%;
     margin-left: 25%;
     margin-right: 25%;
-  }
-
-  .FormInput {
-    font-size: 23px;
   }
 }

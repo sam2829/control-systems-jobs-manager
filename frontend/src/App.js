@@ -13,6 +13,7 @@ import JobDetailPage from "./pages/jobDetailPage/JobDetailPage.js";
 import ProfilesPage from "./pages/profilePage/ProfilesPage.js";
 import ProfilePage from "./pages/profilePage/ProfilePage.js";
 import ProfileUsername from "./pages/profilePage/ProfileUsername.js";
+import ProfilePassword from "./pages/profilePage/ProfilePassword.js";
 
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
@@ -84,6 +85,10 @@ function App() {
               <Route
                 path="/profile/:id/edit/username"
                 element={<ProfileUsername showAlert={showAlert} />}
+              />
+              <Route
+                path="/profile/:id/edit/password"
+                element={<ProfilePassword showAlert={showAlert} />}
               />
             </Routes>
           </div>

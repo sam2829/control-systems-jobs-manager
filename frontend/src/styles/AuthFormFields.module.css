@@ -5,7 +5,7 @@
   padding-left: 5%;
 }
 
-.ChangeUsernameLabel {
+.EditProfileLabel {
   display: none;
 }
 
@@ -16,7 +16,7 @@
   font-size: 18px;
 }
 
-.ChangeUsernameInput {
+.EditProfileInput {
   color: #1a1a40;
   width: 94%;
   margin-left: 3%;
@@ -35,7 +35,7 @@
     font-size: 23px;
   }
 
-  .ChangeUsernameInput {
+  .EditProfileInput {
     font-size: 23px;
   }
 }

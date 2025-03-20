@@ -12,20 +12,20 @@ const AuthFormFields = ({
   value,
   onChange,
   errors,
-  changeUsername,
+  editProfile,
 }) => {
   return (
     <>
       <Form.Label
         className={`${
-          !changeUsername ? styles.FormLabel : styles.ChangeUsernameLabel
+          !editProfile ? styles.FormLabel : styles.EditProfileLabel
         }`}
       >
         {title}
       </Form.Label>
       <Form.Control
         className={`${
-          !changeUsername ? styles.FormInput : styles.ChangeUsernameInput
+          !editProfile ? styles.FormInput : styles.EditProfileInput
         } py-2 my-2`}
         type={type}
         name={name}

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import styles from "../../styles/ProfileUsername.module.css";
+import styles from "../../styles/ProfilePassword.module.css";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,8 +8,8 @@ import axios from "../../api/axiosDefaults";
 import AuthFormFields from "../auth/AuthFormFields";
 import ProfileAuthEditButtons from "./ProfileAuthEditButtons";
 
-// component to render change username form
-const ProfileUsername = ({ showAlert }) => {
+// component to render change password form
+const ProfilePassword = ({ showAlert }) => {
   // call to find who is the current user and update
   const currentUser = useContext(CurrentUserContext);
 
@@ -19,8 +19,12 @@ const ProfileUsername = ({ showAlert }) => {
   // Hook to navigate user
   const navigate = useNavigate();
 
-  // state for username
-  const [newUsername, setNewUsername] = useState("");
+  // state for password
+  const [passwordData, setPasswordData] = useState({
+    new_password1: "",
+    new_password2: "",
+  });
+  const { new_password1, new_password2 } = passwordData;
 
   //Error state for changing username
   const [errors, setErrors] = useState({});
@@ -32,37 +36,57 @@ const ProfileUsername = ({ showAlert }) => {
     }
   });
 
+  // handle changes in input fields
+  const handleChange = (event) => {
+    setPasswordData({
+      ...passwordData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  // handle submit new password
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      await axios.put("http://127.0.0.1:8000/api/dj-rest-auth/user/", {
-        username: newUsername,
-      });
-      showAlert("success", "You have successfully changed your username!");
+      await axios.post(
+        "http://127.0.0.1:8000/api/dj-rest-auth/password/change/",
+        passwordData
+      );
+      showAlert("success", "You have successfully changed your password!");
       navigate(-1);
     } catch (err) {
       // console.log(err);
       setErrors(err.response?.data || {});
-      showAlert("warning", "Error trying to change username!");
+      showAlert("warning", "Error trying to change your password!");
     }
   };
 
   return (
     <Container className={styles.Main}>
-      <h2 className={styles.Heading}>Change Username</h2>
+      <h2 className={styles.Heading}>Change Password</h2>
       <Form
         onSubmit={handleSubmit}
         className={`${styles.FormContainer} mt-5 py-4`}
       >
         {/* import form fields */}
         <AuthFormFields
-          title="Change Username:"
-          type="text"
-          name="username"
-          placeholder="Your new username here..."
-          value={newUsername}
-          onChange={(event) => setNewUsername(event.target.value)}
+          title="Change Password"
+          type="password"
+          name="new_password1"
+          placeholder="New password..."
+          value={new_password1}
+          onChange={handleChange}
+          errors={errors}
+          editProfile
+        />
+        <AuthFormFields
+          title="Confirm Password"
+          type="password"
+          name="new_password2"
+          placeholder="Confirm password..."
+          value={new_password2}
+          onChange={handleChange}
           errors={errors}
           editProfile
         />
@@ -73,4 +97,4 @@ const ProfileUsername = ({ showAlert }) => {
   );
 };
 
-export default ProfileUsername;
+export default ProfilePassword;

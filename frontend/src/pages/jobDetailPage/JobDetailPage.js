@@ -9,8 +9,12 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage";
 import JobDetailPageJob from "./JobDetailPageJob";
 import JobDetailComments from "./JobDetailComments";
+import useRedirectUser from "../../hooks/useRedirectUser";
 
 const JobDetailPage = ({ showAlert }) => {
+  // redirect user if they are not logged in
+  useRedirectUser();
+
   // extract id from url for job id
   const { id } = useParams();
 
@@ -32,9 +36,7 @@ const JobDetailPage = ({ showAlert }) => {
     <Container className={styles.Main}>
       <main>
         <Row>
-          <h1 className={styles.Heading}>
-            Job Detail Page
-          </h1>
+          <h1 className={styles.Heading}>Job Detail Page</h1>
           {/* loading job */}
           {loading && <LoadingSpinner />}
           {/* display error message */}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/SignUp.module.css";
 import Container from "react-bootstrap/Container";
@@ -8,8 +8,13 @@ import CustomButton from "../../components/CustomButton";
 import AuthFormFields from "./AuthFormFields";
 import axios from "../../api/axiosDefaults";
 import AuthFormErrorMessage from "./AuthFormErrorMessage";
+import useRedirectUser from "../../hooks/useRedirectUser";
 
 const SignUp = ({ showAlert }) => {
+  // custom hook to redirect users if not logged 
+  // or not superuser
+  useRedirectUser(true);
+
   // use state hook for sign in data
   const [signUpData, setSignUpData] = useState({
     username: "",

@@ -9,9 +9,13 @@ import CustomButton from "../../components/CustomButton";
 import AddJobFormFields from "./AddJobFormFields";
 import useJobs from "../../hooks/useJobs";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import useRedirectUser from "../../hooks/useRedirectUser";
 
 // this is a component to render the add job page
 const AddJobPage = ({ showAlert }) => {
+  // custom hook to redirect users if not logged in
+  useRedirectUser(true);
+
   // use state hook for add job data
   const [addJobData, setAddJobData] = useState({
     csaNumber: "",

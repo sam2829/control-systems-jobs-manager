@@ -7,8 +7,13 @@ import useProfiles from "../../hooks/useProfiles";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage";
 import CustomButton from "../../components/CustomButton";
+import useRedirectUser from "../../hooks/useRedirectUser";
 
 const ProfilesPage = () => {
+  // custom hook to redirect users if not logged in
+  // or not superuser
+  useRedirectUser(true);
+
   // call to find who is the current user
   const currentUser = useContext(CurrentUserContext);
 

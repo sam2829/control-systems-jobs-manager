@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/Signin.module.css";
 import Container from "react-bootstrap/Container";
@@ -9,11 +9,16 @@ import AuthFormFields from "./AuthFormFields";
 import axios, { setAuthToken } from "../../api/axiosDefaults";
 import AuthFormErrorMessage from "./AuthFormErrorMessage";
 import { SetCurrentUserContext } from "../../App";
+import { CurrentUserContext } from "../../App";
 
 // This component is to render the signin page
 const Signin = ({ showAlert }) => {
   // call current user context hook
   const setCurrentUser = useContext(SetCurrentUserContext);
+
+  // call to find who is current user
+  const currentUser = useContext(CurrentUserContext);
+
   // use state hook for sign in data
   const [signInData, setSignInData] = useState({
     username: "",
@@ -26,6 +31,13 @@ const Signin = ({ showAlert }) => {
 
   // Hook to navigate user
   const navigate = useNavigate();
+
+  // use effect hook to redirect user if already logged in
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  });
 
   // handle change function for form fields
   const handleChange = (event) => {

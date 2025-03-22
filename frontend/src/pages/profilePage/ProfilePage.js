@@ -4,14 +4,16 @@ import Container from "react-bootstrap/Container";
 import { CurrentUserContext } from "../../App";
 import { useParams } from "react-router-dom";
 import useProfiles from "../../hooks/useProfiles";
-
 import LoadingSpinner from "../../components/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage";
-
 import Profile from "./Profile";
+import useRedirectUser from "../../hooks/useRedirectUser";
 
 // component to render profile page
 const ProfilePage = ({ showAlert }) => {
+  // custom hook to redirect users if not logged in
+  useRedirectUser();
+
   // call to find who is the current user
   const currentUser = useContext(CurrentUserContext);
 

@@ -11,17 +11,38 @@ const useJobs = (jobId = null) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [nextPage, setNextPage] = useState(null);
+
   // Fetch jobs or job by id
-  const fetchJobs = async (id = null, searchQuery = "") => {
+  const fetchJobs = async (id = null, searchQuery = "", append = false) => {
     if (!currentUser) return;
 
-    setLoading(true);
+    // Reset jobs and nextPage for new searches
+    if (!append && !id && searchQuery !== "") {
+      setJobs([]);
+      setNextPage(null);
+    }
+
+    if (append === false) {
+      setLoading(true);
+    }
+
     try {
       const endpoint = id
         ? `http://127.0.0.1:8000/api/jobs/${id}/`
-        : `http://127.0.0.1:8000/api/jobs/?search=${searchQuery}`;
+        : !append
+        ? `http://127.0.0.1:8000/api/jobs/?search=${searchQuery}`
+        : nextPage;
       const response = await axios.get(endpoint);
-      setJobs(id ? response.data : response.data.results);
+      setJobs((prevJobs) =>
+        append
+          ? [...prevJobs, ...response.data.results]
+          : id
+          ? response.data
+          : response.data.results
+      );
+      // Save next page URL for infinite scroll
+      setNextPage(response.data.next || null);
     } catch (err) {
       setError(err.response?.data || err.message);
       console.error("Error in fetchJobs:", err.response?.data || err.message);
@@ -89,7 +110,16 @@ const useJobs = (jobId = null) => {
     }
   };
 
-  return { jobs, loading, error, fetchJobs, addJob, editJob, deleteJob };
+  return {
+    jobs,
+    loading,
+    error,
+    fetchJobs,
+    addJob,
+    editJob,
+    deleteJob,
+    nextPage,
+  };
 };
 
 export default useJobs;

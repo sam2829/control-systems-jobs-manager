@@ -11,6 +11,7 @@ import HomepageJobList from "./HomepageJobList";
 import useJobs from "../../hooks/useJobs";
 import ErrorMessage from "../../components/ErrorMessage";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 //  This component is used to render the homepage
 const Hompage = () => {
@@ -24,7 +25,7 @@ const Hompage = () => {
   const [searchComplete, setSearchComplete] = useState(false);
 
   // custom hook to fetch jobs
-  const { jobs, loading, error, fetchJobs } = useJobs();
+  const { jobs, loading, error, fetchJobs, nextPage } = useJobs();
 
   // use effect hook to fetch jobs
   useEffect(() => {
@@ -74,11 +75,19 @@ const Hompage = () => {
                 There are currently no jobs to view.
               </p>
             )}
-            {/* Map over and display jobs */}
-            {!loading &&
-              !error &&
-              jobs.length > 0 &&
-              jobs.map((job) => <HomepageJobList key={job.id} {...job} />)}
+            {/* Map over and display jobs and infinite scroll */}
+            {!loading && !error && (
+              <InfiniteScroll
+                dataLength={jobs.length}
+                next={() => fetchJobs(null, query, true)}
+                hasMore={!!nextPage}
+                loader={<LoadingSpinner />}
+              >
+                {jobs.map((job) => (
+                  <HomepageJobList key={job.id} {...job} />
+                ))}
+              </InfiniteScroll>
+            )}
           </Row>
         ) : (
           // display when a user is not logged in

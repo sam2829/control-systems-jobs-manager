@@ -14,22 +14,44 @@ const useNotes = () => {
   const [editNoteError, setEditNoteError] = useState(null);
   const [localNotesCount, setLocalNotesCount] = useState(0);
 
+  const [nextPage, setNextPage] = useState(null);
+
   // fetch notes by job id
-  const fetchNotes = async (jobId, notesCount) => {
+  const fetchNotes = async (jobId, notesCount, append = false) => {
     if (!currentUser) return;
     if (!jobId) return;
+
     setLocalNotesCount(notesCount);
-    setLoading(true);
+
+    // Reset notes and next page
+    if (!append) {
+      console.log("resetting the notes");
+      setLoading(true);
+      setNotes([]); // Reset when fetching fresh data
+      setNextPage(null);
+    }
 
     try {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/notes/?job=${jobId}`
+      const endpoint =
+        append && nextPage
+          ? nextPage
+          : `http://127.0.0.1:8000/api/notes/?job=${jobId}`;
+
+      const response = await axios.get(endpoint);
+      setNotes((prevNotes) =>
+        append
+          ? [
+              ...prevNotes,
+              ...response.data.results.filter(
+                (newNote) =>
+                  !prevNotes.some(
+                    (existingNote) => existingNote.id === newNote.id
+                  )
+              ),
+            ]
+          : response.data.results
       );
-      // check if response is paginated or plain list
-      const notesData = response.data.results
-        ? response.data.results
-        : response.data;
-      setNotes(notesData);
+      setNextPage(response.data.next || null);
       setError(null);
     } catch (err) {
       // console.log("error trying to fetch notes", err.response.data);
@@ -117,6 +139,7 @@ const useNotes = () => {
     addNote,
     editNote,
     deleteNote,
+    nextPage,
   };
 };
 

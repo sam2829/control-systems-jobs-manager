@@ -12,18 +12,44 @@ const useProfiles = (profileId = null) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [nextPage, setNextPage] = useState(null);
+
   // fetch profiles or by profile id
-  const fetchProfiles = async (id = null) => {
+  const fetchProfiles = async (id = null, append = false) => {
     if (!currentUser) return;
+
+    // Reset profiles and nextPage for new searches
+    if (!append && !id) {
+      setProfiles([]);
+      setNextPage(null);
+    }
+
+    if (append === false) {
+      setLoading(true);
+    }
 
     setLoading(true);
     try {
+      // const endpoint = id
+      //   ? `http://127.0.0.1:8000/api/profiles/${id}`
+      //   : `http://127.0.0.1:8000/api/profiles/`;
+
       const endpoint = id
         ? `http://127.0.0.1:8000/api/profiles/${id}`
+        : append && nextPage
+        ? nextPage
         : `http://127.0.0.1:8000/api/profiles/`;
 
       const response = await axios.get(endpoint);
-      setProfiles(id ? response.data : response.data.results);
+      // setProfiles(id ? response.data : response.data.results);
+      setProfiles((prevProfiles) =>
+        append
+          ? [...prevProfiles, ...response.data.results]
+          : id
+          ? response.data
+          : response.data.results
+      );
+      setNextPage(response.data.next || null);
     } catch (err) {
       setError(err.response?.data || err.message);
       // console.log(
@@ -89,6 +115,7 @@ const useProfiles = (profileId = null) => {
     fetchProfiles,
     editProfile,
     deleteProfile,
+    nextPage,
   };
 };
 

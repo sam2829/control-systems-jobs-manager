@@ -25,7 +25,6 @@ const useNotes = () => {
 
     // Reset notes and next page
     if (!append) {
-      console.log("resetting the notes");
       setLoading(true);
       setNotes([]); // Reset when fetching fresh data
       setNextPage(null);

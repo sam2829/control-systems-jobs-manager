@@ -8,6 +8,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage";
 import CustomButton from "../../components/CustomButton";
 import useRedirectUser from "../../hooks/useRedirectUser";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const ProfilesPage = () => {
   // custom hook to redirect users if not logged in
@@ -18,12 +19,12 @@ const ProfilesPage = () => {
   const currentUser = useContext(CurrentUserContext);
 
   // custom hook for fetching profiles
-  const { profiles, loading, error, fetchProfiles } = useProfiles();
+  const { profiles, loading, error, fetchProfiles, nextPage } = useProfiles();
 
   useEffect(() => {
     if (currentUser) {
       if (currentUser.is_superuser) {
-        fetchProfiles();
+        fetchProfiles(null);
       }
     }
     // eslint-disable-next-line
@@ -40,21 +41,29 @@ const ProfilesPage = () => {
       {!loading && !error ? (
         currentUser?.is_superuser ? (
           profiles.length > 0 ? (
-            profiles.map((profile) => (
-              <Container
-                className={`${styles.ProfileContainer} mt-5 py-4`}
-                key={profile.id}
-              >
-                <p className={`${styles.Text} mt-3 mb-4`}>
-                  Username: <span className={styles.Data}>{profile.owner}</span>
-                </p>
-                <Link to={`/profile/${profile.id}`}>
-                  <div>
-                    <CustomButton text="View Profile" />
-                  </div>
-                </Link>
-              </Container>
-            ))
+            <InfiniteScroll
+              dataLength={profiles.length}
+              next={() => fetchProfiles(null, true)}
+              hasMore={!!nextPage}
+              loader={<LoadingSpinner />}
+            >
+              {profiles.map((profile) => (
+                <Container
+                  className={`${styles.ProfileContainer} mt-5 py-4`}
+                  key={profile.id}
+                >
+                  <p className={`${styles.Text} mt-3 mb-4`}>
+                    Username:{" "}
+                    <span className={styles.Data}>{profile.owner}</span>
+                  </p>
+                  <Link to={`/profile/${profile.id}`}>
+                    <div>
+                      <CustomButton text="View Profile" />
+                    </div>
+                  </Link>
+                </Container>
+              ))}
+            </InfiniteScroll>
           ) : (
             <p>No profiles found</p>
           )

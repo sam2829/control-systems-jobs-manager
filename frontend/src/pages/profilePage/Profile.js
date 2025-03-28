@@ -26,7 +26,7 @@ const Profile = ({
   const { workLocation, profileName } = profileData;
 
   // custom hook to edit profile
-  const { editProfile, deleteProfile } = useProfiles();
+  const { editProfile, deleteProfile, loading } = useProfiles();
 
   // Hook to navigate user
   const navigate = useNavigate();
@@ -103,6 +103,7 @@ const Profile = ({
             value={workLocation}
             handleChange={handleChange}
             handleEditProfile={handleEditProfile}
+            loading={loading}
           />
         )}
       </Container>

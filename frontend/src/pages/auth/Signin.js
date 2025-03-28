@@ -10,6 +10,7 @@ import axios, { setAuthToken } from "../../api/axiosDefaults";
 import AuthFormErrorMessage from "./AuthFormErrorMessage";
 import { SetCurrentUserContext } from "../../App";
 import { CurrentUserContext } from "../../App";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 // This component is to render the signin page
 const Signin = ({ showAlert }) => {
@@ -25,6 +26,9 @@ const Signin = ({ showAlert }) => {
     password: "",
   });
   const { username, password } = signInData;
+
+  // state for loading
+  const [loading, setLoading] = useState(false);
 
   //Error state for sign in form
   const [errors, setErrors] = useState({});
@@ -50,6 +54,8 @@ const Signin = ({ showAlert }) => {
   // handle sign in form submission tokens
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
+
     try {
       const { data } = await axios.post(
         "http://127.0.0.1:8000/api/dj-rest-auth/login/",
@@ -77,6 +83,8 @@ const Signin = ({ showAlert }) => {
       // console.log("error trying to sign in", err.response.data);
       setErrors(err.response?.data || {});
       showAlert("warning", "Error trying to login!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -108,8 +116,12 @@ const Signin = ({ showAlert }) => {
           errors={errors}
         />
         <div className="py-4">
-          {/* import custom button */}
-          <CustomButton text="Sign In" type="submit" />
+          {!loading && (
+            // import custom button
+            <CustomButton text="Sign In" type="submit" />
+          )}
+          {/* import loading spinner */}
+          {loading && <LoadingSpinner />}
         </div>
         {/* Displaying non-field errors, if any */}
         <AuthFormErrorMessage errors={errors} />

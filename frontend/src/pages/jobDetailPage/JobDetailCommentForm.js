@@ -49,11 +49,11 @@ const JobDetailCommentForm = ({ jobId, error, loading, handleAddNote }) => {
       <AuthFormErrorMessage errors={error} fieldName="content" />
       {/* import custom button */}
       <div className="my-4">
-        <CustomButton
-          text={loading ? <LoadingSpinner buttonSpinner /> : "Create Note"}
-          type="submit"
-          disabled={loading}
-        />
+        {!loading && (
+          <CustomButton text="Create Note" type="submit" disabled={loading} />
+        )}
+        {/* import loading spinner */}
+        {loading && <LoadingSpinner />}
       </div>
     </Form>
   );

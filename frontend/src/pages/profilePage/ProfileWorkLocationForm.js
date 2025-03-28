@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../../styles/ProfileWorkLocationForm.module.css";
 import Form from "react-bootstrap/Form";
 import CustomButton from "../../components/CustomButton";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 // component to render the work location form
 const ProfileWorkLocationForm = ({
@@ -10,6 +11,7 @@ const ProfileWorkLocationForm = ({
   value,
   handleChange,
   handleEditProfile,
+  loading,
 }) => {
   return (
     <Form onSubmit={handleEditProfile}>
@@ -26,7 +28,9 @@ const ProfileWorkLocationForm = ({
       </Form.Select>
       {/* import custom button */}
       <div className="mt-4 mb-2">
-        <CustomButton text="Submit" type="submit" />
+        {!loading && <CustomButton text="Submit" type="submit" />}
+        {/* import loading spinner */}
+        {loading && <LoadingSpinner />}
       </div>
     </Form>
   );

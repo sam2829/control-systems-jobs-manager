@@ -9,6 +9,7 @@ import AuthFormFields from "./AuthFormFields";
 import axios from "../../api/axiosDefaults";
 import AuthFormErrorMessage from "./AuthFormErrorMessage";
 import useRedirectUser from "../../hooks/useRedirectUser";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const SignUp = ({ showAlert }) => {
   // custom hook to redirect users if not logged
@@ -22,6 +23,9 @@ const SignUp = ({ showAlert }) => {
     password2: "",
   });
   const { username, password1, password2 } = signUpData;
+
+  // state for loading
+  const [loading, setLoading] = useState(false);
 
   //Error state for sign in form
   const [errors, setErrors] = useState({});
@@ -40,6 +44,8 @@ const SignUp = ({ showAlert }) => {
   // handle sign up form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
+
     try {
       await axios.post(
         "http://127.0.0.1:8000/api/dj-rest-auth/registration/",
@@ -51,6 +57,8 @@ const SignUp = ({ showAlert }) => {
       // console.log("Error trying to sign up", err.response.data);
       setErrors(err.response?.data || {});
       showAlert("warning", "Error trying to sign up!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,8 +100,12 @@ const SignUp = ({ showAlert }) => {
           errors={errors}
         />
         <div className="py-4">
-          {/* import custom button */}
-          <CustomButton text="Sign Up" type="submit" />
+          {!loading && (
+            // import custom button
+            <CustomButton text="Sign In" type="submit" />
+          )}
+          {/* import loading spinner */}
+          {loading && <LoadingSpinner />}
         </div>
         {/* Displaying non-field errors, if any */}
         <AuthFormErrorMessage errors={errors} />

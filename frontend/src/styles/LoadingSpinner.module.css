@@ -4,8 +4,8 @@
   align-items: center;
   height: 100%; /* Adjust as needed */
   width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 /* main spinner */
@@ -14,8 +14,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 50px;
-  min-width: 50px;
+  min-height: 40px;
+  min-width: 40px;
   color: #1a1a40;
   text-align: center;
   border-width: 7px;

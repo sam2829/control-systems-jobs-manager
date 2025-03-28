@@ -26,6 +26,9 @@ const ProfilePassword = ({ showAlert }) => {
   });
   const { new_password1, new_password2 } = passwordData;
 
+  // state for loading
+  const [loading, setLoading] = useState(false);
+
   //Error state for changing username
   const [errors, setErrors] = useState({});
 
@@ -47,6 +50,7 @@ const ProfilePassword = ({ showAlert }) => {
   // handle submit new password
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     try {
       await axios.post(
@@ -59,6 +63,8 @@ const ProfilePassword = ({ showAlert }) => {
       // console.log(err);
       setErrors(err.response?.data || {});
       showAlert("warning", "Error trying to change your password!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -91,7 +97,7 @@ const ProfilePassword = ({ showAlert }) => {
           editProfile
         />
         {/* import custom buttons */}
-        <ProfileAuthEditButtons />
+        <ProfileAuthEditButtons loading={loading} />
       </Form>
     </Container>
   );

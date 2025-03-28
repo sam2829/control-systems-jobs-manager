@@ -22,6 +22,9 @@ const ProfileUsername = ({ showAlert }) => {
   // state for username
   const [newUsername, setNewUsername] = useState("");
 
+  // state for loading
+  const [loading, setLoading] = useState(false);
+
   //Error state for changing username
   const [errors, setErrors] = useState({});
 
@@ -34,6 +37,7 @@ const ProfileUsername = ({ showAlert }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     try {
       await axios.put("http://127.0.0.1:8000/api/dj-rest-auth/user/", {
@@ -45,6 +49,8 @@ const ProfileUsername = ({ showAlert }) => {
       // console.log(err);
       setErrors(err.response?.data || {});
       showAlert("warning", "Error trying to change username!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,7 +73,7 @@ const ProfileUsername = ({ showAlert }) => {
           editProfile
         />
         {/* import custom buttons */}
-        <ProfileAuthEditButtons />
+        <ProfileAuthEditButtons loading={loading} />
       </Form>
     </Container>
   );

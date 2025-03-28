@@ -140,12 +140,12 @@ const AddJobPage = ({ showAlert }) => {
           fieldName="quote"
         />
         <div className="py-4">
-          {/* import custom button */}
-          <CustomButton
-            text={loading ? <LoadingSpinner buttonSpinner /> : "Add Job"}
-            type="submit"
-            disabled={loading}
-          />
+          {!loading && (
+            // import custom button
+            <CustomButton text="Add Job" type="submit" disabled={loading} />
+          )}
+          {/* import loading spinner */}
+          {loading && <LoadingSpinner />}
         </div>
       </Form>
     </Container>

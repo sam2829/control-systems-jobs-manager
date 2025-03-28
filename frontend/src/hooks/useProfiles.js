@@ -28,12 +28,7 @@ const useProfiles = (profileId = null) => {
       setLoading(true);
     }
 
-    setLoading(true);
     try {
-      // const endpoint = id
-      //   ? `http://127.0.0.1:8000/api/profiles/${id}`
-      //   : `http://127.0.0.1:8000/api/profiles/`;
-
       const endpoint = id
         ? `http://127.0.0.1:8000/api/profiles/${id}`
         : append && nextPage
@@ -41,7 +36,7 @@ const useProfiles = (profileId = null) => {
         : `http://127.0.0.1:8000/api/profiles/`;
 
       const response = await axios.get(endpoint);
-      // setProfiles(id ? response.data : response.data.results);
+
       setProfiles((prevProfiles) =>
         append
           ? [...prevProfiles, ...response.data.results]

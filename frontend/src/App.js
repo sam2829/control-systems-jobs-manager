@@ -15,6 +15,7 @@ import ProfilePage from "./pages/profilePage/ProfilePage.js";
 import ProfileUsername from "./pages/profilePage/ProfileUsername.js";
 import ProfilePassword from "./pages/profilePage/ProfilePassword.js";
 import LoadingSpinner from "./components/LoadingSpinner.js";
+import NotFoundPage from "./pages/notFoundPage/NotFoundPage.js";
 
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
@@ -101,6 +102,7 @@ function App() {
                 path="/profile/:id/edit/password"
                 element={<ProfilePassword showAlert={showAlert} />}
               />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>
         </Router>

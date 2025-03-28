@@ -45,7 +45,7 @@ const ProfilesPage = () => {
               dataLength={profiles.length}
               next={() => fetchProfiles(null, true)}
               hasMore={!!nextPage}
-              loader={<LoadingSpinner />}
+              loader={profiles.length > 0 && <LoadingSpinner />}
             >
               {profiles.map((profile) => (
                 <Container

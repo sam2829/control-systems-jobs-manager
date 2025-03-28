@@ -81,7 +81,7 @@ const Hompage = () => {
                 dataLength={jobs.length}
                 next={() => fetchJobs(null, query, true)}
                 hasMore={!!nextPage}
-                loader={<LoadingSpinner />}
+                loader={jobs.length > 0 && <LoadingSpinner />}
               >
                 {jobs.map((job) => (
                   <HomepageJobList key={job.id} {...job} />

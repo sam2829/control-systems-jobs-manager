@@ -67,7 +67,7 @@ const JobDetailComments = ({ jobId, notesCount, showAlert }) => {
         }
       }}
       hasMore={notes.length < pageNoteCount}
-      loader={notes.length < pageNoteCount ? <LoadingSpinner /> : null}
+      loader={notes.length > 0 && <LoadingSpinner />}
     >
       <JobDetailComment
         notes={notes}

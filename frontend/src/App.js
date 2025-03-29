@@ -1,4 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import styles from "./App.module.css";
@@ -16,6 +20,9 @@ import ProfileUsername from "./pages/profilePage/ProfileUsername.js";
 import ProfilePassword from "./pages/profilePage/ProfilePassword.js";
 import LoadingSpinner from "./components/LoadingSpinner.js";
 import NotFoundPage from "./pages/notFoundPage/NotFoundPage.js";
+import useAutoLogout from "./hooks/useAutoLogout.js";
+import useCheckTokenExpiry from "./hooks/useCheckTokenExpiry.js";
+
 
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
@@ -24,11 +31,35 @@ function App() {
   // usestate hook to find current user
   const [currentUser, setCurrentUser] = useState(null);
 
+  // navigate hook
+  const navigate = useNavigate();
+
   // set loading state for app
   const [loading, setLoading] = useState(true);
 
   // to show alert message
   const { alert, showAlert, hideAlert } = useAlert();
+
+
+  // handle auto logout function
+  const logout = () => {
+
+    try {
+      axios.post("http://127.0.0.1:8000/api/dj-rest-auth/logout/", {});
+      // Clear token from localStorage
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("tokenExpiry");
+      navigate("/signin");
+      showAlert("success", "You have been signed out!");
+      setCurrentUser(null);
+    } catch (err) {
+      // console.log("Error signing out:", err);
+    }
+  };
+
+  // Use the custom hooks for auto logout
+  useAutoLogout(logout);
+  useCheckTokenExpiry(logout);
 
   // handle mount function to get user data
   const handleMount = async () => {
@@ -55,7 +86,7 @@ function App() {
   return (
     <CurrentUserContext value={currentUser}>
       <SetCurrentUserContext value={setCurrentUser}>
-        <Router>
+        {/* <Router> */}
           <div className={styles.App}>
             {/* Display Navbar */}
             <NavBar showAlert={showAlert} />
@@ -64,7 +95,6 @@ function App() {
               <AlertMessage
                 variant={alert.variant}
                 message={alert.message}
-                showAlert={showAlert}
                 onClose={hideAlert}
               />
             )}
@@ -105,7 +135,7 @@ function App() {
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>
-        </Router>
+        {/* </Router> */}
       </SetCurrentUserContext>
     </CurrentUserContext>
   );

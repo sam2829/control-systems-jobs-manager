@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -8,18 +7,14 @@ import styles from "../styles/NavBar.module.css";
 import NavBarNavLink from "./NavBarNavLink";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { CurrentUserContext } from "../App";
-import { SetCurrentUserContext } from "../App";
-import axios from "../api/axiosDefaults";
 import CustomModal from "./CustomModal";
 import useModal from "../hooks/useModal";
+import useLogoutUser from "../hooks/useLogoutUser";
 
 // component for rendering Navbar
 const NavBar = ({ showAlert }) => {
   // call to find who is current user
   const currentUser = useContext(CurrentUserContext);
-
-  // call current user context hook
-  const setCurrentUser = useContext(SetCurrentUserContext);
 
   // This is so we can toggle the hamburger menu
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
@@ -27,22 +22,12 @@ const NavBar = ({ showAlert }) => {
   // use modal custom hook
   const { isModalOpen, openModal, closeModal } = useModal();
 
-  // Hook to navigate user
-  const navigate = useNavigate();
+  // custom hook to sign out
+  const { logoutUserManual } = useLogoutUser();
 
   //  Handle sign out function
   const handleSignOut = async () => {
-    try {
-      await axios.post("http://127.0.0.1:8000/api/dj-rest-auth/logout/", {});
-      // Clear token from localStorage
-      localStorage.removeItem("authToken");
-      closeModal();
-      navigate("/");
-      showAlert("success", "You have successfully signed out!");
-      setCurrentUser(null);
-    } catch (err) {
-      // console.log("Error signing out:", err);
-    }
+    logoutUserManual(showAlert);
   };
 
   return (

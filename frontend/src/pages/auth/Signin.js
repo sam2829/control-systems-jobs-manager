@@ -66,6 +66,10 @@ const Signin = ({ showAlert }) => {
       const token = data.key;
       localStorage.setItem("authToken", token);
 
+      // store expiry time
+      const expiryTime = Date.now() + 10 * 60 * 60 * 1000; // 10 hours
+      localStorage.setItem("tokenExpiry", expiryTime);
+
       // Ensure the headers are set before making the user request
       setAuthToken();
 

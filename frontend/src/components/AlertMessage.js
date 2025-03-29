@@ -3,28 +3,30 @@ import Alert from "react-bootstrap/Alert";
 import styles from "../styles/AlertMessage.module.css";
 
 // Functional component for displaying alert messages
-const AlertMessage = ({ variant, message, showAlert }) => {
+const AlertMessage = ({ variant, message, onClose }) => {
   const [show, setShow] = useState(true);
 
   const handleClose = () => {
     setShow(false);
+    if (onClose) onClose();
   };
 
   // this will run only when showAlert has been called
   // and if true shows alert then closes after
   // three seconds
   useEffect(() => {
-    if (showAlert) {
+    if (message) {
       setShow(true);
       const timer = setTimeout(() => {
         setShow(false);
+        if (onClose) onClose();
       }, 5000);
 
       return () => {
         clearTimeout(timer);
       };
     }
-  }, [showAlert]);
+  }, [message, onClose]);
 
   return (
     <>

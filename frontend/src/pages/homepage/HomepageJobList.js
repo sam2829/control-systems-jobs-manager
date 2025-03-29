@@ -29,7 +29,7 @@ const HomepageJobList = ({
             <p className={styles.Text}>Syspal&nbsp;No:</p>
             <p className={styles.Data}>{syspal_number}</p>
           </Col>
-          <Col xs={12} lg={2}>
+          <Col xs={12} lg={4}>
             <p className={styles.Text}>Description:</p>
             <p className={styles.Data}>{description}</p>
           </Col>
@@ -38,13 +38,10 @@ const HomepageJobList = ({
             <p className={styles.Data}>{quantity}</p>
           </Col>
           <Col xs={6} lg={2}>
-            <p className={styles.Text}>Order&nbsp;No:</p>
-            <p className={styles.Data}>{order_number}</p>
-          </Col>
-          <Col xs={12} lg={2}>
             <p className={styles.Text}>Completed:</p>
             <p>
-              {workshop_status === "Complete" && syspal_status === "Complete" ? (
+              {workshop_status === "Complete" &&
+              syspal_status === "Complete" ? (
                 <i className={`${styles.Complete} fa-solid fa-check`}></i>
               ) : (
                 <i className={`${styles.InComplete} fa-solid fa-xmark`}></i>

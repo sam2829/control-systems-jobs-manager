@@ -85,6 +85,7 @@ const Signin = ({ showAlert }) => {
       navigate("/");
     } catch (err) {
       // console.log("error trying to sign in", err.response.data);
+      console.error("Login error:", err.response?.status, err.response?.data);
       setErrors(err.response?.data || {});
       showAlert("warning", "Error trying to login!");
     } finally {

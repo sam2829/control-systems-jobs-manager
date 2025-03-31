@@ -17,7 +17,10 @@ const useLogoutUser = () => {
 
   const logoutUserManual = async (showAlert) => {
     try {
-      await axios.post("http://127.0.0.1:8000/api/dj-rest-auth/logout/", {});
+      await axios.post(
+        "https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/dj-rest-auth/logout/",
+        {}
+      );
       // Clear token from localStorage
       localStorage.removeItem("authToken");
       localStorage.removeItem("tokenExpiry");

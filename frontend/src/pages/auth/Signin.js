@@ -58,7 +58,7 @@ const Signin = ({ showAlert }) => {
 
     try {
       const { data } = await axios.post(
-        "http://127.0.0.1:8000/api/dj-rest-auth/login/",
+        "https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/dj-rest-auth/login/",
         signInData
       );
 
@@ -78,7 +78,7 @@ const Signin = ({ showAlert }) => {
 
       // get user data
       const userResponse = await axios.get(
-        "http://127.0.0.1:8000/api/dj-rest-auth/user/"
+        "https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/dj-rest-auth/user/"
       );
       setCurrentUser(userResponse.data);
       showAlert("success", `You have successfully signed in as ${username}!`);

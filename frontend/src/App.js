@@ -1,8 +1,4 @@
-import {
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import styles from "./App.module.css";
@@ -23,7 +19,6 @@ import NotFoundPage from "./pages/notFoundPage/NotFoundPage.js";
 import useAutoLogout from "./hooks/useAutoLogout.js";
 import useCheckTokenExpiry from "./hooks/useCheckTokenExpiry.js";
 
-
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
 
@@ -40,12 +35,13 @@ function App() {
   // to show alert message
   const { alert, showAlert, hideAlert } = useAlert();
 
-
   // handle auto logout function
   const logout = () => {
-
     try {
-      axios.post("http://127.0.0.1:8000/api/dj-rest-auth/logout/", {});
+      axios.post(
+        "https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/dj-rest-auth/logout/",
+        {}
+      );
       // Clear token from localStorage
       localStorage.removeItem("authToken");
       localStorage.removeItem("tokenExpiry");
@@ -65,7 +61,7 @@ function App() {
   const handleMount = async () => {
     try {
       const userResponse = await axios.get(
-        "http://127.0.0.1:8000/api/dj-rest-auth/user/"
+        "https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/dj-rest-auth/user/"
       );
       setCurrentUser(userResponse.data);
     } catch (err) {
@@ -87,54 +83,48 @@ function App() {
     <CurrentUserContext value={currentUser}>
       <SetCurrentUserContext value={setCurrentUser}>
         {/* <Router> */}
-          <div className={styles.App}>
-            {/* Display Navbar */}
-            <NavBar showAlert={showAlert} />
-            {/** Display the show alert message */}
-            {alert && (
-              <AlertMessage
-                variant={alert.variant}
-                message={alert.message}
-                onClose={hideAlert}
-              />
-            )}
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route
-                path="/signin"
-                element={<Signin showAlert={showAlert} />}
-              />
-              <Route
-                path="/signup"
-                element={<SignUp showAlert={showAlert} />}
-              />
-              <Route
-                path="/add-job"
-                element={<AddJobPage showAlert={showAlert} />}
-              />
-              <Route
-                path="/job/:id"
-                element={<JobDetailPage showAlert={showAlert} />}
-              />
-              <Route
-                path="/profiles"
-                element={<ProfilesPage showAlert={showAlert} />}
-              />
-              <Route
-                path="/profile/:id"
-                element={<ProfilePage showAlert={showAlert} />}
-              />
-              <Route
-                path="/profile/:id/edit/username"
-                element={<ProfileUsername showAlert={showAlert} />}
-              />
-              <Route
-                path="/profile/:id/edit/password"
-                element={<ProfilePassword showAlert={showAlert} />}
-              />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </div>
+        <div className={styles.App}>
+          {/* Display Navbar */}
+          <NavBar showAlert={showAlert} />
+          {/** Display the show alert message */}
+          {alert && (
+            <AlertMessage
+              variant={alert.variant}
+              message={alert.message}
+              onClose={hideAlert}
+            />
+          )}
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/signin" element={<Signin showAlert={showAlert} />} />
+            <Route path="/signup" element={<SignUp showAlert={showAlert} />} />
+            <Route
+              path="/add-job"
+              element={<AddJobPage showAlert={showAlert} />}
+            />
+            <Route
+              path="/job/:id"
+              element={<JobDetailPage showAlert={showAlert} />}
+            />
+            <Route
+              path="/profiles"
+              element={<ProfilesPage showAlert={showAlert} />}
+            />
+            <Route
+              path="/profile/:id"
+              element={<ProfilePage showAlert={showAlert} />}
+            />
+            <Route
+              path="/profile/:id/edit/username"
+              element={<ProfileUsername showAlert={showAlert} />}
+            />
+            <Route
+              path="/profile/:id/edit/password"
+              element={<ProfilePassword showAlert={showAlert} />}
+            />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
         {/* </Router> */}
       </SetCurrentUserContext>
     </CurrentUserContext>

@@ -30,10 +30,10 @@ const useProfiles = (profileId = null) => {
 
     try {
       const endpoint = id
-        ? `http://127.0.0.1:8000/api/profiles/${id}`
+        ? `https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/profiles/${id}`
         : append && nextPage
         ? nextPage
-        : `http://127.0.0.1:8000/api/profiles/`;
+        : `https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/profiles/`;
 
       const response = await axios.get(endpoint);
 
@@ -62,7 +62,7 @@ const useProfiles = (profileId = null) => {
 
     try {
       const response = await axios.patch(
-        `http://127.0.0.1:8000/api/profiles/${id}`,
+        `https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/profiles/${id}`,
         formData
       );
       setProfiles((prevProfile) =>
@@ -87,7 +87,9 @@ const useProfiles = (profileId = null) => {
     setLoading(true);
 
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/profiles/${id}`);
+      await axios.delete(
+        `https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/profiles/${id}`
+      );
       // update state and remove deleted profile
       setProfiles((prevProfiles) =>
         prevProfiles.filter((profile) => profile.id !== id)

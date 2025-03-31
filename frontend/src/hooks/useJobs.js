@@ -29,9 +29,9 @@ const useJobs = (jobId = null) => {
 
     try {
       const endpoint = id
-        ? `http://127.0.0.1:8000/api/jobs/${id}/`
+        ? `https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/jobs/${id}/`
         : !append
-        ? `http://127.0.0.1:8000/api/jobs/?search=${searchQuery}`
+        ? `https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/jobs/?search=${searchQuery}`
         : nextPage;
       const response = await axios.get(endpoint);
       setJobs((prevJobs) =>
@@ -56,7 +56,7 @@ const useJobs = (jobId = null) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/jobs/",
+        "https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/jobs/",
         formData
       );
       setJobs((prevJobs) => [...prevJobs, response.data]);
@@ -76,7 +76,7 @@ const useJobs = (jobId = null) => {
     setLoading(true);
     try {
       const response = await axios.patch(
-        `http://127.0.0.1:8000/api/jobs/${id}/`,
+        `https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/jobs/${id}/`,
         formData
       );
       setJobs((prevJobs) =>
@@ -96,7 +96,9 @@ const useJobs = (jobId = null) => {
   const deleteJob = async (id, showAlert, navigate) => {
     setLoading(true);
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/jobs/${id}/`);
+      await axios.delete(
+        `https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/jobs/${id}/`
+      );
       // Update state to remove the deleted job
       setJobs((prevJobs) => prevJobs.filter((job) => job.id !== id));
       showAlert("success", `You have successfully deleted job!`);

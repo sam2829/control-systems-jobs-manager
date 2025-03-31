@@ -48,7 +48,7 @@ const SignUp = ({ showAlert }) => {
 
     try {
       await axios.post(
-        "http://127.0.0.1:8000/api/dj-rest-auth/registration/",
+        "https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/dj-rest-auth/registration/",
         signUpData
       );
       showAlert("success", "Successfully created an account!");

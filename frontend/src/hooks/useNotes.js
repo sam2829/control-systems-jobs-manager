@@ -34,7 +34,7 @@ const useNotes = () => {
       const endpoint =
         append && nextPage
           ? nextPage
-          : `http://127.0.0.1:8000/api/notes/?job=${jobId}`;
+          : `https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/notes/?job=${jobId}`;
 
       const response = await axios.get(endpoint);
       setNotes((prevNotes) =>
@@ -66,7 +66,7 @@ const useNotes = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/notes/",
+        "https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/notes/",
         formData
       );
       setNotes((prevNotes) => [...prevNotes, response.data]);
@@ -88,7 +88,7 @@ const useNotes = () => {
 
     try {
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/notes/${noteId}/`,
+        `https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/notes/${noteId}/`,
         formData
       );
       setNotes((prevNotes) =>
@@ -113,7 +113,9 @@ const useNotes = () => {
     setLoading(true);
 
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/notes/${noteId}/`);
+      await axios.delete(
+        `https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/notes/${noteId}/`
+      );
       setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
       setLocalNotesCount((prevCount) => prevCount - 1);
       showAlert("success", `You have successfully deleted your note!`);

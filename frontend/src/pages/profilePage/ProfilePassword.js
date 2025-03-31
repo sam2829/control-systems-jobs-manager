@@ -54,7 +54,7 @@ const ProfilePassword = ({ showAlert }) => {
 
     try {
       await axios.post(
-        "http://127.0.0.1:8000/api/dj-rest-auth/password/change/",
+        "https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/dj-rest-auth/password/change/",
         passwordData
       );
       showAlert("success", "You have successfully changed your password!");

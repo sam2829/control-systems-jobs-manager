@@ -40,9 +40,12 @@ const ProfileUsername = ({ showAlert }) => {
     setLoading(true);
 
     try {
-      await axios.put("http://127.0.0.1:8000/api/dj-rest-auth/user/", {
-        username: newUsername,
-      });
+      await axios.put(
+        "https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/api/dj-rest-auth/user/",
+        {
+          username: newUsername,
+        }
+      );
       showAlert("success", "You have successfully changed your username!");
       navigate(-1);
     } catch (err) {

@@ -20,6 +20,37 @@ screenshot for repsonsive ness goes here lkjsndbflsbnfilasfif
         - [Libraries Used](#libraries-used)
       - [Testing Backend](#testing-backend)
       - [Deployment](#deployment)
+  - [Frontend](#frontend)
+    - [User Experience](#user-experience)
+      - [The Strategy Plan](#the-strategy-plan)
+        - [Ideal User](#ideal-user)
+        - [Site Goals](#site-goals)
+      - [Agile Planning](#agile-planning)
+        - [User Stories](#user-stories)
+      - [Skeleton Plane](#skeleton-plane)
+        - [Wireframes](#wireframes)
+        - [Database Schema](#database-schema)
+        - [Security](#security)
+      - [The Scope Plane](#the-scope-plane)
+      - [The Structure Plane](#the-structure-plane)
+        - [Features](#features)
+      - [The Surface Plane](#the-surface-plane)
+        - [Design](#design)
+    - [Use of Components](#use-of-components)
+    - [Custom Hooks](#custom-hooks)
+    - [Technologies Used](#technologies-used)
+      - [Languages Used](#languages-used)
+    - [Frameworks, Libraries and Dependencies](#frameworks-libraries-and-dependencies)
+      - [React](#react)
+      - [React-Router-DOM](#react-router-dom)
+      - [ReactDOM](#reactdom)
+      - [Axios](#axios)
+      - [React Bootstrap](#react-bootstrap)
+      - [Font Awesome](#fontawesome)
+      - [Google Fonts](#google-fonts)
+      - [Prettier](#prettier)
+    - [Testing Frontend](#testing-frontend)
+  - [Credits](#credits)
 
 ## Backend
 
@@ -181,4 +212,40 @@ For deployment to Heroku the following steps were made:
 
 [back to top](#control-systems-jobs-manager)
 
+### User Experience
 
+ #### The Stratgey Plane
+
+ Control Systems Jobs Manager is intended for the engineers who work at Control Systems Automation Limited. Here engineers and managers can track the current status of each individual job and any information they may need regarding the specific job.
+
+ #### The Ideal User
+
+ - Manager / Engineer who works at Control Systems Automation Limited.
+
+##### Site Goals
+
+- To provide user with current status for each indivial job in it's development.
+
+- Let user know if specific job has been delivered or completed.
+
+- Let user know any important information regarding the specific job.
+
+[back to top](#control-systems-jobs-manager)
+
+### Agile Planning
+
+This project was developed using agile methodologies by delivering small features across the duration of the project. This broke down the build of the project into a lot more manageable parts and was able to select which user stories were more important for the site.
+
+It was carried out this way to try ensuring that all core requirements were completed first to give the project a complete feel and to make sure the most important user stories were implemented. When clicked on and opened the user story, the user story was assigned a label "must have", "should have" or "could have" so I would know the importance of the user story.
+
+The kanban board was created using GitHub projects, this helped me be able to see all my user stories and be able to keep track of which ones had been done, to do or in progress.
+
+![User Stories Screenshot](/docs/readme_screenshots/user-stories.png)
+
+Each User story was placed into it's own milestone iteration to help schedule the development of the project. These iterations can be set with dates but I did not do this due to fitting in around work and other commitments. In the iteration you can close a user story when finished, this will also keep track of how much is completed.
+
+Milestones:
+
+![Milestones Screenshot](/docs/readme_screenshots/milestones.png)
+
+[back to top](#control-systems-jobs-manager)

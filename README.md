@@ -212,6 +212,8 @@ For deployment to Heroku the following steps were made:
 
 [back to top](#control-systems-jobs-manager)
 
+## Frontend
+
 ### User Experience
 
  #### The Stratgey Plane
@@ -249,3 +251,262 @@ Milestones:
 ![Milestones Screenshot](/docs/readme_screenshots/milestones.png)
 
 [back to top](#control-systems-jobs-manager)
+
+##### User Stories
+
+***Themes***
+
+Themes were developed using the project goals as a starting point. These included:
+
+  - User management - This was necessary so that user could have all the necessary functions across the site.
+
+  - Admin management - This was necessary so that the admin to have full function of admin data.
+
+
+***Epics***
+
+Themes were then refined into the following epics:
+
+- User management:
+  
+  - Easily navigate across site.
+
+  - Able to find any job by job numbers.
+
+  - Able to change job status depending on the work location.
+
+  - Able to change their password and username.
+
+  - Able to leave notes on jobs.
+
+- Admin management:
+
+  - Sign in to admin page.
+
+  - Sign up new users
+
+  - Change users work locations.
+
+  - Add new jobs to site.
+
+  - Edit and delete any jobs.
+
+***User Stories***
+
+The following user stories were completed throughout the development:
+
+User Sign In:
+
+- As a user I can sign in to my account so that I can access all the jobs.
+
+User Sign Up:
+
+- As a Admin I can sign up new users so that I can create new accounts for any new employees.
+
+NavBar Navigation:
+
+- As a user I can clearly view the navbar from every page so that I can easily naviaget between pages.
+
+Routing:
+
+- As a user I can navigate through pages quickly so that I can view content seamlessly without page refresh.
+
+Conditional Rendering:
+
+- As a logged out user I can see the sign in option so that I can sign in and then access job information.
+
+Add New Jobs:
+
+- As a admin I can create new jobs to the site so that engineers and users and see any new jobs we have to do.
+
+Search For Jobs In Search Bar:
+
+- As a user I can search for any job, by the CSA or syspal job number so that users can find any job that we have on order and fast.
+
+Job is Complete:
+
+- As a user I can see on the job, whether it has been completed so that engineers know the job has been completed.
+
+View full Job Details:
+
+- As a user I can click on any job and then view the full job details so that I can see all the information that is required and the status of jobs.
+
+Leave Notes:
+
+- As a user I can leave notes on any job so that all other engineers can see any important information they need to know.
+
+Changing Workshop Status:
+
+- As a user based in the workshop I can update the workshop status so that I can confirm what stage of the build process the job is in, in the workshop.
+
+Changing Syspal Status:
+
+- As a user in syspal I can update the syspal status so that other engineers can see what stage of the build proces the job is in, in syspal.
+
+Change Work Location:
+
+- As a admin I can change the work location or the users so that users can only update the job status in a certain location, if their work location is set top that place.
+
+Change Password:
+
+- As a user I can change my password so that I can keep my account safe.
+
+Change Username
+
+- As a user I can change my username so that users can see what notes I've left by the name I choose.
+
+Infinite Scroll:
+
+- As a user I can scroll through the jobs and notes, with them only fetching so many at a time so that it doesn't fetch all jobs at once and keeping site running smoother and faster.
+
+[back to top](#control-systems-jobs-manager)
+
+#### The Skeleton Plane
+
+##### Wireframes
+
+Wireframes were used to create a prototype of the project which may change during its development.
+
+***Homepage***
+
+Desktop:
+
+![Homepage Desktop Screenshot](/docs/readme_screenshots/desktop-homepage-wireframe.png)
+
+Mobile:
+
+![Homepage Mobile Screenshot](/docs/readme_screenshots/mobile-homepage-wireframe.png)
+
+***Sign In Page***
+
+Desktop:
+
+![Sign In Desktop Screenshot](/docs/readme_screenshots/desktop-signin-wireframe.png)
+
+Mobile:
+
+![Sign In Mobile Screenshot](/docs/readme_screenshots/mobile-signin-wireframe.png)
+
+***Add User Page***
+
+Desktop:
+
+![Add User Desktop Screenshot](/docs/readme_screenshots/desktop-add-user-wireframe.png)
+
+Mobile:
+
+![Add User Mobile Screenshot](/docs/readme_screenshots/mobile-add-user-wireframe.png)
+
+***Jobs Page***
+
+Desktop:
+
+![Jobs List Admin Desktop Screenshot](/docs/readme_screenshots/desktop-job-list-admin-wireframe.png)
+
+![Jobs List Desktop Screenshot](/docs/readme_screenshots/desktop-job-list-engineer-wireframe.png)
+
+Mobile:
+
+![Jobs List Mobile Screenshot](/docs/readme_screenshots/mobile-job-list-wireframe.png)
+
+***Job Detail Page***
+
+Desktop:
+
+![Job Detail Desktop Screenshot](/docs/readme_screenshots/desktop-job-detail-wireframe.png)
+
+Mobile:
+
+![Job Detail Mobile Screenshot](/docs/readme_screenshots/mobile-job-detail-wireframe.png)
+
+***Add Job Page***
+
+Desktop:
+
+![Add Job Desktop Screenshot](/docs/readme_screenshots/desktop-add-job-wireframe.png)
+
+Mobile:
+
+![Add Job Mobile Screenshot](/docs/readme_screenshots/mobile-add-job-wireframe.png)
+
+***Admin Profiles Page***
+
+Desktop:
+
+![Admin Profiles Desktop Screenshot](/docs/readme_screenshots/desktop-profile-admin-wireframe.png)
+
+Mobile:
+
+![Admin Profiles Mobile Screenshot](/docs/readme_screenshots/mobile-profile-admin-wireframe.png)
+
+***User Profile Page***
+
+Desktop:
+
+![Profile Desktop Screenshot](/docs/readme_screenshots/desktop-profile-wireframe.png)
+
+Mobile:
+
+![Profile Mobile Screenshot](/docs/readme_screenshots/mobile-profile-wireframe.png)
+
+***Change Password Page***
+
+Desktop:
+
+![Change Password Desktop Screenshot](/docs/readme_screenshots/desktop-change-password-wireframe.png)
+
+Mobile:
+
+![Change Password Mobile Screenshot](/docs/readme_screenshots/mobile-change-password-wireframe.png)
+
+***Change Username Page***
+
+Desktop:
+
+![Change Username Desktop Screenshot](/docs/readme_screenshots/desktop-change-username-wireframe.png)
+
+Mobile:
+
+![Change Username Mobile Screenshot](/docs/readme_screenshots/mobile-change-username-wireframe.png)
+
+***Change Work Location Page***
+
+![Change Work Location Desktop Screenshot](/docs/readme_screenshots/desktop-edit-work-location-wireframe.png)
+
+Mobile:
+
+![Change Work Location Mobile Screenshot](/docs/readme_screenshots/mobile-edit-work-location-wireframe.png)
+
+***Sign Out Page***
+
+![Sign Out Desktop Screenshot](/docs/readme_screenshots/desktop-sign-out-wireframe.png)
+
+Mobile:
+
+![Sign Out Mobile Screenshot](/docs/readme_screenshots/mobile-sign-out-wireframe.png)
+
+
+##### Database Schema
+
+This is well explained in the backend repository readme [here](#backend)
+
+##### Security
+
+For security I've made sure that I users get an authorization token from the backend when they sign in. Here I always make sure that a user is logged in, and that a the current user can only change passwords and usernames for their own user profile.
+
+#### The Scope Plane
+
+- Responsive Design - The site should be fully functional on all devices from 320px wide and up.
+
+- Hamburger menu for navbar on mobile devices.
+
+- Homepage welcoming user to the site and links them to the signin in page, where once signed in can navigate through the site.
+
+[back to top](#control-systems-jobs-manager)
+
+#### The Structure Plane
+
+##### Features
+
+
+

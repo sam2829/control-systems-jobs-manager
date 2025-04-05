@@ -775,4 +775,175 @@ When a user submits a form successfully, the user will see an alert pop up infor
 
 [back to top](#control-systems-jobs-manager)
 
+#### The Surface Plane
 
+##### Design
+
+***Colour Scheme***
+
+I opted for a very few choices of colours throughout the site. The same colours have been implemented across the site and are included in the button's styles. The colours are the colours of Control Systems Automation Limited Logo
+
+This hopefully makes the site easy and clear to read / use.
+
+The colour palette was created using the coolors website.
+
+![Coolors Screenshot](/docs/readme_screenshots/coolors-screenshot.png)
+
+***Imagery***
+
+Font awesome was used to for the sites icons.
+
+Google fonts was used for the font style.
+
+[back to top](#control-systems-jobs-manager)
+
+### Use of Components
+
+A number of reusable React components were created with the intention of reducing code duplication.
+
+***AlertMessage.js***
+
+Used to show alert messages to inform user of different actions. This was passed as a prop so each alert when called can display it's own message. 
+
+***CustomButton.js***
+
+Used to create a custom button and then styled depending on what purpose the button is used for, which is passed as a prop.
+
+
+***CustomModal.js***
+
+Use to create a modal to pop when a user has decided and on action but is asked if they a sure.
+
+***ErrorMessage.js***
+
+Used to display error messages on pages if any.
+
+***LoadingSpinner***
+
+Used to display loading spinner for whenever site is loading. Spinner can be different sizes depending on purpose, which is passed as a prop.
+
+***MoreDropdown.js***
+
+Used so that the jobs, notes and profiles have an icon, where they can click and then have the options for delete or edit information. These are built so they can be modified slightly depending on where the component is used.
+
+***NavBar***
+
+Used to display navbar on all pages.
+
+***NavBarNavLink***
+
+Used to create numerous nav links for the navbar, which diferent information was passed as props.
+
+### Custom Hooks
+
+***useAutoLogout.js***
+
+This custom hook is used trigger user to be signed out automatically if token expired or reset token expire time if user being active.
+
+***useCheckTokenExpiry.js***
+
+This custom hook is used to check if the auth token for the logged in user hasn't expired on a rgular basis.
+
+***useClickOutsideToggle.js***
+
+This custom hook is used so that in mobile devices, if the navbar dropdown menu has been toggled open, the user can click anywhere outside the dropdown menu and this will still toggle the dropdown menu closed.
+
+***useJobs.js***
+
+This custom hook is used to deal with any backend requests related to the jobs. Fetch, Add, Delete and Edit jobs.
+
+***useLogoutUser.js***
+
+This custom hook is used to logout the user manually.
+
+***useModal.js***
+
+This custom hook is used to control the functionality of the custom modal.
+
+***useNotes.js***
+
+This custom hook is used to deal with any backend requests related to the notes. Fetch, Add, Delete and Edit notes.
+
+***useProfiles.js***
+
+This custom hook is used to deal with any backend requests related to the profiles. Fetch, Add, Delete and Edit profiles.
+
+***useRedirectUser.js***
+
+This custom hook is used to redirect the user from certain pages, depending on whether they are not logged in or if they are not a super user.
+
+[back to top](#control-systems-jobs-manager)
+
+### Languages Used
+
+- HTML5
+
+- JSX
+
+- CSS
+
+- JavaScript
+
+[back to top](#control-systems-jobs-manager)
+
+### Frameworks, Libraries and Dependencies
+
+#### React
+
+React is the frontend framework used to create the frontend of this project.
+
+#### React-Router-Dom
+
+React-Router-Dom is used to enable client side routing for React web applications and is used to implement basic routing across this project.
+
+#### ReactDOM
+
+ReactDOM is used for rendering components to the DOM. It bridges the gap between Reacts Virtual DOM and the actual DOM in the browser.
+
+#### Axios
+
+Axios was used to simplify requests made to the REST API.
+
+#### React Bootstrap
+
+React Bootstrap was used to help with the styling and layout of the entire project.
+
+#### Font Awesome
+
+Font awesome was used for the icons used across the site.
+
+#### Google fonts
+
+Google fonts was used to provide the font for the site.
+
+#### Prettier
+
+Prettier is used as code formatting tool which helped me structure my code in the correct way.
+
+#### Infinite Scroll
+
+Used so that all data isn't fetched at once, and instead which fetch more data, if any as the user scrolls through the pages.
+
+[back to top](#control-systems-jobs-manager)
+
+### Testing Frontend
+
+I have included details of my testing during and post development in a separate file called [TESTING_FRONTEND.md](TESTING_FRONTEND.md)
+
+[back to top](#control-systems-jobs-manager)
+
+### Credits
+
+- Code Institute - Without the knowledge gained through out doing the course I would not have been able to build this project.
+
+- React Framework - React Framework - For being able to use React Framework to build my project and all the documentation to help build and set up correctly.
+
+- StackOverflow - For helping give me with ideas on how to overcome issues I encountered.
+
+- Google Fonts - For supplying the fonts used.
+
+- Font Awesome - For Providing the icons used throughout this project.
+
+- Djando Rest Framework - For providing me the platform to create my custom API for the backend.
+
+[back to top](#control-systems-jobs-manager)

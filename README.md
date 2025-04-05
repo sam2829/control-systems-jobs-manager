@@ -508,5 +508,269 @@ For security I've made sure that I users get an authorization token from the bac
 
 ##### Features
 
+As a User I would like to view the site on all my different devices so I can view site wherever I am.
+
+***Navbar***
+
+As a user I want to see a clear way of navigating around the site so that I can easily find the relative information I am looking for.
+
+The Navbar contains links to jobs, profile and sign out for regular users, and add job, add user, jobs, profile and sign out for admin users. These links are only available to users once logged in successfully.
+
+The navigation menu is displayed on all pages and forms into a hamburger menu on smaller devices. This allows users to view the site from any device and not take up too much space on mobile devices. It's very clear and easy to use.
+
+There is also a hover over effect to inform the user when they are hovering over the specific link and the Navlink for the page the user is currently on will also be of a different colour to inform the user which page they are on.
+
+Desktop Regular User:
+
+![Desktop Navbar Regular User Screenshot](/docs/readme_screenshots/desktop-navbar-user.png)
+
+Desktop Admin User:
+
+![Desktop Navbar Admin User Screenshot](/docs/readme_screenshots/desktop-navbar-admin.png)
+
+Mobile Regular User:
+
+![Mobile Navbar Regular User Screenshot](/docs/readme_screenshots/mobile-navbar-user.png)
+
+Mobile Admin User:
+
+![Mobile Navbar Regular User Screenshot](/docs/readme_screenshots/mobile-navbar-admin.png)
+
+Desktop Logged Out:
+
+![Desktop Navbar Logged Out Screenshot](/docs/readme_screenshots/desktop-navbar-logged-out.png)
+
+Mobile Logged Out:
+
+![Mobile Navbar Logged Out Screenshot](/docs/readme_screenshots/mobile-navbar-logged-out.png)
+
+***Sign In Page***
+
+Sign in page displays the sign in form, so that users can sign in and view all jobs.
+
+Desktop:
+
+![Desktop Sign In Page Screenshot](/docs/readme_screenshots/desktop-signin-page.png)
+
+Mobile:
+
+![Mobile Sign In Page Screenshot](/docs/readme_screenshots/mobile-signin-page.png)
+
+***Jobs List Page***
+
+Job list page is where, once a user is logged in they can see and search for any job that control systems has on order.
+
+Desktop:
+
+![Desktop Job List Page Screenshot 1](/docs/readme_screenshots/desktop-job-list-page-1.png)
+
+![Desktop Job List Page Screenshot 2](/docs/readme_screenshots/desktop-job-list-page-2.png)
+
+Mobile:
+
+![Mobile Job List Page Screenshot 1](/docs/readme_screenshots/mobile-job-list-page-1.png)
+
+![Mobile Job List Page Screenshot 2](/docs/readme_screenshots/mobile-job-list-page-2.png)
+
+***Add User Page***
+
+Add user page is only accessible for the admin user, here the admin user can create a new user.
+
+Desktop:
+
+![Desktop Signup Page Screenshot](/docs/readme_screenshots/desktop-signup-page.png)
+
+Mobile:
+
+![Mobile Signup Page Screenshot](/docs/readme_screenshots/mobile-signup-page.png)
+
+***Add Job Page***
+
+Add job page is only accessible for the admin user, here the admin user can create new jobs.
+
+Desktop:
+
+![Desktop Add Job Page Screenshot](/docs/readme_screenshots/desktop-add-job-page.png)
+
+Mobile:
+
+Desktop:
+
+![Mobile Add Job Page Screenshot 1](/docs/readme_screenshots/mobile-add-job-page-1.png)
+
+![Mobile Add Job Page Screenshot 2](/docs/readme_screenshots/mobile-add-job-page-2.png)
+
+***Job Detail Page***
+
+The job detail page is where the users and can see all the information they need to regarding the specific job. Here they can also see any important notes that have been added to the job and create their own.
+
+Desktop:
+
+![Desktop Job Detail Page Screenshot 1](/docs/readme_screenshots/desktop-job-detail-page-1.png)
+
+![Desktop Job Detail Page Screenshot 2](/docs/readme_screenshots/desktop-job-detail-page-2.png)
+
+![Desktop Job Detail Page Screenshot 3](/docs/readme_screenshots/desktop-job-detail-page-3.png)
+
+Mobile:
+
+![Mobile Job Detail Page Screenshot 1](/docs/readme_screenshots/mobile-job-detail-page-1.png)
+
+![Mobile Job Detail Page Screenshot 2](/docs/readme_screenshots/mobile-job-detail-page-2.png)
+
+![Mobile Job Detail Page Screenshot 3](/docs/readme_screenshots/mobile-job-detail-page-3.png)
+
+***Profiles Page***
+
+Profiles page is only accessible by the admin user. Here the admin user can see the list of all profiles, and can choose to view any of these profiles.
+
+Desktop:
+
+![Desktop Profiles Page Screenshot](/docs/readme_screenshots/desktop-profiles-page.png)
+
+Mobile:
+
+![Mobile Profiles Page Screenshot](/docs/readme_screenshots/mobile-profiles-page.png)
+
+***Profile Page***
+
+Profile Page is where the user can view their own profile. Here they can see where their work location is set and also have the ability to change their password and username.
+
+Admin user can view any profile and modify the work location of any of the users.
+
+Desktop Regular User:
+
+![Desktop Profile Page Admin Screenshot](/docs/readme_screenshots/desktop-profile-page-admin.png)
+
+Desktop Admin User:
+
+![Desktop Profile Page Regular User Screenshot](/docs/readme_screenshots/desktop-profile-page-user.png)
+
+Mobile Regular User:
+
+![Mobile Profile Page Admin Screenshot](/docs/readme_screenshots/mobile-profile-page-admin.png)
+
+Mobile Admin User:
+
+![Mobile Profile Page Regular User Screenshot](/docs/readme_screenshots/mobile-profile-page-user.png)
+
+***Change Username***
+
+Change username page is where the users can change their usernames.
+
+Desktop:
+
+![Desktop Change Username Page Screenshot](/docs/readme_screenshots/desktop-change-username-page.png)
+
+Mobile:
+
+![Mobile Change Username Page Screenshot](/docs/readme_screenshots/mobile-change-username-page.png)
+
+***Change Password***
+
+Change password page is where the users can change their usernames.
+
+Desktop:
+
+![Desktop Change Password Page Screenshot](/docs/readme_screenshots/desktop-change-password-page.png)
+
+Mobile:
+
+![Mobile Change Password Page Screenshot](/docs/readme_screenshots/mobile-change-password-page.png)
+
+***Sign Out Modal***
+
+When a user attempts to sign out, the sign out modal pops up to check the user wants to sign out.
+
+Desktop:
+
+![Desktop Sign Out Modal Screenshot](/docs/readme_screenshots/desktop-sign-out-modal.png)
+
+Mobile:
+
+![Mobile Sign Out Modal Screenshot](/docs/readme_screenshots/mobile-sign-out-modal.png)
+
+***Delete Job Modal***
+
+When an admin user goes to delete a job, the modal pops up asking the admin user if they are sure they want to delete job.
+
+Desktop:
+
+![Desktop Delete Job Modal Screenshot](/docs/readme_screenshots/desktop-delete-job-modal.png)
+
+Mobile:
+
+![Mobile Delete Job Modal Screenshot](/docs/readme_screenshots/mobile-delete-job-modal.png)
+
+
+***Delete Note Modal***
+
+When a user goes to delete a note, the modal pops up asking the user if they are sure they want to delete the note.
+
+Desktop:
+
+![Desktop Delete Note Modal Screenshot](/docs/readme_screenshots/desktop-delete-note-modal.png)
+
+Mobile:
+
+![Mobile Delete Job Modal Screenshot](/docs/readme_screenshots/mobile-delete-note-modal.png)
+
+***Delete Profile Modal***
+
+When an admin user goes to delete a profile, the modal pops up asking the admin user if they are sure they want to delete the profile.
+
+Desktop:
+
+![Desktop Delete Profile Modal Screenshot](/docs/readme_screenshots/desktop-delete-profile-modal.png)
+
+Mobile:
+
+![Mobile Delete Job Modal Screenshot](/docs/readme_screenshots/mobile-delete-profile-modal.png)
+
+***Edit Note Form***
+
+When the logged in user is the owner of a note, they have the option to click on the edit icon, which will then make an edit note form appear where they can then edit their note.
+
+Desktop:
+
+![Desktop Edit Note Form Screenshot](/docs/readme_screenshots/desktop-edit-note-form.png)
+
+Mobile:
+
+![Mobile Edit Note Form Screenshot](/docs/readme_screenshots/mobile-edit-note-form.png)
+
+***Form Errors and Alerts***
+
+When a form is filled out incorrectly their will be an error message underneath the form field with the error and also an alert popping up to inform the user that an error has occurred.
+
+Signin Form:
+
+![Desktop Signin Form Errors Screenshot](/docs/readme_screenshots/desktop-signin-form-errors.png)
+
+Signup Form:
+
+![Desktop Signup Form Errors Screenshot](/docs/readme_screenshots/desktop-signup-form-errors.png)
+
+Add Job Form:
+
+![Desktop Add Job Form Errors Screenshot](/docs/readme_screenshots/desktop-add-job-form-errors.png)
+
+Add Note Form:
+
+![Desktop Add Note Form Errors Screenshot](/docs/readme_screenshots/desktop-add-note-form-errors.png)
+
+Change Username Form:
+
+![Desktop Change Username Form Errors Screenshot](/docs/readme_screenshots/desktop-change-username-form-errors.png)
+
+Change Password Form:
+
+![Desktop Change password Form Errors Screenshot](/docs/readme_screenshots/desktop-change-password-form-errors.png)
+
+***Successful Alerts***
+
+When a user submits a form successfully, the user will see an alert pop up informing them of their successful action with brief description.
+
+![Desktop Success Alert Screenshot](/docs/readme_screenshots/desktop-success-alert.png)
 
 

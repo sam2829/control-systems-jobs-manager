@@ -4,7 +4,9 @@
 
 Welcome to Control Systems Jobs Manager! As an enthusiastic junior developer, I created this site to streamline job management for an electrical engineering company, Control Systems Automation. This platform allows engineers to effortlessly track the status of each job at both locations, whether it’s in progress, completed, or not yet started. Since control panels are built in the workshop and later installed at separate factory location, this site eliminates the need for time consuming phone calls by providing real time updates on job statuses. Engineers can, view the current job status, check if a job has been delivered, access the jobs quote and leave notes to share important information with other engineers.
 
-screenshot for repsonsive ness goes here lkjsndbflsbnfilasfif
+Here is a live version of my project [Control Systems Jobs Manager](https://control-systems-jobs-8e7c07b4a83a.herokuapp.com/)
+
+![Am I Responsive Screenshot](/docs/readme_screenshots/am-i-responsive.png)
 
 ## Content
 

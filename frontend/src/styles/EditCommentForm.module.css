@@ -13,7 +13,7 @@
 }
 
 .FormLabel {
-  display: hidden;
+  display: none;
 }
 
 .FormInput {

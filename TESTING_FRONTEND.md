@@ -44,7 +44,7 @@ Full test table:
 | Can add new user. | When logged in as an admin user, the admin user can create another user by filling out the sign up form correctly. | Signed in as an admin user and filled out the sign up form correctly. | Successfully created new user. | Pass |
 | Input field errors displayed. | If there is an error with one of the form input fields on submission, an error will appear underneath that field to inform the user of the error. | Tried submitting the sign up form with an intentional error. | Form was not submitted and error message underneath the specific field was displayed. | Pass |
 | Alert message informing error. | If there is an error submitting the sign up form, an alert message will pop up informing the user that there was an error. | Tried submitting sign up form with an intentional error. | Alert message popped up informing user of an error. | Pass |
-| Alert message on creating user. | When the sign up form has successfully been submitted, an alert message should pop up, informing the user that they have successfully created a new user. | Submitted sign up form correctly. | Alert message popped up informing me I had successfully created new user. |
+| Alert message on creating user. | When the sign up form has successfully been submitted, an alert message should pop up, informing the user that they have successfully created a new user. | Submitted sign up form correctly. | Alert message popped up informing me I had successfully created new user. | Pass |
 | Redirected on successful submission. | When user has successfully submitted the sign up form, user should then be redirected back to the homepage. | Successfully submitted the sign up form. | I was redirected back to homepage. | Pass |
 | Redirected if not admin user. | If a regular logged in user tries to access the add user page through the url, they will be redirected back to the homepage. | Logged in as a regular user and typed in the url for the add user page. | I was redirected back to the homepage. | Pass |
 | Redirected if not logged in. | If a logged out user tries to access the add user page through the url, they will be redirected back to the sign in page. | Visited site as a logged out user and typed in the url for the add user page. | I was redirected back to the sign in page. | Pass |
@@ -53,7 +53,7 @@ Full test table:
 | User can sign in. | When a user has an account and goes to the sign in page. If they fill out the sign in form correctly, they can log into the site. | Filled out the sign in form correctly. | Successfully logged into site. | Pass |
 | Input field errors displayed. | If there is an error with one of the form input fields on submission, an error will appear underneath that field to inform the user of the error. | Tried submitting the sign in form with an intentional error. | Form was not submitted and error message underneath the specific field was displayed. | Pass |
 | Alert message informing error. | If there is an error submitting the sign in form, an alert message will pop up informing the user that there was an error. | Tried submitting sign in form with an intentional error. | Alert message popped up informing user of an error. | Pass |
-| Alert message on signing in. | When the sign in form has successfully been submitted, an alert message should pop up, informing the user that they have successfully signed in as that user. | Submitted sign up form correctly. | Alert message popped up informing me I had successfully created new user. |
+| Alert message on signing in. | When the sign in form has successfully been submitted, an alert message should pop up, informing the user that they have successfully signed in as that user. | Submitted sign up form correctly. | Alert message popped up informing me I had successfully created new user. | Pass |
 | Redirected on successful submission. | When user has successfully submitted the sign in form, user should then be redirected back to the homepage. | Successfully submitted the sign in form. | I was redirected back to homepage. | Pass |
 | Redirected if not logged out. | If a logged in user tries to access the sign in page through the url, they will be redirected back to the homepage. | Visited site as a logged in user and typed in the url for the sign in page. | I was redirected back to the homepage. | Pass |
 | Sign in form button turns to loading spinner when submitting. | When user has submitted the sign in form, the sign in button has now been disabled and is a loading spinner to inform the user the request is being loaded. | Submitted the sign in form. | Loading spinner had replaced the sign in button. | Pass |
@@ -61,7 +61,7 @@ Full test table:
 | Can add new job. | When logged in as an admin user, the admin user can create another job by filling out the add job form correctly. | Signed in as an admin user and filled out the add job form correctly. | Successfully created new job. | Pass |
 | Input field errors displayed. | If there is an error with one of the form input fields on submission, an error will appear underneath that field to inform the user of the error. | Tried submitting the add job form with an intentional error. | Form was not submitted and error message underneath the specific field was displayed. | Pass |
 | Alert message informing error. | If there is an error submitting the add job form, an alert message will pop up informing the user that there was an error. | Tried submitting add job form with an intentional error. | Alert message popped up informing user of an error. | Pass |
-| Alert message on creating job. | When the add job form has successfully been submitted, an alert message should pop up, informing the user that they have successfully created a new job. | Submitted add job form correctly. | Alert message popped up informing me I had successfully created new job. |
+| Alert message on creating job. | When the add job form has successfully been submitted, an alert message should pop up, informing the user that they have successfully created a new job. | Submitted add job form correctly. | Alert message popped up informing me I had successfully created new job. | Pass |
 | Redirected on successful submission. | When user has successfully submitted the add job form, user should then be redirected back to the homepage. | Successfully submitted the add job form. | I was redirected back to homepage. | Pass |
 | Redirected if not admin user. | If a regular logged in user tries to access the add job page through the url, they will be redirected back to the homepage. | Logged in as a regular user and typed in the url for the add job page. | I was redirected back to the homepage. | Pass |
 | Redirected if not logged in. | If a logged out user tries to access the add job page through the url, they will be redirected back to the sign in page. | Visited site as a logged out user and typed in the url for the add job page. | I was redirected back to the sign in page. | Pass |
@@ -84,7 +84,7 @@ Full test table:
 | Add note form button turns to loading spinner when submitting. | When user has submitted the add note form, the add note button has now been disabled and is a loading spinner to inform the user the request is being loaded. | Submitted the add note form. | Loading spinner had replaced the create note button. | Pass |
 | Infinite Scroll | When the job detail page is loaded, only the first ten most recent notes are fetched. Then as the user scrolls down throught the page, the site will automatically fetch the next page of notes automatically and will continue to do so as the user keeps scrolling. | Visited job detail page and scrolled down through the page. | At first, the first ten notes were displayed. As I scrolled down, the site kept fetching further data as I continued to scroll. | Pass |
 | `Profiles page` |
-| Can access admin page as admin. | If logged in as an admin user, the user can access the profiles page my clicking on the profile navbar link. | Logged in as an admin user and clicked on the profile navbar link. | Succuessfully accessed profiles page. |
+| Can access admin page as admin. | If logged in as an admin user, the user can access the profiles page my clicking on the profile navbar link. | Logged in as an admin user and clicked on the profile navbar link. | Succuessfully accessed profiles page. | Pass |
 | View all profiles. | When on the profiles page, the user can see all the users that have an account on this site. Each profile has a view profile button which allows the user to view there specific profile. | Visited the profiles page. | List of all the users profiles were displayed. I was able to click on each of the profiles and visit their specific profile pages. | Pass |
 | Infinite Scroll | When the profiles page is loaded, only the first ten most recent profiles are fetched. Then as the user scrolls down throught the page, the site will automatically fetch the next page of profiles automatically and will continue to do so as the user keeps scrolling. | Visited profiles page and scrolled down through the page. | At first, the first ten profiles were displayed. As I scrolled down, the site kept fetching further data as I continued to scroll. | Pass |
 | Redirected if not admin user. | If a regular logged in user tries to access the add profiles page through the url, they will be redirected back to the homepage. | Logged in as a regular user and typed in the url for the profiles page. | I was redirected back to the homepage. | Pass |
@@ -103,20 +103,168 @@ Full test table:
 | Can change username. | When logged in, the user can change their username by filling out the change username form correctly. | Signed in as user and filled out the change username form correctly. | Successfully changed username. | Pass |
 | Input field errors displayed. | If there is an error with one of the form input fields on submission, an error will appear underneath that field to inform the user of the error. | Tried submitting the change username form with an intentional error. | Form was not submitted and error message underneath the specific field was displayed. | Pass |
 | Alert message informing error. | If there is an error submitting the change username form, an alert message will pop up informing the user that there was an error. | Tried submitting change username form with an intentional error. | Alert message popped up informing user of an error. | Pass |
-| Alert message on changing username. | When the change username form has successfully been submitted, an alert message should pop up, informing the user that they have successfully changed their username. | Submitted change username form correctly. | Alert message popped up informing me I had successfully changed the username. |
+| Alert message on changing username. | When the change username form has successfully been submitted, an alert message should pop up, informing the user that they have successfully changed their username. | Submitted change username form correctly. | Alert message popped up informing me I had successfully changed the username. | Pass |
 | Redirected on successful submission. | When user has successfully submitted the change username form, user should then be redirected back to their profile page. | Successfully submitted the change username form. | I was redirected back to their profile page. | Pass |
 | `Change password page` |
 | Can change password. | When logged in, the user can change their password by filling out the change password form correctly. | Signed in as user and filled out the change password form correctly. | Successfully changed password. | Pass |
 | Input field errors displayed. | If there is an error with one of the form input fields on submission, an error will appear underneath that field to inform the user of the error. | Tried submitting the change password form with an intentional error. | Form was not submitted and error message underneath the specific field was displayed. | Pass |
 | Alert message informing error. | If there is an error submitting the change password form, an alert message will pop up informing the user that there was an error. | Tried submitting change password form with an intentional error. | Alert message popped up informing user of an error. | Pass |
-| Alert message on changing password. | When the change password form has successfully been submitted, an alert message should pop up, informing the user that they have successfully changed their password. | Submitted change password form correctly. | Alert message popped up informing me I had successfully changed the password. |
+| Alert message on changing password. | When the change password form has successfully been submitted, an alert message should pop up, informing the user that they have successfully changed their password. | Submitted change password form correctly. | Alert message popped up informing me I had successfully changed the password. | Pass |
 | Redirected on successful submission. | When user has successfully submitted the change password form, user should then be redirected back to their profile page. | Successfully submitted the change password form. | I was redirected back to their profile page. | Pass |
 | `Sign out modal` |
 | Sign out modal appears when trying to sign out. | When a logged in user clicks the sign out navbar link, the sign out modal appears, checking that the user wants to sign out. If the user clicks yes, the user will be signed out. | Logged in as different users and clicked the sign out link. | Sign out modal appears and if clicked, I was successfully signed out. If I clicked no, or any where else on the screen, the modal closed and was able to continue as a logged in user. | Pass |
 
 
+[back to top](#control-systems-jobs-react-testing)
 
+## Validators
 
+### Lighthouse
 
+<details>
 
+<summary>Desktop</summary>
 
+Homepage Logged Out:
+
+![Desktop Homepage Logged Out Lighthouse](/docs/frontend_testing_screenshots/desktop-homepage-logged-out-lighthouse.png)
+
+Homepage Logged In:
+
+![Desktop Homepage Logged In Lighthouse](/docs/frontend_testing_screenshots/desktop-homepage-logged-in-lighthouse.png)
+
+Sign In Page:
+
+![Desktop Sign In Page Lighthouse](/docs/frontend_testing_screenshots/desktop-signin-lighthouse.png)
+
+Add User Page:
+
+![Desktop Add User Page Lighthouse](/docs/frontend_testing_screenshots/desktop-add-user-lighthouse.png)
+
+Add Job Page:
+
+![Desktop Add Job Page Lighthouse](/docs/frontend_testing_screenshots/desktop-add-job-lighthouse.png)
+
+Job Detail Page:
+
+![Desktop Job Detail Page Lighthouse](/docs/frontend_testing_screenshots/desktop-job-detail-lighthouse.png)
+
+Profiles Page:
+
+![Desktop Profiles Page Lighthouse](/docs/frontend_testing_screenshots/desktop-profiles-lighthouse.png)
+
+Profile Page:
+
+![Desktop Profile Page Lighthouse](/docs/frontend_testing_screenshots/desktop-profile-lighthouse.png)
+
+Change Username Page:
+
+![Desktop Change Username Page Lighthouse](/docs/frontend_testing_screenshots/desktop-change-username-lighthouse.png)
+
+Change Password Page:
+
+![Desktop Change Password Page Lighthouse](/docs/frontend_testing_screenshots/desktop-change-password-lighthouse.png)
+
+</details>
+
+<details>
+
+<summary>Mobile</summary>
+
+Homepage Logged Out:
+
+![Mobile Homepage Logged Out Lighthouse](/docs/frontend_testing_screenshots/mobile-homepage-logged-out-lighthouse.png)
+
+Homepage Logged In:
+
+![Mobile Homepage Logged In Lighthouse](/docs/frontend_testing_screenshots/mobile-homepage-logged-in-lighthouse.png)
+
+Sign In Page:
+
+![Mobile Sign In Page Lighthouse](/docs/frontend_testing_screenshots/mobile-signin-lighthouse.png)
+
+Add User Page:
+
+![Mobile Add User Page Lighthouse](/docs/frontend_testing_screenshots/mobile-add-user-lighthouse.png)
+
+Add Job Page:
+
+![Mobile Add Job Page Lighthouse](/docs/frontend_testing_screenshots/mobile-add-job-lighthouse.png)
+
+Job Detail Page:
+
+![Mobile Job Detail Page Lighthouse](/docs/frontend_testing_screenshots/mobile-job-detail-lighthouse.png)
+
+Profiles Page:
+
+![Mobile Profiles Page Lighthouse](/docs/frontend_testing_screenshots/mobile-profiles-lighthouse.png)
+
+Profile Page:
+
+![Mobile Profile Page Lighthouse](/docs/frontend_testing_screenshots/mobile-profile-lighthouse.png)
+
+Change Username Page:
+
+![Mobile Change Username Page Lighthouse](/docs/frontend_testing_screenshots/mobile-change-username-lighthouse.png)
+
+Change Password Page:
+
+![Mobile Change Password Page Lighthouse](/docs/frontend_testing_screenshots/mobile-change-password-lighthouse.png)
+
+</details>
+
+[back to top](#control-systems-jobs-react-testing)
+
+### ESLint JavaScript
+
+Most of the JavaScript code validation was done through the help of the prettier code formatting extension and ESLint running through the production of the app.
+
+All JavaScript files were then validated using ESLint JavaScript validator, which reported back no issues. 
+
+[back to top](#control-systems-jobs-react-testing)
+
+### W3C CSS Validator
+
+W3C CSS Validator was used to validate the site's CSS code. All style pages return with no errors found:
+
+![W3C CSS Validattion Screenshot](/docs/frontend_testing_screenshots/css-validation.png)
+
+[back to top](#control-systems-jobs-react-testing)
+
+## Responsiveness
+
+All pages were tested to ensure responsiveness on screen sizes from 320px and upwards. The site was also tested on multiple browsers and devices.
+
+Browser test table:
+
+| Browser Tested | Actual Result | Pass / Fail |
+| --- | --- | --- |
+| Chrome | As Expected | Pass |
+| Firefox | As Expected | Pass |
+| Edge | As Expected | Pass |
+|Samsung | As Expected | Pass |
+
+Devices tested and devices using google tools:
+
+| Device Tested | Actual Result | Pass / Fail |
+| --- | --- | --- |
+| Acer Laptop | As expected | Pass |
+| Samsung 22 inch Screen | As expected | Pass |
+| i Phone SE | As expected | Pass |
+| i Phone XR | As expected | Pass |
+| i Phone 12 Pro | As expected | Pass |
+| i Phone 14 Pro Max | As expected | Pass |
+| Pixel 7 | As expected | Pass |
+| Samsung Galaxy S8 | As expected | Pass |
+| Samsung S20 Ultra | As expected | Pass |
+| iPad Mini | As expected | Pass |
+| iPad Air | As expected | Pass |
+| iPad Pro | As expected | Pass |
+| Surface Pro 7 | As expected | Pass |
+| Surface Duo | As expected | Pass |
+| Galaxy Fold | As expected | Pass |
+| Samsung Galaxy A51/71 | As expected | Pass |
+| Nest Hub | As expected | Pass |
+| Nest Hub Max | As expected | Pass |
+
+[back to top](#control-systems-jobs-react-testing)
